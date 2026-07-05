@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeItAll — 20 Interactive Python Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f23;
+      --surface: #1a1a2e;
+      --accent: #6c5ce7;
+      --accent2: #00d2ff;
+      --text: #eaeaea;
+      --muted: #a0a0b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+      border-bottom: 1px solid rgba(108, 92, 231, 0.3);
+    }
+    .logo {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .tagline { color: var(--muted); font-size: 1.15rem; max-width: 600px; margin: 0 auto 2rem; }
+    .cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #5a4bd1);
+      color: #fff;
+      text-decoration: none;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 8px 32px rgba(108, 92, 231, 0.4);
+    }
+    .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(108, 92, 231, 0.5); }
+    .cta-secondary {
+      display: inline-block;
+      margin-left: 1rem;
+      color: var(--accent2);
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      font-weight: 600;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent2); }
+    .stat-label { font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .projects {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+    h2 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(108, 92, 231, 0.4); }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .card-title { font-weight: 700; font-size: 1rem; }
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .badge-beginner { background: rgba(0, 184, 148, 0.2); color: #00b894; }
+    .badge-intermediate { background: rgba(253, 203, 110, 0.2); color: #fdcb6e; }
+    .badge-advanced { background: rgba(214, 48, 49, 0.2); color: #ff6b6b; }
+    .card-desc { font-size: 0.85rem; color: var(--muted); }
+    .card-libs { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-top: 0.5rem; }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="logo">CodeItAll</div>
+    <p class="tagline">20 interactive Python projects — learn by building real outputs. Images, charts, PDFs, maps, and more.</p>
+    <a class="cta" href="notebook.html">📓 Open Full Notebook</a>
+    <a class="cta-secondary" href="https://github.com/">View on GitHub ↗</a>
+    <div class="stats">
+      <div><div class="stat-num">20</div><div class="stat-label">Projects</div></div>
+      <div><div class="stat-num">114</div><div class="stat-label">Cells</div></div>
+      <div><div class="stat-num">3</div><div class="stat-label">Difficulty Levels</div></div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <h2>All Projects</h2>
+    <div class="grid" id="project-grid"></div>
+  </section>
+
+  <footer>Built with ❤️ by CodeItAll — learn Python by building.</footer>
+
+  <script>
+    const projects = [
+      { n: 1, name: "Pixel Palette Pop", level: "beginner", desc: "Generate vibrant gradient artwork PNGs.", libs: "PIL, ImageDraw" },
+      { n: 2, name: "ASCII Art Machine", level: "beginner", desc: "Convert images to retro terminal ASCII art.", libs: "PIL" },
+      { n: 3, name: "Password Fortress", level: "beginner", desc: "Cryptographically secure password generator.", libs: "secrets, string" },
+      { n: 4, name: "QR Code Crafter", level: "beginner", desc: "Encode URLs into scannable QR codes.", libs: "qrcode" },
+      { n: 5, name: "Word Cloud Weaver", level: "beginner", desc: "Transform text into beautiful word clouds.", libs: "wordcloud, matplotlib" },
+      { n: 6, name: "Morse Code Messenger", level: "beginner", desc: "Encode messages in International Morse Code.", libs: "dict, winsound" },
+      { n: 7, name: "Haiku Composer", level: "beginner", desc: "Randomly compose 5-7-5 syllable haiku.", libs: "random" },
+      { n: 8, name: "Spiral Art Generator", level: "beginner", desc: "Draw golden-ratio and archimedean spirals.", libs: "numpy, matplotlib" },
+      { n: 9, name: "Barcode Factory", level: "beginner", desc: "Generate retail Code128 barcodes.", libs: "barcode" },
+      { n: 10, name: "CSV Story Explorer", level: "beginner", desc: "Analyze data and render charts from CSV.", libs: "pandas, matplotlib" },
+      { n: 11, name: "Fractal Tree Garden", level: "intermediate", desc: "Recursively draw fractal trees.", libs: "matplotlib, recursion" },
+      { n: 12, name: "Audio Waveform Painter", level: "intermediate", desc: "Synthesize and visualize audio waveforms.", libs: "numpy, scipy" },
+      { n: 13, name: "GIF Animation Studio", level: "intermediate", desc: "Build frame-by-frame animated GIFs.", libs: "PIL" },
+      { n: 14, name: "PDF Certificate Maker", level: "intermediate", desc: "Generate printable achievement PDFs.", libs: "fpdf2" },
+      { n: 15, name: "Email HTML Renderer", level: "intermediate", desc: "Render HTML emails with Jinja2 templates.", libs: "jinja2" },
+      { n: 16, name: "Stock Sparkline Dashboard", level: "intermediate", desc: "Simulate stock data and sparkline charts.", libs: "pandas, numpy" },
+      { n: 17, name: "Color Extractor Lens", level: "intermediate", desc: "Extract dominant colors from images.", libs: "PIL, Counter" },
+      { n: 18, name: "Sentiment Mood Ring", level: "intermediate", desc: "Analyze text sentiment with a mood ring viz.", libs: "re, matplotlib" },
+      { n: 19, name: "GeoMap Storyteller", level: "advanced", desc: "Interactive world map with markers.", libs: "folium" },
+      { n: 20, name: "Plotly Data Dashboard", level: "advanced", desc: "Multi-chart interactive dashboard.", libs: "plotly, pandas" },
+    ];
+    const grid = document.getElementById("project-grid");
+    projects.forEach(p => {
+      const badgeClass = `badge-${p.level}`;
+      const levelLabel = p.level === "beginner" ? "🟢 Beginner" : p.level === "intermediate" ? "🟡 Intermediate" : "🔴 Advanced";
+      grid.innerHTML += `
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">${p.n}. ${p.name}</span>
+            <span class="badge ${badgeClass}">${levelLabel}</span>
+          </div>
+          <p class="card-desc">${p.desc}</p>
+          <p class="card-libs">${p.libs}</p>
+        </div>`;
+    });
+  </script>
+</body>
+</html>
