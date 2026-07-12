@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | CodeItAll</title>
+  <link rel="icon" href="assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/favicon-256.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="site.css" />
+  <style>
+    .contact-stage {
+      margin: 1.25rem var(--page-pad) 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      align-items: start;
+      min-height: min(70vh, 640px);
+    }
+
+    .info-card {
+      background: var(--white);
+      color: var(--black);
+      border-radius: var(--radius-lg);
+      padding: clamp(2rem, 5vw, 3.25rem);
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .info-card .label {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .info-card h1 {
+      font-family: "Anton", Impact, sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      line-height: 1;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      max-width: 12ch;
+    }
+    .info-card p {
+      color: var(--gray);
+      font-size: 1.05rem;
+      max-width: 34ch;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      padding-top: 0.5rem;
+    }
+    .contact-form label {
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 14px;
+      color: var(--white);
+      font: inherit;
+      padding: 0.95rem 1rem;
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--white);
+    }
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+    .contact-form .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.9);
+      margin-top: 0.25rem;
+    }
+    .contact-form .check input {
+      width: auto;
+      margin-top: 0.2rem;
+      accent-color: var(--accent);
+    }
+    .contact-form button {
+      margin-top: 0.5rem;
+      border: 0;
+      border-radius: 16px;
+      background: var(--white);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .contact-form button:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+    .form-note {
+      min-height: 1.25em;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 860px) {
+      .contact-stage { grid-template-columns: 1fr; }
+      .info-card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">Menu</button>
+    <ul class="nav" id="nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="index.html#projects">All Projects</a></li>
+      <li><a class="active" href="contact.html">Contact</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <div class="contact-stage">
+      <section class="info-card">
+        <div class="label">Connect with CodeItAll</div>
+        <h1>Empower Your Python Journey</h1>
+        <p>We are here to support you. You’ll receive a confirmation once submitted and a response within hours.</p>
+      </section>
+
+      <form class="contact-form" id="contactForm">
+        <label>
+          How should we address you?
+          <input type="text" name="name" required placeholder="Your name" />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" required placeholder="you@email.com" />
+        </label>
+        <label>
+          Please text your content here
+          <textarea name="message" required placeholder="Tell us what’s on your mind…"></textarea>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="newsletter" checked />
+          <span>Yes, subscribe me to your newsletter.</span>
+        </label>
+        <button type="submit">Submit</button>
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer light">
+    <div class="footer-grid">
+      <a class="footer-brand" href="index.html" aria-label="Code It All">
+        <img src="assets/logo-black.png" alt="Code It All" width="240" height="44" />
+      </a>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="notebook.html">Notebook</a>
+        <a href="https://github.com/hxyan2020/CodeItAll">GitHub</a>
+      </div>
+      <div class="footer-contact">
+        <div>github.com/hxyan2020</div>
+        <div><a href="mailto:hello@codeitall.dev">hello@codeitall.dev</a></div>
+        <div>Singapore</div>
+      </div>
+    </div>
+    <div class="footer-copy">© 2026 by CodeItAll. Learn Python by building.</div>
+  </footer>
+
+  <script>
+    const header = document.getElementById("header");
+    document.getElementById("menuToggle").addEventListener("click", () => header.classList.toggle("open"));
+    document.querySelectorAll("#nav a").forEach((a) => a.addEventListener("click", () => header.classList.remove("open")));
+
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      document.getElementById("formNote").textContent =
+        `Thanks ${data.get("name")} — we received your message and will reply to ${data.get("email")} soon.`;
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
