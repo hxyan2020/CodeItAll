@@ -276,35 +276,67 @@
       color: var(--black);
       border-radius: var(--radius-lg);
       padding: clamp(2rem, 5vw, 3.25rem);
+      display: grid;
+      gap: 1.25rem;
+      justify-items: center;
+    }
+    .story-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
     .story-card blockquote {
       font-family: "Anton", Impact, sans-serif;
       font-size: clamp(1.5rem, 3.5vw, 2.2rem);
       line-height: 1.25;
       font-weight: 400;
+      max-width: 28ch;
     }
     .story-card cite {
       display: block;
-      margin-top: 1.25rem;
       font-style: normal;
       font-size: 0.95rem;
       color: var(--gray);
     }
+    .story-card .story-name {
+      font-weight: 700;
+      color: var(--black);
+    }
     .story-dots {
       display: flex;
       justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
     }
     .story-dots button {
-      width: 10px;
-      height: 10px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
-      border: 0;
-      background: rgba(255,255,255,0.35);
+      border: 2px solid transparent;
+      padding: 0;
+      overflow: hidden;
       cursor: pointer;
+      background: transparent;
+      opacity: 0.55;
+      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     }
-    .story-dots button.active { background: var(--white); }
+    .story-dots button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .story-dots button:hover { opacity: 0.85; }
+    .story-dots button.active {
+      opacity: 1;
+      border-color: var(--white);
+      transform: scale(1.08);
+      box-shadow: 0 0 0 2px rgba(255,255,255,0.35);
+    }
 
     /* Connect / newsletter */
     .connect {
@@ -501,8 +533,9 @@
         <p class="eyebrow">Learner Stories</p>
         <h2 class="section-title">What Our Users Say</h2>
         <div class="story-card">
+          <img class="story-avatar" id="storyAvatar" src="assets/profiles/alex.jpg" alt="Alex" width="96" height="96" />
           <blockquote id="storyQuote">“CodeItAll turned abstract Python concepts into things I can see, save, and share.”</blockquote>
-          <cite id="storyCite">Alex, Self-taught Developer</cite>
+          <cite id="storyCite"><span class="story-name">Alex</span> · Self-taught Developer</cite>
         </div>
         <div class="story-dots" id="storyDots" aria-label="Testimonials"></div>
       </div>
@@ -606,15 +639,27 @@
     const stories = [
       {
         quote: "“CodeItAll turned abstract Python concepts into things I can see, save, and share.”",
-        cite: "Alex, Self-taught Developer"
+        name: "Alex",
+        role: "Self-taught Developer",
+        avatar: "assets/profiles/alex.jpg"
       },
       {
         quote: "“I finally understood loops when I watched my GIF animation come alive frame by frame.”",
-        cite: "Maya, University Student"
+        name: "Maya",
+        role: "University Student",
+        avatar: "assets/profiles/maya.jpg"
       },
       {
         quote: "“From QR codes to interactive maps — every project leaves you with a real artifact.”",
-        cite: "Jordan, Career Switcher"
+        name: "Jordan",
+        role: "Career Switcher",
+        avatar: "assets/profiles/jordan.jpg"
+      },
+      {
+        quote: "“CodeItAll has transformed my understanding of Python. It's simply amazing!”",
+        name: "Sam",
+        role: "University Student, USA",
+        avatar: "assets/profiles/sophia.png"
       }
     ];
 
@@ -646,17 +691,25 @@
       a.addEventListener("click", () => header.classList.remove("open"));
     });
 
-    // Testimonials
+    // Testimonials with profile photos
     let storyIndex = 0;
     const quoteEl = document.getElementById("storyQuote");
     const citeEl = document.getElementById("storyCite");
+    const avatarEl = document.getElementById("storyAvatar");
     const dotsEl = document.getElementById("storyDots");
-    dotsEl.innerHTML = stories.map((_, i) => `<button type="button" aria-label="Story ${i + 1}" data-i="${i}"></button>`).join("");
+    dotsEl.innerHTML = stories.map((s, i) => `
+      <button type="button" aria-label="${s.name}" data-i="${i}">
+        <img src="${s.avatar}" alt="${s.name}" width="52" height="52" />
+      </button>
+    `).join("");
 
     function showStory(i) {
       storyIndex = i;
-      quoteEl.textContent = stories[i].quote;
-      citeEl.textContent = stories[i].cite;
+      const s = stories[i];
+      quoteEl.textContent = s.quote;
+      citeEl.innerHTML = `<span class="story-name">${s.name}</span> · ${s.role}`;
+      avatarEl.src = s.avatar;
+      avatarEl.alt = s.name;
       [...dotsEl.children].forEach((btn, idx) => btn.classList.toggle("active", idx === i));
     }
     dotsEl.addEventListener("click", (e) => {
