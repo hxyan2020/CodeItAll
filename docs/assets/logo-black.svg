@@ -1,29 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 72" role="img" aria-label="Code It All">
-  <!-- CODE IT ALL — tighter geometric wordmark -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 72" role="img" aria-label="Code It All">
   <g fill="none" stroke="#000000" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- C = < -->
-    <path d="M30 18 L14 36 L30 54"/>
-    <!-- O = ? -->
-    <circle cx="54" cy="36" r="14"/>
-    <!-- D = | > -->
-    <path d="M80 18 V54"/>
-    <path d="M88 18 L106 36 L88 54"/>
-    <!-- E = ? -->
-    <path d="M118 22 H142"/>
-    <path d="M118 36 H142"/>
-    <path d="M118 50 H142"/>
-
-    <!-- I = | -->
-    <path d="M166 18 V54"/>
-    <!-- T = T -->
-    <path d="M178 18 H210"/>
-    <path d="M194 18 V54"/>
-
-    <!-- A = / \ -->
-    <path d="M236 54 L252 18 L268 54"/>
-    <!-- L = |_ -->
-    <path d="M284 18 V54 H306"/>
-    <!-- L = |_ -->
-    <path d="M320 18 V54 H342"/>
+    <path d="M26 18 L12 36 L26 54"/>
+    <circle cx="48" cy="36" r="14"/>
+    <path d="M72 18 V54"/>
+    <path d="M80 18 L96 36 L80 54"/>
+    <path d="M108 22 H130"/>
+    <path d="M108 36 H130"/>
+    <path d="M108 50 H130"/>
+    <path d="M150 18 V54"/>
+    <path d="M160 18 H188"/>
+    <path d="M174 18 V54"/>
+    <path d="M208 54 L222 18 L236 54"/>
+    <path d="M250 18 V54 H270"/>
+    <path d="M282 18 V54 H302"/>
   </g>
 </svg>
