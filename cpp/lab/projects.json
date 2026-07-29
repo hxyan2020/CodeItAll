@@ -1,0 +1,529 @@
+{
+  "track": "cpp",
+  "projects": [
+    {
+      "id": "01_hello_fortune_cookie",
+      "title": "Project 1: Hello Fortune Cookie 🥠",
+      "description": "Print a warm welcome and crack open a random programming fortune.",
+      "level": "Beginner",
+      "concepts": "cout, strings, basic program structure",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Say hello in C++\n\nEvery C++ program needs a `main`. Print your first message with `cout`.",
+          "source": "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    cout << \"Hello from CodeItAll C++ Lab!\" << endl;\n    cout << \"You just compiled a real C++ program.\" << endl;\n    return 0;\n}\n"
+        },
+        {
+          "markdown": "### Step 2 — Crack a fortune\n\nStore a few fortunes in an array and print one based on a simple index.",
+          "source": "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    string fortunes[] = {\n        \"Bugs fear brave beginners.\",\n        \"Compile often, panic less.\",\n        \"A semicolon saved the day.\",\n        \"Loops are just determined ifs.\"\n    };\n    int n = 4;\n    int pick = 2; // tweak 0..3\n    cout << \"Your fortune: \" << fortunes[pick % n] << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "02_number_guess_duel",
+      "title": "Project 2: Number Guess Duel 🎯",
+      "description": "The computer picks a secret number; you practice comparison logic with hints.",
+      "level": "Beginner",
+      "concepts": "variables, if/else, loops",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Secret number + hints\n\nSimulate guesses in a loop and print Too high / Too low / Win.",
+          "source": "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    int secret = 37; // tweak\n    int guesses[] = {20, 40, 37};\n    int n = 3;\n    for (int i = 0; i < n; i++) {\n        int g = guesses[i];\n        cout << \"Guess \" << g << \" → \";\n        if (g < secret) cout << \"too low\" << endl;\n        else if (g > secret) cout << \"too high\" << endl;\n        else cout << \"you win!\" << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "03_caesar_cipher_desk",
+      "title": "Project 3: Caesar Cipher Desk 🔐",
+      "description": "Shift letters with modular arithmetic — a classic first crypto toy.",
+      "level": "Beginner",
+      "concepts": "chars, ASCII math, functions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Encrypt a message\n\nWrite a function that shifts A–Z / a–z and leaves punctuation alone.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstring caesar(const string& text, int shift) {\n    string out;\n    for (char ch : text) {\n        if (ch >= 'a' && ch <= 'z')\n            out += char((ch - 'a' + shift + 26) % 26 + 'a');\n        else if (ch >= 'A' && ch <= 'Z')\n            out += char((ch - 'A' + shift + 26) % 26 + 'A');\n        else\n            out += ch;\n    }\n    return out;\n}\n\nint main() {\n    string msg = \"Attack at dawn!\";\n    int shift = 3; // tweak\n    cout << \"Plain : \" << msg << endl;\n    cout << \"Secret: \" << caesar(msg, shift) << endl;\n    cout << \"Back  : \" << caesar(caesar(msg, shift), -shift) << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "04_temp_converter_booth",
+      "title": "Project 4: Temp Converter Booth 🌡️",
+      "description": "Convert Celsius ↔ Fahrenheit with tidy functions and formatted output.",
+      "level": "Beginner",
+      "concepts": "functions, floating point, formatting",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Two-way conversion\n\nImplement `c_to_f` and `f_to_c`, then print a mini table.",
+          "source": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\ndouble c_to_f(double c) { return c * 9.0 / 5.0 + 32.0; }\ndouble f_to_c(double f) { return (f - 32.0) * 5.0 / 9.0; }\n\nint main() {\n    cout << fixed << setprecision(1);\n    double cs[] = {0, 22, 37, 100};\n    for (double c : cs) {\n        cout << c << \" C = \" << c_to_f(c) << \" F\" << endl;\n    }\n    cout << \"72 F = \" << f_to_c(72) << \" C\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "05_fizzbuzz_remix",
+      "title": "Project 5: FizzBuzz Remix 🧃",
+      "description": "The classic interview katana — with a custom remix ending.",
+      "level": "Beginner",
+      "concepts": "loops, modulo, branching",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Fizz, Buzz, Remix\n\nMultiples of 3 → Fizz, 5 → Buzz, both → FizzBuzz, 7 → Remix.",
+          "source": "#include <iostream>\n#include <string>\n\nusing namespace std;\n\nint main() {\n    int N = 35; // tweak\n    for (int i = 1; i <= N; i++) {\n        if (i % 3 == 0 && i % 5 == 0) cout << \"FizzBuzz\";\n        else if (i % 3 == 0) cout << \"Fizz\";\n        else if (i % 5 == 0) cout << \"Buzz\";\n        else if (i % 7 == 0) cout << \"Remix\";\n        else cout << i;\n        cout << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "06_dice_odds_lab",
+      "title": "Project 6: Dice Odds Lab 🎲",
+      "description": "Roll virtual dice thousands of times and print the frequency table.",
+      "level": "Beginner",
+      "concepts": "arrays, randomness (seeded), aggregation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Simulate rolls\n\nUse a simple LCG-style pseudo-random generator (no `<random>` required) and tally faces.",
+          "source": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int sides = 6;      // tweak\n    int rolls = 6000;   // tweak\n    unsigned long seed = 42;\n    int counts[7] = {0};\n    for (int i = 0; i < rolls; i++) {\n        seed = seed * 1103515245 + 12345;\n        int face = 1 + (seed / 65536) % sides;\n        counts[face]++;\n    }\n    cout << \"Dice odds after \" << rolls << \" rolls:\" << endl;\n    for (int f = 1; f <= sides; f++) {\n        double pct = 100.0 * counts[f] / rolls;\n        cout << \"  \" << f << \": \" << counts[f] << \" (\" << pct << \"%)\" << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "07_palindrome_detective",
+      "title": "Project 7: Palindrome Detective 🕵️",
+      "description": "Check whether phrases read the same forwards and backwards (ignoring spaces/case).",
+      "level": "Beginner",
+      "concepts": "string indexing, two pointers",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Detect palindromes\n\nNormalize to lowercase letters only, then compare ends.",
+          "source": "#include <iostream>\n#include <string>\n#include <cctype>\nusing namespace std;\n\nbool is_palindrome(string s) {\n    string clean;\n    for (char ch : s) {\n        if (isalnum((unsigned char)ch))\n            clean += (char)tolower((unsigned char)ch);\n    }\n    int i = 0, j = (int)clean.size() - 1;\n    while (i < j) {\n        if (clean[i] != clean[j]) return false;\n        i++; j--;\n    }\n    return true;\n}\n\nint main() {\n    string tests[] = {\"Level\", \"CodeItAll\", \"A man a plan a canal Panama\", \"12321\"};\n    for (auto& t : tests) {\n        cout << \"\\\"\" << t << \"\\\" → \" << (is_palindrome(t) ? \"YES\" : \"no\") << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "08_mini_calculator",
+      "title": "Project 8: Mini Calculator 🧮",
+      "description": "Parse a tiny expression style: number operator number.",
+      "level": "Beginner",
+      "concepts": "switch, doubles, error handling basics",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Evaluate expressions\n\nSupport `+ - * /` on a list of sample inputs.",
+          "source": "#include <iostream>\nusing namespace std;\n\ndouble eval(double a, char op, double b) {\n    switch (op) {\n        case '+': return a + b;\n        case '-': return a - b;\n        case '*': return a * b;\n        case '/': return b == 0 ? 0 : a / b;\n        default: return 0;\n    }\n}\n\nint main() {\n    struct Job { double a; char op; double b; };\n    Job jobs[] = {{12, '+', 5}, {10, '/', 4}, {3, '*', 7}, {9, '-', 2}};\n    for (auto j : jobs) {\n        cout << j.a << \" \" << j.op << \" \" << j.b << \" = \" << eval(j.a, j.op, j.b) << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "09_password_strength_meter",
+      "title": "Project 9: Password Strength Meter 💪",
+      "description": "Score passwords for length, digits, and symbols — then give a grade.",
+      "level": "Beginner",
+      "concepts": "char classification, scoring rules",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Grade passwords\n\nAward points and map the score to Weak / OK / Strong.",
+          "source": "#include <iostream>\n#include <string>\n#include <cctype>\nusing namespace std;\n\nstring grade(const string& pw) {\n    int score = 0;\n    bool digit = false, upper = false, lower = false, symbol = false;\n    if ((int)pw.size() >= 8) score++;\n    if ((int)pw.size() >= 12) score++;\n    for (char ch : pw) {\n        if (isdigit((unsigned char)ch)) digit = true;\n        else if (isupper((unsigned char)ch)) upper = true;\n        else if (islower((unsigned char)ch)) lower = true;\n        else symbol = true;\n    }\n    score += digit + upper + lower + symbol;\n    if (score <= 2) return \"Weak\";\n    if (score <= 4) return \"OK\";\n    return \"Strong\";\n}\n\nint main() {\n    string tests[] = {\"abc\", \"hunter2\", \"Hunter2!\", \"C0deItAll#2026\"};\n    for (auto& t : tests) cout << t << \" → \" << grade(t) << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "10_word_counter_cli",
+      "title": "Project 10: Word Counter CLI 📝",
+      "description": "Count characters, words, and lines in a sample paragraph.",
+      "level": "Beginner",
+      "concepts": "string scanning, whitespace detection",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Analyze text stats\n\nWalk the string once and tally metrics.",
+          "source": "#include <iostream>\n#include <string>\n#include <sstream>\nusing namespace std;\n\nint main() {\n    string text = \"CodeItAll makes C++ playful.\\nLoops practice patience.\\n\";\n    int chars = (int)text.size();\n    int lines = 1;\n    for (char ch : text) if (ch == '\\n') lines++;\n    stringstream ss(text);\n    string w;\n    int words = 0;\n    while (ss >> w) words++;\n    cout << \"chars=\" << chars << \" words=\" << words << \" lines=\" << lines << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "11_vector_todo_list",
+      "title": "Project 11: Vector Todo List ✅",
+      "description": "Use `std::vector` to add, list, and complete todos in memory.",
+      "level": "Beginner",
+      "concepts": "vector, range-for, erase",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Manage a todo vector\n\nPush tasks, mark one done by index, print the board.",
+          "source": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nint main() {\n    vector<string> todos = {\"Learn C++ basics\", \"Ship a mini project\", \"Take a stretch break\"};\n    todos.push_back(\"Celebrate with coffee\");\n    int done_index = 1; // tweak\n    if (done_index >= 0 && done_index < (int)todos.size()) {\n        cout << \"Completed: \" << todos[done_index] << endl;\n        todos.erase(todos.begin() + done_index);\n    }\n    cout << \"Remaining:\" << endl;\n    for (size_t i = 0; i < todos.size(); i++)\n        cout << \"  [\" << i << \"] \" << todos[i] << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "12_struct_contact_card",
+      "title": "Project 12: Struct Contact Card 👤",
+      "description": "Model contacts with a `struct` and print formatted cards.",
+      "level": "Beginner",
+      "concepts": "structs, arrays of structs",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Define Contact\n\nStore name, email, and vibe score — then pretty-print.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstruct Contact {\n    string name;\n    string email;\n    int vibe; // 1-5\n};\n\nint main() {\n    Contact people[] = {\n        {\"Maya\", \"maya@codeitall.dev\", 5},\n        {\"Jordan\", \"jordan@codeitall.dev\", 4},\n        {\"Sam\", \"sam@codeitall.dev\", 5}\n    };\n    for (auto& c : people) {\n        cout << \"┌─────────────────────────\\n\";\n        cout << \"│ \" << c.name << \"\\n\";\n        cout << \"│ \" << c.email << \"\\n\";\n        cout << \"│ vibe: \" << string(c.vibe, '*') << \"\\n\";\n        cout << \"└─────────────────────────\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "13_fibonacci_fountain",
+      "title": "Project 13: Fibonacci Fountain ⛲",
+      "description": "Generate Fibonacci numbers and spot golden-ratio approximations.",
+      "level": "Beginner",
+      "concepts": "loops, long long, ratios",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Print Fibonacci + ratios\n\nWatch consecutive ratios approach ~1.618.",
+          "source": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int N = 15; // tweak\n    long long a = 0, b = 1;\n    cout << fixed << setprecision(6);\n    for (int i = 1; i <= N; i++) {\n        cout << i << \": \" << b;\n        if (a > 0) cout << \"  ratio=\" << (double)b / a;\n        cout << endl;\n        long long next = a + b;\n        a = b;\n        b = next;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "14_rock_paper_scissors_bot",
+      "title": "Project 14: Rock Paper Scissors Bot ✊",
+      "description": "Simulate rounds of RPS against a pseudo-random opponent and keep score.",
+      "level": "Beginner",
+      "concepts": "enums-as-ints, scoring, loops",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Battle loop\n\n0=rock, 1=paper, 2=scissors. Print a scoreboard.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint winner(int a, int b) { // 0 draw, 1 a, 2 b\n    if (a == b) return 0;\n    if ((a + 1) % 3 == b) return 2;\n    return 1;\n}\n\nint main() {\n    string names[] = {\"rock\", \"paper\", \"scissors\"};\n    int you_seq[] = {0, 1, 2, 0, 1};\n    unsigned long seed = 9;\n    int score_you = 0, score_cpu = 0, draws = 0;\n    for (int y : you_seq) {\n        seed = seed * 1103515245 + 12345;\n        int cpu = (seed / 65536) % 3;\n        int w = winner(y, cpu);\n        if (w == 0) draws++;\n        else if (w == 1) score_you++;\n        else score_cpu++;\n        cout << names[y] << \" vs \" << names[cpu] << endl;\n    }\n    cout << \"You \" << score_you << \" | CPU \" << score_cpu << \" | Draws \" << draws << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "15_multiplication_table_forge",
+      "title": "Project 15: Multiplication Table Forge ✖️",
+      "description": "Print a clean N×N multiplication table with aligned columns.",
+      "level": "Beginner",
+      "concepts": "nested loops, iomanip widths",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Forge the table\n\nNested loops + `setw` for alignment.",
+          "source": "#include <iostream>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    int N = 10; // tweak\n    for (int r = 1; r <= N; r++) {\n        for (int c = 1; c <= N; c++)\n            cout << setw(4) << r * c;\n        cout << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "16_leap_year_oracle",
+      "title": "Project 16: Leap Year Oracle 📅",
+      "description": "Decide leap years with the full Gregorian rules.",
+      "level": "Beginner",
+      "concepts": "boolean logic, edge cases",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Ask the oracle\n\nYear divisible by 400 → leap; by 100 → not; by 4 → leap.",
+          "source": "#include <iostream>\nusing namespace std;\n\nbool is_leap(int y) {\n    if (y % 400 == 0) return true;\n    if (y % 100 == 0) return false;\n    return y % 4 == 0;\n}\n\nint main() {\n    int years[] = {1900, 2000, 2024, 2026, 2400};\n    for (int y : years)\n        cout << y << (is_leap(y) ? \" leap\" : \" common\") << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "17_grade_curve_sorter",
+      "title": "Project 17: Grade Curve Sorter 📊",
+      "description": "Sort exam scores and assign letter grades with a simple curve story.",
+      "level": "Beginner",
+      "concepts": "arrays, sorting (bubble), grade mapping",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Sort + letter grades\n\nBubble-sort scores descending and map to A–F.",
+          "source": "#include <iostream>\nusing namespace std;\n\nchar letter(int s) {\n    if (s >= 90) return 'A';\n    if (s >= 80) return 'B';\n    if (s >= 70) return 'C';\n    if (s >= 60) return 'D';\n    return 'F';\n}\n\nint main() {\n    int scores[] = {88, 72, 95, 60, 77, 91};\n    int n = 6;\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < n - 1 - i; j++)\n            if (scores[j] < scores[j + 1]) {\n                int t = scores[j];\n                scores[j] = scores[j + 1];\n                scores[j + 1] = t;\n            }\n    for (int i = 0; i < n; i++)\n        cout << scores[i] << \" → \" << letter(scores[i]) << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "18_ascii_banner_printer",
+      "title": "Project 18: ASCII Banner Printer 🖨️",
+      "description": "Build chunky banner letters for a short word using patterns.",
+      "level": "Beginner",
+      "concepts": "2D char patterns, printing rows",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Print HI\n\nRepresent each letter as 5 rows of `#` / space.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint main() {\n    string H[] = {\"#   #\", \"#   #\", \"#####\", \"#   #\", \"#   #\"};\n    string I[] = {\"#####\", \"  #  \", \"  #  \", \"  #  \", \"#####\"};\n    for (int r = 0; r < 5; r++)\n        cout << H[r] << \"  \" << I[r] << endl;\n    cout << endl << \"CodeItAll C++ Banner\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "19_coin_flip_streaks",
+      "title": "Project 19: Coin Flip Streaks 🪙",
+      "description": "Flip coins and track the longest heads streak.",
+      "level": "Beginner",
+      "concepts": "loops, counters, running maxima",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Find the streak\n\nSimulate flips and report the longest consecutive heads run.",
+          "source": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int flips = 40; // tweak\n    unsigned long seed = 77;\n    int streak = 0, best = 0;\n    for (int i = 0; i < flips; i++) {\n        seed = seed * 1103515245 + 12345;\n        bool heads = ((seed / 65536) % 2) == 0;\n        cout << (heads ? 'H' : 'T');\n        if (heads) { streak++; if (streak > best) best = streak; }\n        else streak = 0;\n    }\n    cout << endl << \"Longest heads streak: \" << best << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "20_unit_circle_trig_table",
+      "title": "Project 20: Unit Circle Trig Table 📐",
+      "description": "Print a small sin/cos table using `<cmath>` — useful physics prep.",
+      "level": "Beginner",
+      "concepts": "cmath, degrees↔radians",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Trig table\n\nConvert degrees to radians and print sin/cos for key angles.",
+          "source": "#include <iostream>\n#include <cmath>\n#include <iomanip>\nusing namespace std;\n\nint main() {\n    cout << fixed << setprecision(4);\n    int angles[] = {0, 30, 45, 60, 90};\n    const double PI = acos(-1.0);\n    for (int d : angles) {\n        double r = d * PI / 180.0;\n        cout << setw(3) << d << \"°  sin=\" << sin(r) << \"  cos=\" << cos(r) << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "21_hangman_skeleton",
+      "title": "Project 21: Hangman Skeleton 🦴",
+      "description": "Reveal letters in a secret word as the player guesses — console hangman core.",
+      "level": "Intermediate",
+      "concepts": "string mutation, sets of guessed letters",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Play a scripted round\n\nFeed a sequence of guesses and update the mask.",
+          "source": "#include <iostream>\n#include <string>\n#include <set>\n#include <cctype>\nusing namespace std;\n\nint main() {\n    string secret = \"COMPILER\";\n    string mask(secret.size(), '_');\n    string guesses = \"COEMPRXYZ\"; // scripted\n    set<char> tried;\n    int lives = 6;\n    for (char g : guesses) {\n        g = (char)toupper((unsigned char)g);\n        if (tried.count(g)) continue;\n        tried.insert(g);\n        bool hit = false;\n        for (size_t i = 0; i < secret.size(); i++)\n            if (secret[i] == g) { mask[i] = g; hit = true; }\n        if (!hit) lives--;\n        cout << mask << \"  lives=\" << lives << endl;\n        if (mask == secret || lives == 0) break;\n    }\n    cout << (mask == secret ? \"Saved!\" : \"Out of lives.\") << \" Word was \" << secret << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "22_tic_tac_toe_board",
+      "title": "Project 22: Tic Tac Toe Board ⭕",
+      "description": "Represent a 3×3 board, apply moves, and detect a winner.",
+      "level": "Intermediate",
+      "concepts": "2D arrays, win-checking logic",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Play scripted moves\n\nApply X/O moves and print the board after each turn.",
+          "source": "#include <iostream>\nusing namespace std;\n\nchar b[3][3] = {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};\n\nvoid show() {\n    for (int r = 0; r < 3; r++) {\n        cout << \" \" << b[r][0] << \" | \" << b[r][1] << \" | \" << b[r][2] << endl;\n        if (r < 2) cout << \"---+---+---\" << endl;\n    }\n    cout << endl;\n}\n\nchar winner() {\n    for (int i = 0; i < 3; i++) {\n        if (b[i][0] != ' ' && b[i][0] == b[i][1] && b[i][1] == b[i][2]) return b[i][0];\n        if (b[0][i] != ' ' && b[0][i] == b[1][i] && b[1][i] == b[2][i]) return b[0][i];\n    }\n    if (b[0][0] != ' ' && b[0][0] == b[1][1] && b[1][1] == b[2][2]) return b[0][0];\n    if (b[0][2] != ' ' && b[0][2] == b[1][1] && b[1][1] == b[2][0]) return b[0][2];\n    return ' ';\n}\n\nint main() {\n    int moves[][2] = {{1,1},{0,0},{0,2},{2,0},{2,2}}; // X,O alternating starting X center\n    char turn = 'X';\n    for (auto& m : moves) {\n        b[m[0]][m[1]] = turn;\n        show();\n        char w = winner();\n        if (w != ' ') { cout << w << \" wins!\" << endl; return 0; }\n        turn = (turn == 'X') ? 'O' : 'X';\n    }\n    cout << \"No winner yet.\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "23_stack_bracket_matcher",
+      "title": "Project 23: Stack Bracket Matcher 🧱",
+      "description": "Use a stack to validate bracket strings — interview classic.",
+      "level": "Intermediate",
+      "concepts": "stack, parsing",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Validate brackets\n\nPush openers, pop on closers, ensure types match.",
+          "source": "#include <iostream>\n#include <stack>\n#include <string>\nusing namespace std;\n\nbool valid(const string& s) {\n    stack<char> st;\n    for (char ch : s) {\n        if (ch == '(' || ch == '[' || ch == '{') st.push(ch);\n        else if (ch == ')' || ch == ']' || ch == '}') {\n            if (st.empty()) return false;\n            char o = st.top(); st.pop();\n            if ((ch == ')' && o != '(') || (ch == ']' && o != '[') || (ch == '}' && o != '{'))\n                return false;\n        }\n    }\n    return st.empty();\n}\n\nint main() {\n    string tests[] = {\"()[]{}\", \"([)]\", \"{[]}\", \"(\", \"a+(b*c)-{d/e}\"};\n    for (auto& t : tests)\n        cout << t << \" → \" << (valid(t) ? \"OK\" : \"bad\") << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "24_queue_ice_cream_shop",
+      "title": "Project 24: Queue Ice Cream Shop 🍦",
+      "description": "Simulate customers with `std::queue` — serve the line and track wait jokes.",
+      "level": "Intermediate",
+      "concepts": "queue, simulation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Serve the line\n\nEnqueue names, then dequeue while printing receipts.",
+          "source": "#include <iostream>\n#include <queue>\n#include <string>\nusing namespace std;\n\nint main() {\n    queue<string> line;\n    for (string name : {\"Ava\", \"Ben\", \"Cara\", \"Dee\"}) line.push(name);\n    int order = 1;\n    while (!line.empty()) {\n        cout << \"Order #\" << order++ << \": \" << line.front()\n             << \" gets a double scoop\" << endl;\n        line.pop();\n    }\n    cout << \"Shop closed. Queue size=\" << line.size() << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "25_map_leaderboard",
+      "title": "Project 25: Map Leaderboard 🏆",
+      "description": "Track high scores with `std::map` and print a ranked board.",
+      "level": "Intermediate",
+      "concepts": "map, iteration, sorting values",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Rank players\n\nInsert scores, then copy to a vector to sort by points.",
+          "source": "#include <iostream>\n#include <map>\n#include <vector>\n#include <algorithm>\n#include <string>\nusing namespace std;\n\nint main() {\n    map<string, int> scores = {{\"Nova\", 1200}, {\"Pixel\", 980}, {\"Quark\", 1505}, {\"Ada\", 1400}};\n    scores[\"Pixel\"] += 50;\n    vector<pair<string,int>> board(scores.begin(), scores.end());\n    sort(board.begin(), board.end(), [](auto& a, auto& b){ return a.second > b.second; });\n    int rank = 1;\n    for (auto& [name, pts] : board)\n        cout << rank++ << \". \" << name << \" — \" << pts << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "26_class_bank_account",
+      "title": "Project 26: Class Bank Account 🏦",
+      "description": "Encapsulate balance with a class — deposit, withdraw, print statement.",
+      "level": "Intermediate",
+      "concepts": "classes, private fields, methods",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Account class\n\nGuard against overdrafts and print a mini statement.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nclass Account {\n    string owner;\n    double balance;\npublic:\n    Account(string o, double b=0) : owner(o), balance(b) {}\n    void deposit(double x) { if (x > 0) balance += x; }\n    bool withdraw(double x) {\n        if (x <= 0 || x > balance) return false;\n        balance -= x; return true;\n    }\n    void statement() const {\n        cout << owner << \" balance: $\" << balance << endl;\n    }\n};\n\nint main() {\n    Account a(\"CodeItAll\", 100);\n    a.deposit(40);\n    a.withdraw(25);\n    a.withdraw(1000); // should fail silently\n    a.statement();\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "27_inheritance_shape_zoo",
+      "title": "Project 27: Inheritance Shape Zoo 🔷",
+      "description": "Polymorphism with Shape → Circle/Rectangle and virtual area().",
+      "level": "Intermediate",
+      "concepts": "inheritance, virtual functions, pointers",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Virtual zoo\n\nStore shapes via base pointers and sum total area.",
+          "source": "#include <iostream>\n#include <vector>\n#include <cmath>\nusing namespace std;\n\nstruct Shape {\n    virtual double area() const = 0;\n    virtual ~Shape() {}\n};\nstruct Circle : Shape {\n    double r;\n    Circle(double R): r(R) {}\n    double area() const override { return acos(-1.0) * r * r; }\n};\nstruct Rectangle : Shape {\n    double w, h;\n    Rectangle(double W, double H): w(W), h(H) {}\n    double area() const override { return w * h; }\n};\n\nint main() {\n    vector<Shape*> zoo = { new Circle(2), new Rectangle(3, 4), new Circle(1.5) };\n    double total = 0;\n    for (auto* s : zoo) {\n        cout << \"area=\" << s->area() << endl;\n        total += s->area();\n        delete s;\n    }\n    cout << \"total=\" << total << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "28_file_journal_logger",
+      "title": "Project 28: File Journal Logger 📓",
+      "description": "Append timestamped lines to a journal file and read them back.",
+      "level": "Intermediate",
+      "concepts": "fstream, iostream, simple persistence",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Write + read journal\n\nNote: in online compilers the filesystem is ephemeral but still demonstrates the API.",
+          "source": "#include <iostream>\n#include <fstream>\n#include <string>\nusing namespace std;\n\nint main() {\n    {\n        ofstream out(\"journal.txt\", ios::app);\n        out << \"Day 1: Learned cout and loops\\n\";\n        out << \"Day 2: Built a tiny class\\n\";\n    }\n    ifstream in(\"journal.txt\");\n    string line;\n    cout << \"Journal contents:\" << endl;\n    while (getline(in, line)) cout << \"  \" << line << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "29_template_swap_toolkit",
+      "title": "Project 29: Template Swap Toolkit 🔁",
+      "description": "Write a function template `swap2` that works for int, double, and string.",
+      "level": "Intermediate",
+      "concepts": "templates, type flexibility",
+      "cells": [
+        {
+          "markdown": "### Step 1 — One swap to rule them\n\nImplement `template<typename T> void swap2(T&, T&)`.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\ntemplate <typename T>\nvoid swap2(T& a, T& b) {\n    T tmp = a; a = b; b = tmp;\n}\n\nint main() {\n    int a = 3, b = 9; swap2(a, b);\n    cout << a << \" \" << b << endl;\n    string x = \"code\", y = \"itall\"; swap2(x, y);\n    cout << x << \" \" << y << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "30_binary_search_treasure",
+      "title": "Project 30: Binary Search Treasure 💎",
+      "description": "Binary-search a sorted chest of IDs and count how many probes you needed.",
+      "level": "Intermediate",
+      "concepts": "algorithms, divide and conquer",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Find the treasure ID\n\nImplement classic binary search and print probe count.",
+          "source": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int chest[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};\n    int n = 10;\n    int target = 23; // tweak\n    int lo = 0, hi = n - 1, probes = 0, found = -1;\n    while (lo <= hi) {\n        probes++;\n        int mid = lo + (hi - lo) / 2;\n        if (chest[mid] == target) { found = mid; break; }\n        if (chest[mid] < target) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    if (found >= 0) cout << \"Found \" << target << \" at index \" << found;\n    else cout << \"Missing \" << target;\n    cout << \" after \" << probes << \" probes\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "31_linked_list_playlist",
+      "title": "Project 31: Linked List Playlist 🎵",
+      "description": "Build a singly linked list of song titles and walk the playlist.",
+      "level": "Intermediate",
+      "concepts": "pointers, nodes, manual memory",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Chain the songs\n\nCreate nodes, append, traverse, delete.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nstruct Node {\n    string title;\n    Node* next;\n    Node(string t): title(t), next(nullptr) {}\n};\n\nint main() {\n    Node* head = new Node(\"Intro Loop\");\n    head->next = new Node(\"Pointer Blues\");\n    head->next->next = new Node(\"Semaphore Sunrise\");\n    cout << \"Playlist:\" << endl;\n    for (Node* p = head; p; p = p->next)\n        cout << \" ♪ \" << p->title << endl;\n    while (head) { Node* n = head->next; delete head; head = n; }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "32_recursion_folder_depth",
+      "title": "Project 32: Recursion Folder Depth 📁",
+      "description": "Simulate nested folders with recursion and print indented trees.",
+      "level": "Intermediate",
+      "concepts": "recursion, tree-ish structs",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Print a folder tree\n\nEach folder has a name and children vector.",
+          "source": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\n\nstruct Folder {\n    string name;\n    vector<Folder> kids;\n};\n\nvoid print_tree(const Folder& f, int depth = 0) {\n    cout << string(depth * 2, ' ') << \"+ \" << f.name << endl;\n    for (auto& k : f.kids) print_tree(k, depth + 1);\n}\n\nint main() {\n    Folder root{\"CodeItAll\", {\n        {\"cpp\", {{\"lab\"}, {\"projects\"}}},\n        {\"python\", {{\"notebooks\"}}}\n    }};\n    print_tree(root);\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "33_smart_pointer_pet_shelter",
+      "title": "Project 33: Smart Pointer Pet Shelter 🐶",
+      "description": "Manage pet objects with `unique_ptr` — modern ownership without leaks.",
+      "level": "Advanced",
+      "concepts": "unique_ptr, move semantics intro",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Adopt with unique_ptr\n\nCreate pets in a shelter vector of unique_ptrs.",
+          "source": "#include <iostream>\n#include <memory>\n#include <vector>\n#include <string>\nusing namespace std;\n\nstruct Pet {\n    string name;\n    Pet(string n): name(n) { cout << name << \" arrives\" << endl; }\n    ~Pet() { cout << name << \" goes home\" << endl; }\n    void speak() const { cout << name << \": woof/meow!\" << endl; }\n};\n\nint main() {\n    vector<unique_ptr<Pet>> shelter;\n    shelter.push_back(make_unique<Pet>(\"Pixel\"));\n    shelter.push_back(make_unique<Pet>(\"Byte\"));\n    for (auto& p : shelter) p->speak();\n    shelter.clear(); // destructors run\n    cout << \"Shelter empty.\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "34_lambda_filter_party",
+      "title": "Project 34: Lambda Filter Party λ",
+      "description": "Use STL algorithms + lambdas to filter and transform a list of numbers.",
+      "level": "Advanced",
+      "concepts": "lambdas, <algorithm>, iterators",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Filter evens, square them\n\n`copy_if` + `transform` with lambdas.",
+          "source": "#include <iostream>\n#include <vector>\n#include <algorithm>\nusing namespace std;\n\nint main() {\n    vector<int> nums = {1,2,3,4,5,6,7,8,9,10};\n    vector<int> evens;\n    copy_if(nums.begin(), nums.end(), back_inserter(evens), [](int x){ return x % 2 == 0; });\n    transform(evens.begin(), evens.end(), evens.begin(), [](int x){ return x * x; });\n    cout << \"squared evens: \";\n    for (int x : evens) cout << x << \" \";\n    cout << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "35_chrono_stopwatch",
+      "title": "Project 35: Chrono Stopwatch ⏱️",
+      "description": "Benchmark a busy loop with `std::chrono` and report milliseconds.",
+      "level": "Advanced",
+      "concepts": "chrono, performance measurement",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Time a workload\n\nUse steady_clock around a sum loop.",
+          "source": "#include <iostream>\n#include <chrono>\nusing namespace std;\nusing namespace std::chrono;\n\nint main() {\n    long long N = 5000000; // tweak\n    auto t0 = steady_clock::now();\n    long long sum = 0;\n    for (long long i = 0; i < N; i++) sum += i % 7;\n    auto t1 = steady_clock::now();\n    auto ms = duration_cast<milliseconds>(t1 - t0).count();\n    cout << \"sum=\" << sum << \" time=\" << ms << \" ms\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "36_optional_config_finder",
+      "title": "Project 36: Optional Config Finder ⚙️",
+      "description": "Use `std::optional` to represent missing settings cleanly.",
+      "level": "Advanced",
+      "concepts": "optional, nullability without raw pointers",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Find a setting\n\nReturn optional values for known / unknown keys.",
+          "source": "#include <iostream>\n#include <optional>\n#include <string>\n#include <map>\nusing namespace std;\n\noptional<string> get_setting(const map<string,string>& cfg, const string& key) {\n    auto it = cfg.find(key);\n    if (it == cfg.end()) return nullopt;\n    return it->second;\n}\n\nint main() {\n    map<string,string> cfg{{\"theme\",\"dark\"},{\"lang\",\"cpp\"}};\n    for (string key : {\"theme\", \"volume\"}) {\n        auto v = get_setting(cfg, key);\n        if (v) cout << key << \"=\" << *v << endl;\n        else cout << key << \" is missing\" << endl;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "37_variant_message_bus",
+      "title": "Project 37: Variant Message Bus 📨",
+      "description": "Store int/string/double messages in `std::variant` and visit them.",
+      "level": "Advanced",
+      "concepts": "variant, visit, type-safe unions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Visit messages\n\nPush mixed types and print with `std::visit`.",
+          "source": "#include <iostream>\n#include <variant>\n#include <vector>\n#include <string>\nusing namespace std;\n\nusing Message = variant<int, string, double>;\n\nint main() {\n    vector<Message> bus = {42, string(\"ping\"), 3.14, string(\"pong\")};\n    for (auto& m : bus) {\n        visit([](auto&& value) {\n            cout << \"msg: \" << value << endl;\n        }, m);\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "38_game_of_life_pulse",
+      "title": "Project 38: Game of Life Pulse 🧬",
+      "description": "Run a few generations of Conway's Game of Life on a tiny grid.",
+      "level": "Advanced",
+      "concepts": "2D grids, neighbor counts, cellular automata",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Evolve a blinker\n\nPrint generation 0..4 of a classic oscillator.",
+          "source": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    const int R = 5, C = 5;\n    vector<vector<int>> g(R, vector<int>(C, 0));\n    // blinker\n    g[2][1] = g[2][2] = g[2][3] = 1;\n\n    auto show = [&](int gen) {\n        cout << \"gen \" << gen << endl;\n        for (int r = 0; r < R; r++) {\n            for (int c = 0; c < C; c++) cout << (g[r][c] ? '#' : '.');\n            cout << endl;\n        }\n        cout << endl;\n    };\n\n    show(0);\n    for (int gen = 1; gen <= 4; gen++) {\n        auto next = g;\n        for (int r = 0; r < R; r++) for (int c = 0; c < C; c++) {\n            int n = 0;\n            for (int dr = -1; dr <= 1; dr++) for (int dc = -1; dc <= 1; dc++) {\n                if (!dr && !dc) continue;\n                int rr = r + dr, cc = c + dc;\n                if (rr>=0 && rr<R && cc>=0 && cc<C) n += g[rr][cc];\n            }\n            next[r][c] = (g[r][c] ? (n == 2 || n == 3) : (n == 3));\n        }\n        g.swap(next);\n        show(gen);\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "39_tiny_expr_evaluator",
+      "title": "Project 39: Tiny Expr Evaluator ➗",
+      "description": "Evaluate simple +/− expressions with single digits (recursive descent lite).",
+      "level": "Advanced",
+      "concepts": "parsing, recursion",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Parse a+b-c\n\nWalk a string expression of digits and +/−.",
+          "source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nint eval_expr(const string& s) {\n    int i = 0;\n    auto num = [&]() {\n        int v = s[i] - '0';\n        i++;\n        return v;\n    };\n    int value = num();\n    while (i < (int)s.size()) {\n        char op = s[i++];\n        int rhs = num();\n        if (op == '+') value += rhs;\n        else if (op == '-') value -= rhs;\n    }\n    return value;\n}\n\nint main() {\n    string tests[] = {\"3+4\", \"9-2+1\", \"8-3-2\"};\n    for (auto& t : tests) cout << t << \" = \" << eval_expr(t) << endl;\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "40_raii_file_guard",
+      "title": "Project 40: RAII File Guard 🛡️",
+      "description": "Wrap a FILE* (or ofstream) in an RAII guard so cleanup is automatic.",
+      "level": "Advanced",
+      "concepts": "RAII, destructors, resource safety",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Guard an ofstream\n\nCustom class closes the stream when leaving scope — even on early return.",
+          "source": "#include <iostream>\n#include <fstream>\n#include <string>\nusing namespace std;\n\nclass FileGuard {\n    ofstream out;\npublic:\n    explicit FileGuard(const string& path) : out(path) {\n        cout << \"open \" << path << endl;\n    }\n    void write(const string& s) { out << s; }\n    ~FileGuard() { cout << \"auto-close\" << endl; }\n};\n\nint main() {\n    {\n        FileGuard g(\"raii_note.txt\");\n        g.write(\"RAII keeps resources tidy.\\n\");\n        // no explicit close — destructor handles it\n    }\n    cout << \"scope left\" << endl;\n    return 0;\n}\n"
+        }
+      ]
+    }
+  ]
+}

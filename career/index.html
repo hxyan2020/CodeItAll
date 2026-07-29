@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Career Lab | CodeItAll</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="./career.css?v=5" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="../index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="../assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <ul class="nav" id="nav">
+      <li><a href="../course/">Learn with AI</a></li>
+      <li><a href="../dissect/">Dissect any website</a></li>
+      <li><a class="active" href="./">Career booster</a></li>
+      <li><a href="../profile/">Me</a></li>
+    </ul>
+  </header>
+
+  <main class="career-main">
+    <section class="career-hero">
+      <p class="eyebrow">Career Lab</p>
+      <h1>Train on real job work</h1>
+      <p class="lead">
+        Pick an industry, a role, a language — optionally a daily task.
+        We generate interactive projects like the ones practitioners actually run.
+      </p>
+
+      <form class="career-form" id="careerForm">
+        <label>
+          Industry
+          <input id="industry" name="industry" required placeholder="e.g. Finance / hedge funds" list="industryHints" autocomplete="organization-title" />
+        </label>
+        <label>
+          Job title
+          <input id="job" name="job" required placeholder="e.g. Quant researcher" list="jobHints" autocomplete="organization-title" />
+        </label>
+        <label>
+          Specific task <span class="opt">(optional)</span>
+          <input id="task" name="task" placeholder="e.g. data processing" />
+        </label>
+        <label>
+          Language
+          <select id="language" name="language" required>
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="sql">SQL</option>
+            <option value="html">HTML</option>
+            <option value="cpp">C++</option>
+          </select>
+        </label>
+        <button type="submit" class="btn-go" id="genBtn">Generate projects</button>
+      </form>
+
+      <datalist id="industryHints">
+        <option value="Finance / hedge funds"></option>
+        <option value="Technology / SaaS"></option>
+        <option value="E-commerce"></option>
+        <option value="Healthcare"></option>
+        <option value="Marketing / advertising"></option>
+        <option value="Manufacturing"></option>
+      </datalist>
+      <datalist id="jobHints">
+        <option value="Quant researcher"></option>
+        <option value="Data analyst"></option>
+        <option value="Software engineer"></option>
+        <option value="Frontend engineer"></option>
+        <option value="Backend engineer"></option>
+        <option value="Product analyst"></option>
+        <option value="DevOps engineer"></option>
+      </datalist>
+
+      <p class="fine" id="statusLine">Projects open in the matching interactive lab — same Run / Run all flow as the fun track.</p>
+    </section>
+
+    <section class="career-results" id="results" hidden>
+      <article class="brief" id="briefBox"></article>
+      <div class="pack-meta" id="packMeta"></div>
+      <ol class="project-cards" id="projectCards"></ol>
+      <div class="cta-row">
+        <button type="button" class="btn-go" id="moreBtn" hidden>Generate more projects</button>
+        <button type="button" class="btn-go" id="openLabBtn">Open interactive lab</button>
+        <button type="button" class="btn-ghost" id="regenBtn">Regenerate</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-links row">
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../course/">Course</a>
+      <a href="../profile/">Me</a>
+    </div>
+    <div class="wrap footer-copy">© 2026 CodeItAll · Career Lab practice packs are educational simulations.</div>
+  </footer>
+
+  <script src="../shared/career-pack.js?v=1"></script>
+  <script src="../shared/progress.js?v=2"></script>
+  <script src="./career.js?v=4"></script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeItAll Admin</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+  <style>
+    :root {
+      --bg: #0a0f1c;
+      --panel: #111827;
+      --panel-2: #0f1626;
+      --line: rgba(255,255,255,0.10);
+      --ink: #e8edf6;
+      --muted: #93a1ba;
+      --accent: #0b6cff;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --danger: #f87171;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: var(--bg); color: var(--ink); line-height: 1.55;
+      min-height: 100vh; -webkit-text-size-adjust: 100%;
+    }
+    a { color: var(--accent); }
+    button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    input, textarea, select {
+      font: inherit; width: 100%; background: #0b1220; color: var(--ink);
+      border: 1px solid var(--line); border-radius: 10px; padding: 0.7rem 0.85rem; outline: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 220px; font-family: ui-monospace, "Cascadia Code", monospace; font-size: 13px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      border: 0; border-radius: 999px; padding: 0.6rem 1.1rem; font-weight: 700;
+      background: var(--accent); color: #fff; min-height: 42px;
+    }
+    .btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+    .btn.danger { background: transparent; border: 1px solid rgba(248,113,113,0.5); color: var(--danger); }
+    .btn.small { padding: 0.35rem 0.7rem; min-height: 34px; font-size: 0.82rem; }
+    .btn:disabled { opacity: 0.5; cursor: wait; }
+
+    /* Login */
+    .login-wrap { max-width: 420px; margin: 12vh auto; padding: 1.5rem; }
+    .login-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 2rem; }
+    .login-card img { height: 34px; margin-bottom: 1.25rem; }
+    .login-card h1 { font-size: 1.3rem; margin-bottom: 0.35rem; }
+    .login-card p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.25rem; }
+    .login-card .btn { width: 100%; margin-top: 0.85rem; }
+
+    /* App */
+    .topbar {
+      position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 1rem;
+      background: rgba(10,15,28,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line); padding: 0.85rem 1.1rem;
+    }
+    .topbar img { height: 26px; }
+    .topbar .spacer { flex: 1; }
+    .tabs { display: flex; gap: 0.35rem; flex-wrap: wrap; padding: 0.85rem 1.1rem 0; }
+    .tab {
+      background: transparent; border: 1px solid var(--line); color: var(--muted);
+      border-radius: 999px; padding: 0.45rem 1rem; font-weight: 600; min-height: 38px;
+    }
+    .tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    main { padding: 1.1rem; max-width: 1100px; margin: 0 auto; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 0.75rem; margin-bottom: 1.25rem; }
+    .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; }
+    .stat b { display: block; font-size: 1.7rem; }
+    .stat span { color: var(--muted); font-size: 0.8rem; }
+    .pill { display: inline-block; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.55rem; border-radius: 999px; border: 1px solid var(--line); }
+    .pill.on { color: var(--ok); border-color: rgba(52,211,153,0.4); }
+    .pill.off { color: var(--muted); }
+
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem; margin-bottom: 1rem; }
+    .row { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+    .row .grow { flex: 1; min-width: 180px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { text-align: left; padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .muted { color: var(--muted); }
+    .cat { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; color: var(--muted); }
+    .list-item { display: flex; gap: 0.75rem; align-items: center; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--line); }
+    .list-item .grow { flex: 1; }
+    .list-item .subj { font-weight: 600; }
+    .hide { display: none !important; }
+    .toast {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      background: #16233c; border: 1px solid var(--line); color: var(--ink);
+      padding: 0.7rem 1.1rem; border-radius: 12px; z-index: 50; max-width: 90vw;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .toast.err { border-color: rgba(248,113,113,0.6); }
+    .toast.ok { border-color: rgba(52,211,153,0.6); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+    .bar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.45rem; font-size: 0.86rem; }
+    .bar-row .lbl { width: 130px; color: var(--muted); flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-row .track { flex: 1; background: #0b1220; border-radius: 6px; overflow: hidden; height: 22px; }
+    .bar-row .fill { height: 100%; background: linear-gradient(90deg, #0b6cff, #4d94ff); border-radius: 6px; min-width: 2px; }
+    .bar-row .val { width: 44px; text-align: right; font-weight: 700; flex-shrink: 0; }
+    .chart { display: flex; align-items: flex-end; gap: 4px; height: 160px; padding-top: 0.5rem; overflow-x: auto; }
+    .chart .col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; flex: 1; min-width: 14px; height: 100%; }
+    .chart .col .b { width: 70%; background: linear-gradient(180deg, #4d94ff, #0b6cff); border-radius: 4px 4px 0 0; min-height: 2px; }
+    .chart .col .cap { font-size: 0.62rem; color: var(--muted); margin-top: 4px; transform: rotate(-45deg); white-space: nowrap; }
+    label.fld { display: block; margin-bottom: 0.7rem; }
+    label.fld span { display: block; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.3rem; }
+    .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    iframe.preview { width: 100%; height: 640px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+    @media (max-width: 800px) {
+      .editor-grid { grid-template-columns: 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+      iframe.preview { height: 480px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login-wrap" id="loginView">
+    <div class="login-card">
+      <img src="../assets/CodeItAll_Logo_HD_white-on-black.png" alt="CodeItAll" />
+      <h1>Admin sign in</h1>
+      <p>Enter your admin token to manage the mailing list and email content.</p>
+      <input type="password" id="tokenInput" placeholder="Admin token" autocomplete="current-password" />
+      <button class="btn" id="loginBtn">Sign in</button>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="appView" class="hide">
+    <div class="topbar">
+      <img src="../assets/CodeItAll_Logo_HD_white-on-black.png" alt="CodeItAll" />
+      <strong>Admin</strong>
+      <div class="spacer"></div>
+      <span class="pill" id="mcPill">Mailchimp</span>
+      <span class="pill" id="smtpPill">SMTP</span>
+      <button class="btn ghost small" id="logoutBtn">Sign out</button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="dashboard">Dashboard</button>
+      <button class="tab" data-tab="analytics">Analytics</button>
+      <button class="tab" data-tab="subscribers">Subscribers</button>
+      <button class="tab" data-tab="content">Content</button>
+      <button class="tab" data-tab="send">Send</button>
+      <button class="tab" data-tab="settings">Settings</button>
+    </div>
+    <main>
+      <!-- DASHBOARD -->
+      <section id="tab-dashboard">
+        <div class="stats" id="statsRow"></div>
+        <div class="panel">
+          <h3 style="margin-bottom:0.5rem;">Recent campaigns</h3>
+          <div id="campaignsMini" class="muted">Loading…</div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="tab-analytics" class="hide">
+        <div class="panel">
+          <div class="row" style="margin-bottom:0.5rem;">
+            <strong class="grow">Viewership</strong>
+            <select id="anDays" style="width:auto;">
+              <option value="1">Today</option>
+              <option value="7">Last 7 days</option>
+              <option value="30" selected>Last 30 days</option>
+              <option value="90">Last 90 days</option>
+              <option value="365">Last year</option>
+            </select>
+            <label class="row" style="gap:0.35rem;font-size:0.85rem;color:var(--muted);">
+              <input type="checkbox" id="anBots" style="width:auto;" /> include bots
+            </label>
+            <button class="btn ghost small" id="anRefresh">Refresh</button>
+          </div>
+          <div class="stats" id="anStats"></div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h3 style="margin-bottom:0.6rem;">Lab visits</h3>
+            <div id="anLabs"></div>
+          </div>
+          <div class="panel">
+            <h3 style="margin-bottom:0.6rem;">Traffic sources</h3>
+            <div id="anSources"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-bottom:0.6rem;">Views per day</h3>
+          <div id="anByDay" class="chart"></div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-bottom:0.6rem;">Pages</h3>
+          <div style="overflow-x:auto;"><table>
+            <thead><tr><th>Page</th><th>Path</th><th>Views</th><th>Visitors</th></tr></thead>
+            <tbody id="anPages"></tbody>
+          </table></div>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-bottom:0.6rem;">Recent visits</h3>
+          <div style="overflow-x:auto;"><table>
+            <thead><tr><th>Time</th><th>Page</th><th>Source</th></tr></thead>
+            <tbody id="anRecent"></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- SUBSCRIBERS -->
+      <section id="tab-subscribers" class="hide">
+        <div class="panel">
+          <div class="row" style="margin-bottom:0.85rem;">
+            <input class="grow" id="subSearch" placeholder="Search email…" />
+            <select id="subStatus" style="width:auto;">
+              <option value="">All</option>
+              <option value="subscribed">Subscribed</option>
+              <option value="unsubscribed">Unsubscribed</option>
+            </select>
+            <button class="btn ghost small" id="subRefresh">Refresh</button>
+            <a class="btn ghost small" id="exportBtn" href="#">Export CSV</a>
+          </div>
+          <div class="row" style="margin-bottom:0.85rem;">
+            <input class="grow" id="newSubEmail" placeholder="Add subscriber email…" />
+            <input id="newSubName" placeholder="Name (optional)" style="width:auto;" />
+            <button class="btn small" id="addSubBtn">Add</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table>
+              <thead><tr><th>Email</th><th>Name</th><th>Status</th><th>Source</th><th></th></tr></thead>
+              <tbody id="subsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTENT -->
+      <section id="tab-content" class="hide">
+        <div class="panel" id="contentListPanel">
+          <div class="row" style="margin-bottom:0.85rem;">
+            <strong class="grow">Email library</strong>
+            <button class="btn small" id="newEmailBtn">+ New email</button>
+          </div>
+          <div id="emailsList"></div>
+        </div>
+        <div class="panel hide" id="editorPanel">
+          <div class="row" style="margin-bottom:0.85rem;">
+            <button class="btn ghost small" id="backToList">← Back</button>
+            <div class="spacer" style="flex:1;"></div>
+            <button class="btn ghost small" id="previewBtn">Preview</button>
+            <button class="btn small" id="saveEmailBtn">Save</button>
+          </div>
+          <div class="editor-grid">
+            <div>
+              <div class="grid-2">
+                <label class="fld"><span>Category</span><input id="edCategory" /></label>
+                <label class="fld"><span>Status</span>
+                  <select id="edStatus"><option value="ready">ready</option><option value="draft">draft</option></select>
+                </label>
+              </div>
+              <label class="fld"><span>Subject</span><input id="edSubject" /></label>
+              <label class="fld"><span>Preheader</span><input id="edPreheader" /></label>
+              <label class="fld"><span>CTA label</span><input id="edCta" /></label>
+              <label class="fld"><span>Body (blank line = paragraph · "## " subhead · "- " bullet · **bold**)</span>
+                <textarea id="edBody"></textarea></label>
+            </div>
+            <div>
+              <span class="cat">Live preview</span>
+              <iframe class="preview" id="previewFrame" title="Email preview"></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEND -->
+      <section id="tab-send" class="hide">
+        <div class="panel">
+          <h3 style="margin-bottom:0.6rem;">Send an email</h3>
+          <p class="muted" style="margin-bottom:0.85rem;font-size:0.9rem;">
+            Choose a piece of content, send yourself a test, then send the full campaign to your subscribed list.
+          </p>
+          <label class="fld"><span>Email content</span><select id="sendSelect"></select></label>
+          <div class="row" style="margin-bottom:0.85rem;">
+            <input class="grow" id="testTo" placeholder="Send test to (email via SMTP)…" />
+            <button class="btn ghost small" id="sendTestBtn">Send test</button>
+          </div>
+          <button class="btn" id="sendCampaignBtn">Send campaign to all subscribers</button>
+          <p class="muted" id="sendMode" style="margin-top:0.6rem;font-size:0.85rem;"></p>
+        </div>
+        <div class="panel">
+          <h3 style="margin-bottom:0.5rem;">Campaign history</h3>
+          <div style="overflow-x:auto;"><table>
+            <thead><tr><th>When</th><th>Subject</th><th>Provider</th><th>Recipients</th><th>Status</th></tr></thead>
+            <tbody id="campaignsBody"></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="tab-settings" class="hide">
+        <div class="panel">
+          <h3 style="margin-bottom:0.6rem;">Integrations</h3>
+          <p class="muted" style="font-size:0.9rem;margin-bottom:0.85rem;">
+            Configure these in <code>/etc/codeitall-assist.env</code> on the server, then restart the service.
+          </p>
+          <div id="integStatus" class="row"></div>
+          <div class="row" style="margin-top:1rem;">
+            <button class="btn ghost small" id="syncMcBtn">Sync subscribers → Mailchimp</button>
+            <button class="btn ghost small" id="importMcBtn">Import Mailchimp → subscribers</button>
+            <button class="btn ghost small" id="reseedBtn">Reseed content library</button>
+            <button class="btn ghost small" id="reseedForceBtn">Reseed (overwrite curated)</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h3 style="margin-bottom:0.4rem;">Sender</h3>
+          <div id="founderBox" class="muted" style="font-size:0.9rem;"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const API = "/api/mail";
+    let TOKEN = sessionStorage.getItem("cia_admin_token") || "";
+    let currentEmailId = null;
+    let previewTimer = null;
+
+    const $ = (s) => document.querySelector(s);
+    const el = (id) => document.getElementById(id);
+
+    function toast(msg, kind) {
+      const t = document.createElement("div");
+      t.className = "toast " + (kind || "");
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3200);
+    }
+
+    async function api(path, opts = {}) {
+      const headers = Object.assign({ "X-Admin-Token": TOKEN }, opts.headers || {});
+      if (opts.body && !headers["Content-Type"]) headers["Content-Type"] = "application/json";
+      const res = await fetch(API + path, Object.assign({}, opts, { headers }));
+      if (res.status === 401) { logout(); throw new Error("Unauthorized"); }
+      if (!res.ok) {
+        let detail = res.status + "";
+        try { detail = (await res.json()).detail || detail; } catch (e) {}
+        throw new Error(detail);
+      }
+      const ct = res.headers.get("content-type") || "";
+      return ct.includes("application/json") ? res.json() : res.text();
+    }
+
+    // ---- Auth ----
+    async function doLogin() {
+      TOKEN = el("tokenInput").value.trim();
+      if (!TOKEN) return toast("Enter a token", "err");
+      el("loginBtn").disabled = true;
+      try {
+        const info = await api("/admin/login", { method: "POST" });
+        sessionStorage.setItem("cia_admin_token", TOKEN);
+        showApp(info);
+      } catch (e) {
+        toast("Login failed: " + e.message, "err");
+      } finally {
+        el("loginBtn").disabled = false;
+      }
+    }
+    function logout() {
+      sessionStorage.removeItem("cia_admin_token");
+      TOKEN = "";
+      el("appView").classList.add("hide");
+      el("loginView").classList.remove("hide");
+    }
+
+    function showApp(info) {
+      el("loginView").classList.add("hide");
+      el("appView").classList.remove("hide");
+      renderIntegration(info);
+      loadIntegration();
+      loadDashboard();
+      loadEmails();
+      loadSubscribers();
+      loadCampaigns();
+    }
+
+    function renderIntegration(info) {
+      const mc = info.mailchimp, smtp = info.smtp;
+      el("mcPill").className = "pill " + (mc ? "on" : "off");
+      el("mcPill").textContent = "Mailchimp " + (mc ? "on" : "off");
+      el("smtpPill").className = "pill " + (smtp ? "on" : "off");
+      el("smtpPill").textContent = "SMTP " + (smtp ? "on" : "off");
+      el("integStatus").innerHTML =
+        '<span class="pill ' + (mc ? "on" : "off") + '">Mailchimp ' + (mc ? "connected" : "not set") + "</span>" +
+        '<span class="pill ' + (smtp ? "on" : "off") + '">SMTP ' + (smtp ? "connected" : "not set") + "</span>";
+      if (info.founder) {
+        const f = info.founder;
+        el("founderBox").innerHTML =
+          "<strong style='color:var(--ink)'>" + f.name + "</strong> — " + f.title +
+          "<br>From: " + f.from_name + " &lt;" + f.from_email + "&gt;<br>" + f.bio;
+      }
+    }
+
+    async function loadIntegration() {
+      try {
+        const info = await api("/admin/integration");
+        const mc = info.mailchimp_connected;
+        el("mcPill").className = "pill " + (mc ? "on" : "off");
+        el("mcPill").textContent = "Mailchimp " + (mc ? "on" : "off");
+        el("smtpPill").className = "pill " + (info.smtp ? "on" : "off");
+        el("smtpPill").textContent = "SMTP " + (info.smtp ? "on" : "off");
+        const audience = info.mailchimp_audience;
+        const audienceText = audience
+          ? `Mailchimp connected · ${escapeHtml(audience.name || "Audience")} · ${audience.members} subscribed`
+          : info.mailchimp_configured
+            ? `Mailchimp configured but unavailable: ${escapeHtml(info.mailchimp_error || "connection failed")}`
+            : "Mailchimp not configured";
+        el("integStatus").innerHTML =
+          `<span class="pill ${mc ? "on" : "off"}">${audienceText}</span>` +
+          `<span class="pill ${info.smtp ? "on" : "off"}">SMTP ${info.smtp ? "connected" : "not set"}</span>` +
+          `<span class="pill ${info.sender_ready ? "on" : "off"}">Sender ${info.sender_ready ? "ready" : "needs setup"}</span>`;
+        el("sendMode").textContent = mc
+          ? `Campaigns send through Mailchimp to ${audience.members} subscribed audience member(s). Tests use ${info.smtp ? "SMTP" : "Mailchimp"}.` +
+            (info.sender_ready ? "" : " Production send is blocked: " + (info.sender_issues || []).join(" "))
+          : "Connect Mailchimp before sending a campaign. SMTP is optional for test messages.";
+        if (info.sender) {
+          const f = info.sender;
+          el("founderBox").innerHTML =
+            "<strong style='color:var(--ink)'>" + escapeHtml(f.name) + "</strong> — " + escapeHtml(f.title) +
+            "<br>From: " + escapeHtml(f.from_name) + " &lt;" + escapeHtml(f.from_email) + "&gt;<br>" +
+            escapeHtml(f.bio) + "<br><span class='cat'>Compliance address</span> " + escapeHtml(f.address || "not set");
+        }
+      } catch (e) {
+        toast("Integration check failed: " + e.message, "err");
+      }
+    }
+
+    // ---- Tabs ----
+    document.querySelectorAll(".tab").forEach((t) => {
+      t.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
+        t.classList.add("active");
+        document.querySelectorAll("main > section").forEach((s) => s.classList.add("hide"));
+        el("tab-" + t.dataset.tab).classList.remove("hide");
+        if (t.dataset.tab === "analytics") loadAnalytics();
+      });
+    });
+
+    // ---- Dashboard ----
+    async function loadDashboard() {
+      try {
+        const s = await api("/admin/stats");
+        el("statsRow").innerHTML = [
+          ["Subscribers", s.subscribers],
+          ["Unsubscribed", s.unsubscribed],
+          ["Email pieces", s.emails],
+          ["Campaigns sent", s.campaigns],
+        ].map(([k, v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+      } catch (e) { toast(e.message, "err"); }
+    }
+
+    // ---- Subscribers ----
+    async function loadSubscribers() {
+      try {
+        const q = encodeURIComponent(el("subSearch").value.trim());
+        const st = el("subStatus").value;
+        const data = await api(`/admin/subscribers?q=${q}&status=${st}`);
+        el("subsBody").innerHTML = data.subscribers.map((r) => `
+          <tr>
+            <td>${r.email}</td>
+            <td>${r.name || "<span class='muted'>—</span>"}</td>
+            <td><span class="pill ${r.status === "subscribed" ? "on" : "off"}">${r.status}</span></td>
+            <td class="muted">${r.source || ""}</td>
+            <td><button class="btn danger small" data-del="${r.id}">Delete</button></td>
+          </tr>`).join("") || `<tr><td colspan="5" class="muted">No subscribers yet.</td></tr>`;
+        el("subsBody").querySelectorAll("[data-del]").forEach((b) =>
+          b.addEventListener("click", async () => {
+            if (!confirm("Delete this subscriber?")) return;
+            await api("/admin/subscribers/" + b.dataset.del, { method: "DELETE" });
+            loadSubscribers(); loadDashboard();
+          }));
+      } catch (e) { toast(e.message, "err"); }
+    }
+    el("subRefresh").addEventListener("click", loadSubscribers);
+    el("subSearch").addEventListener("keydown", (e) => { if (e.key === "Enter") loadSubscribers(); });
+    el("subStatus").addEventListener("change", loadSubscribers);
+    el("addSubBtn").addEventListener("click", async () => {
+      const email = el("newSubEmail").value.trim();
+      if (!email) return;
+      try {
+        await api("/admin/subscribers", { method: "POST", body: JSON.stringify({ email, name: el("newSubName").value.trim() }) });
+        el("newSubEmail").value = ""; el("newSubName").value = "";
+        toast("Added", "ok"); loadSubscribers(); loadDashboard();
+      } catch (e) { toast(e.message, "err"); }
+    });
+    el("exportBtn").addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        const csv = await api("/admin/export.csv");
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob); a.download = "codeitall-subscribers.csv"; a.click();
+      } catch (err) { toast(err.message, "err"); }
+    });
+
+    // ---- Content ----
+    async function loadEmails() {
+      try {
+        const data = await api("/admin/emails");
+        const cats = {};
+        data.emails.forEach((e) => { (cats[e.category] = cats[e.category] || []).push(e); });
+        el("emailsList").innerHTML = Object.keys(cats).map((cat) =>
+          `<div class="cat" style="margin:0.85rem 0 0.3rem;">${cat || "uncategorized"}</div>` +
+          cats[cat].map((e) => `
+            <div class="list-item">
+              <div class="grow">
+                <div class="subj">${escapeHtml(e.subject)}</div>
+                <div class="muted" style="font-size:0.8rem;">${escapeHtml(e.preheader || "")}</div>
+              </div>
+              <span class="pill ${e.status === "ready" ? "on" : "off"}">${e.status}</span>
+              <button class="btn ghost small" data-edit="${e.id}">Edit</button>
+            </div>`).join("")
+        ).join("");
+        el("emailsList").querySelectorAll("[data-edit]").forEach((b) =>
+          b.addEventListener("click", () => openEditor(b.dataset.edit)));
+        // populate send select
+        el("sendSelect").innerHTML = data.emails.map((e) =>
+          `<option value="${e.id}">[${e.category}] ${escapeHtml(e.subject)}</option>`).join("");
+      } catch (e) { toast(e.message, "err"); }
+    }
+    el("newEmailBtn").addEventListener("click", () => openEditor(null));
+    el("backToList").addEventListener("click", () => {
+      el("editorPanel").classList.add("hide");
+      el("contentListPanel").classList.remove("hide");
+    });
+
+    async function openEditor(id) {
+      currentEmailId = id;
+      el("contentListPanel").classList.add("hide");
+      el("editorPanel").classList.remove("hide");
+      if (id) {
+        const e = await api("/admin/emails/" + id);
+        el("edCategory").value = e.category || "";
+        el("edStatus").value = e.status || "ready";
+        el("edSubject").value = e.subject || "";
+        el("edPreheader").value = e.preheader || "";
+        el("edCta").value = e.cta_label || "";
+        el("edBody").value = e.body || "";
+        refreshPreview();
+      } else {
+        ["edCategory","edSubject","edPreheader","edBody"].forEach((k)=>el(k).value="");
+        el("edCta").value = "Open the labs"; el("edStatus").value = "ready";
+        el("previewFrame").srcdoc = "<p style='font-family:sans-serif;padding:2rem;color:#888'>Save to preview…</p>";
+      }
+    }
+
+    function collectEmail() {
+      return {
+        category: el("edCategory").value.trim(),
+        subject: el("edSubject").value.trim(),
+        preheader: el("edPreheader").value.trim(),
+        cta_label: el("edCta").value.trim() || "Open the labs",
+        body: el("edBody").value,
+        status: el("edStatus").value,
+      };
+    }
+    el("saveEmailBtn").addEventListener("click", async () => {
+      const payload = collectEmail();
+      if (!payload.subject || !payload.body) return toast("Subject and body required", "err");
+      try {
+        if (currentEmailId) {
+          await api("/admin/emails/" + currentEmailId, { method: "PUT", body: JSON.stringify(payload) });
+        } else {
+          const r = await api("/admin/emails", { method: "POST", body: JSON.stringify(payload) });
+          currentEmailId = r.id;
+        }
+        toast("Saved", "ok"); loadEmails(); refreshPreview();
+      } catch (e) { toast(e.message, "err"); }
+    });
+    el("previewBtn").addEventListener("click", refreshPreview);
+    el("edBody").addEventListener("input", () => { clearTimeout(previewTimer); previewTimer = setTimeout(refreshPreview, 700); });
+
+    async function refreshPreview() {
+      if (!currentEmailId) return;
+      try {
+        // save current edits first so preview reflects them
+        await api("/admin/emails/" + currentEmailId, { method: "PUT", body: JSON.stringify(collectEmail()) });
+        const html = await api("/admin/emails/" + currentEmailId + "/preview");
+        el("previewFrame").srcdoc = html;
+      } catch (e) { /* silent */ }
+    }
+
+    // ---- Send ----
+    el("sendTestBtn").addEventListener("click", async () => {
+      const id = el("sendSelect").value, to = el("testTo").value.trim();
+      if (!to) return toast("Enter a test email", "err");
+      el("sendTestBtn").disabled = true;
+      try {
+        const r = await api("/admin/send", { method: "POST", body: JSON.stringify({ email_id: Number(id), test_to: to }) });
+        toast("Test sent via " + r.mode, "ok");
+      } catch (e) { toast(e.message, "err"); } finally { el("sendTestBtn").disabled = false; }
+    });
+    el("sendCampaignBtn").addEventListener("click", async () => {
+      const id = el("sendSelect").value;
+      const selected = el("sendSelect").selectedOptions[0]?.textContent || "this email";
+      if (!confirm(`Send “${selected}” to the full subscribed Mailchimp audience? This cannot be undone.`)) return;
+      el("sendCampaignBtn").disabled = true;
+      try {
+        const r = await api("/admin/send", { method: "POST", body: JSON.stringify({ email_id: Number(id) }) });
+        toast("Campaign sent to " + (r.recipients || 0) + " via " + r.mode, "ok");
+        loadCampaigns(); loadDashboard();
+      } catch (e) { toast(e.message, "err"); } finally { el("sendCampaignBtn").disabled = false; }
+    });
+
+    async function loadCampaigns() {
+      try {
+        const data = await api("/admin/campaigns");
+        const rowsHtml = data.campaigns.map((c) => `
+          <tr><td class="muted">${new Date(c.created_at*1000).toLocaleString()}</td>
+          <td>${escapeHtml(c.subject||"")}</td><td>${c.provider||""}</td>
+          <td>${c.recipients||0}</td><td>${c.status||""}</td></tr>`).join("");
+        el("campaignsBody").innerHTML = rowsHtml || `<tr><td colspan="5" class="muted">No campaigns yet.</td></tr>`;
+        el("campaignsMini").innerHTML = data.campaigns.slice(0,5).map((c) =>
+          `<div class="list-item"><div class="grow">${escapeHtml(c.subject||"")}</div>
+           <span class="muted">${c.recipients||0} · ${c.provider||""}</span></div>`).join("") ||
+          "<span class='muted'>No campaigns sent yet.</span>";
+      } catch (e) { /* silent */ }
+    }
+
+    // ---- Settings ----
+    el("syncMcBtn").addEventListener("click", async () => {
+      try { const r = await api("/admin/sync-mailchimp", { method: "POST" });
+        toast(`Synced ${r.synced}/${r.total} (errors ${r.errors})`, r.errors ? "err" : "ok");
+        loadIntegration(); } catch (e) { toast(e.message, "err"); }
+    });
+    el("importMcBtn").addEventListener("click", async () => {
+      try {
+        const r = await api("/admin/import-mailchimp", { method: "POST" });
+        toast(`Imported ${r.imported}; updated ${r.updated}; skipped ${r.skipped}`, "ok");
+        loadSubscribers(); loadDashboard(); loadIntegration();
+      } catch (e) { toast(e.message, "err"); }
+    });
+    el("reseedBtn").addEventListener("click", async () => {
+      try { const r = await api("/admin/seed", { method: "POST" }); toast(`Inserted ${r.inserted} new`, "ok"); loadEmails(); }
+      catch (e) { toast(e.message, "err"); }
+    });
+    el("reseedForceBtn").addEventListener("click", async () => {
+      if (!confirm("Overwrite all curated emails with the built-in library? Your edits to curated pieces will be lost.")) return;
+      try { await api("/admin/seed?force=true", { method: "POST" }); toast("Reseeded", "ok"); loadEmails(); }
+      catch (e) { toast(e.message, "err"); }
+    });
+
+    // ---- Analytics ----
+    function bars(container, items, labelKey, valKey) {
+      const max = Math.max(1, ...items.map((x) => x[valKey]));
+      el(container).innerHTML = items.length ? items.map((x) => `
+        <div class="bar-row">
+          <span class="lbl" title="${escapeHtml(String(x[labelKey]))}">${escapeHtml(String(x[labelKey]))}</span>
+          <span class="track"><span class="fill" style="width:${Math.round((x[valKey]/max)*100)}%"></span></span>
+          <span class="val">${x[valKey]}</span>
+        </div>`).join("") : "<span class='muted'>No data yet.</span>";
+    }
+
+    async function loadAnalytics() {
+      const days = el("anDays").value;
+      const bots = el("anBots").checked ? "true" : "false";
+      try {
+        const a = await api(`/admin/analytics?days=${days}&include_bots=${bots}`);
+        el("anStats").innerHTML = [
+          ["Page views", a.totals.views],
+          ["Unique visitors", a.totals.unique_visitors],
+          ["Bot views (excluded)", a.totals.bot_views],
+          ["All-time views", a.totals.all_time_views],
+        ].map(([k, v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+
+        bars("anLabs", a.labs, "label", "views");
+        bars("anSources", a.sources, "referrer", "views");
+
+        const max = Math.max(1, ...a.by_day.map((d) => d.views));
+        el("anByDay").innerHTML = a.by_day.length ? a.by_day.map((d) => `
+          <div class="col" title="${d.day}: ${d.views} views, ${d.visitors} visitors">
+            <div class="b" style="height:${Math.round((d.views/max)*100)}%"></div>
+            <div class="cap">${d.day.slice(5)}</div>
+          </div>`).join("") : "<span class='muted'>No data yet.</span>";
+
+        el("anPages").innerHTML = a.by_page.map((p) => `
+          <tr><td>${escapeHtml(p.label)}</td><td class="muted">${escapeHtml(p.path)}</td>
+          <td>${p.views}</td><td>${p.visitors}</td></tr>`).join("") ||
+          `<tr><td colspan="4" class="muted">No page views recorded yet.</td></tr>`;
+
+        el("anRecent").innerHTML = a.recent.map((r) => `
+          <tr><td class="muted">${new Date(r.ts*1000).toLocaleString()}</td>
+          <td>${escapeHtml(r.label)}</td>
+          <td class="muted">${escapeHtml(r.referrer || "(direct)")}</td></tr>`).join("") ||
+          `<tr><td colspan="3" class="muted">No visits recorded yet.</td></tr>`;
+      } catch (e) { toast(e.message, "err"); }
+    }
+    el("anRefresh").addEventListener("click", loadAnalytics);
+    el("anDays").addEventListener("change", loadAnalytics);
+    el("anBots").addEventListener("change", loadAnalytics);
+
+    function escapeHtml(s) { const d = document.createElement("div"); d.textContent = s == null ? "" : s; return d.innerHTML; }
+
+    el("loginBtn").addEventListener("click", doLogin);
+    el("tokenInput").addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
+    el("logoutBtn").addEventListener("click", logout);
+
+    // Auto sign-in if token stored
+    if (TOKEN) {
+      api("/admin/login", { method: "POST" }).then(showApp).catch(() => logout());
+    }
+  </script>
+</body>
+</html>

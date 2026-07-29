@@ -1,0 +1,529 @@
+{
+  "track": "javascript",
+  "projects": [
+    {
+      "id": "01_hello_fortune_cookie",
+      "title": "Project 1: Hello Fortune Cookie 🥠",
+      "description": "Print a welcome and crack open a random programming fortune in the console.",
+      "level": "Beginner",
+      "concepts": "console.log, strings, arrays, Math.random",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Say hello\n\n`console.log` is your hello world in the browser.",
+          "source": "console.log(\"Hello from CodeItAll JS Lab!\");\nconsole.log(\"You just ran real JavaScript in the browser.\");\n"
+        },
+        {
+          "markdown": "### Step 2 — Crack a fortune\n\nPick a random string from an array.",
+          "source": "const fortunes = [\n  \"Semicolons are optional — clarity is not.\",\n  \"Bugs fear brave beginners.\",\n  \"console.log first, refactor second.\",\n  \"Closures hug your variables.\"\n];\nconst pick = fortunes[Math.floor(Math.random() * fortunes.length)];\nconsole.log(\"Your fortune:\", pick);\n"
+        }
+      ]
+    },
+    {
+      "id": "02_number_guess_arena",
+      "title": "Project 2: Number Guess Arena 🎯",
+      "description": "Simulate guesses against a secret number with too-high / too-low hints.",
+      "level": "Beginner",
+      "concepts": "variables, if/else, loops",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Guess loop\n\nWalk a list of guesses and print feedback.",
+          "source": "const secret = 37; // tweak\nconst guesses = [20, 40, 37];\nfor (const g of guesses) {\n  let msg;\n  if (g < secret) msg = \"too low\";\n  else if (g > secret) msg = \"too high\";\n  else msg = \"you win!\";\n  console.log(`Guess ${g} → ${msg}`);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "03_caesar_cipher_pad",
+      "title": "Project 3: Caesar Cipher Pad 🔐",
+      "description": "Shift letters with modular arithmetic — a classic cipher in JS.",
+      "level": "Beginner",
+      "concepts": "strings, char codes, functions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Encrypt a message\n\nWrite a function that shifts A–Z / a–z.",
+          "source": "function caesar(text, shift) {\n  return [...text].map((ch) => {\n    const code = ch.charCodeAt(0);\n    if (code >= 65 && code <= 90) return String.fromCharCode(((code - 65 + shift) % 26) + 65);\n    if (code >= 97 && code <= 122) return String.fromCharCode(((code - 97 + shift) % 26) + 97);\n    return ch;\n  }).join(\"\");\n}\nconst msg = \"Hello, CodeItAll!\";\nconsole.log(\"plain:\", msg);\nconsole.log(\"cipher:\", caesar(msg, 3));\nconsole.log(\"back:\", caesar(caesar(msg, 3), 23));\n"
+        }
+      ]
+    },
+    {
+      "id": "04_tip_calculator_booth",
+      "title": "Project 4: Tip Calculator Booth 🧾",
+      "description": "Split a bill with tip — practice numbers and `toFixed`.",
+      "level": "Beginner",
+      "concepts": "numbers, Math, template strings",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Bill + tip + split\n\nCompute per-person cost.",
+          "source": "const bill = 86.5;\nconst tipPercent = 18;\nconst people = 3;\nconst tip = bill * (tipPercent / 100);\nconst total = bill + tip;\nconst each = total / people;\nconsole.log(`Bill $${bill.toFixed(2)}`);\nconsole.log(`Tip ${tipPercent}% → $${tip.toFixed(2)}`);\nconsole.log(`Total $${total.toFixed(2)}`);\nconsole.log(`Each of ${people}: $${each.toFixed(2)}`);\n"
+        }
+      ]
+    },
+    {
+      "id": "05_fizzbuzz_remix",
+      "title": "Project 5: FizzBuzz Remix 🥤",
+      "description": "Classic FizzBuzz with a custom third word for multiples of 7.",
+      "level": "Beginner",
+      "concepts": "modulo, loops, conditionals",
+      "cells": [
+        {
+          "markdown": "### Step 1 — 1 to 35 remix\n\nPrint Fizz / Buzz / Jazz / combinations.",
+          "source": "for (let n = 1; n <= 35; n++) {\n  let out = \"\";\n  if (n % 3 === 0) out += \"Fizz\";\n  if (n % 5 === 0) out += \"Buzz\";\n  if (n % 7 === 0) out += \"Jazz\";\n  console.log(out || n);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "06_dice_odds_studio",
+      "title": "Project 6: Dice Odds Studio 🎲",
+      "description": "Roll two dice thousands of times and chart the sum frequencies.",
+      "level": "Beginner",
+      "concepts": "Math.random, objects as maps, simulation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Simulate rolls\n\nTally sums 2–12.",
+          "source": "const trials = 10000;\nconst counts = {};\nfor (let i = 2; i <= 12; i++) counts[i] = 0;\nfor (let t = 0; t < trials; t++) {\n  const sum = 1 + Math.floor(Math.random() * 6) + 1 + Math.floor(Math.random() * 6);\n  counts[sum]++;\n}\nconsole.log(`After ${trials} rolls:`);\nfor (let s = 2; s <= 12; s++) {\n  const bar = \"#\".repeat(Math.round((counts[s] / trials) * 80));\n  console.log(`${String(s).padStart(2)}: ${bar} ${counts[s]}`);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "07_palindrome_detective",
+      "title": "Project 7: Palindrome Detective 🔍",
+      "description": "Detect palindromes after cleaning punctuation and case.",
+      "level": "Beginner",
+      "concepts": "string methods, reverse, regex basics",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Clean and compare\n\nIgnore spaces and punctuation.",
+          "source": "function isPalindrome(s) {\n  const clean = s.toLowerCase().replace(/[^a-z0-9]/g, \"\");\n  return clean === [...clean].reverse().join(\"\");\n}\nconst samples = [\"Radar\", \"A man, a plan, a canal: Panama\", \"CodeItAll\", \"1221\"];\nfor (const s of samples) {\n  console.log(`\"${s}\" → ${isPalindrome(s) ? \"palindrome\" : \"not\"}`);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "08_mini_calculator",
+      "title": "Project 8: Mini Calculator 🧮",
+      "description": "Evaluate simple a op b expressions with a switch.",
+      "level": "Beginner",
+      "concepts": "functions, switch, Number",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Operate\n\nSupport +, -, *, / and guard divide-by-zero.",
+          "source": "function calc(a, op, b) {\n  switch (op) {\n    case \"+\": return a + b;\n    case \"-\": return a - b;\n    case \"*\": return a * b;\n    case \"/\": return b === 0 ? \"∞ (divide by zero)\" : a / b;\n    default: return \"unknown op\";\n  }\n}\nconst jobs = [[12, \"+\", 5], [12, \"-\", 5], [12, \"*\", 5], [12, \"/\", 5], [12, \"/\", 0]];\nfor (const [a, op, b] of jobs) {\n  console.log(`${a} ${op} ${b} =`, calc(a, op, b));\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "09_password_strength_meter",
+      "title": "Project 9: Password Strength Meter 🛡️",
+      "description": "Score a password with length and character-class checks.",
+      "level": "Beginner",
+      "concepts": "regex, scoring, conditionals",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Score passwords\n\nAward points for diversity.",
+          "source": "function scorePassword(pw) {\n  let score = 0;\n  const tips = [];\n  if (pw.length >= 8) score += 2; else tips.push(\"use 8+ chars\");\n  if (pw.length >= 12) score += 1;\n  if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score += 2; else tips.push(\"mix upper/lower\");\n  if (/\\d/.test(pw)) score += 2; else tips.push(\"add a digit\");\n  if (/[^A-Za-z0-9]/.test(pw)) score += 2; else tips.push(\"add a symbol\");\n  const label = score >= 8 ? \"strong\" : score >= 5 ? \"okay\" : \"weak\";\n  return { score, label, tips };\n}\nfor (const pw of [\"abc\", \"CodeItAll1\", \"C0de!tAll#2026\"]) {\n  const r = scorePassword(pw);\n  console.log(`\"${pw}\" → ${r.label} (${r.score})`, r.tips.length ? r.tips : \"nice!\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "10_word_counter_cli",
+      "title": "Project 10: Word Counter CLI 📝",
+      "description": "Count characters, words, and unique words in a paragraph.",
+      "level": "Beginner",
+      "concepts": "split, Set, reduce",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Analyze text\n\nNormalize case before uniqueness.",
+          "source": "const text = `JavaScript lets you build interactive pages.\nJavaScript also runs in labs and tools.`;\nconst words = text.toLowerCase().match(/[a-z0-9']+/g) || [];\nconst unique = new Set(words);\nconsole.log(\"chars:\", text.length);\nconsole.log(\"words:\", words.length);\nconsole.log(\"unique:\", unique.size);\nconsole.log(\"top sample:\", [...unique].slice(0, 8).join(\", \"));\n"
+        }
+      ]
+    },
+    {
+      "id": "11_array_todo_list",
+      "title": "Project 11: Array Todo List ✅",
+      "description": "Manage todos with push, filter, and map — no UI chrome needed.",
+      "level": "Beginner",
+      "concepts": "arrays, map/filter, objects",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Add, done, list\n\nKeep an array of `{id, text, done}`.",
+          "source": "let todos = [];\nlet nextId = 1;\nfunction add(text) {\n  todos.push({ id: nextId++, text, done: false });\n}\nfunction complete(id) {\n  todos = todos.map((t) => (t.id === id ? { ...t, done: true } : t));\n}\nfunction list(title) {\n  console.log(\"---\", title);\n  for (const t of todos) console.log(`${t.done ? \"[x]\" : \"[ ]\"} ${t.id}: ${t.text}`);\n}\nadd(\"Learn JS arrays\");\nadd(\"Ship a tiny project\");\nadd(\"Celebrate with coffee\");\ncomplete(1);\nlist(\"After completing #1\");\ntodos = todos.filter((t) => !t.done);\nlist(\"Open only\");\n"
+        }
+      ]
+    },
+    {
+      "id": "12_object_contact_card",
+      "title": "Project 12: Object Contact Card 📇",
+      "description": "Model contacts as objects and pretty-print them.",
+      "level": "Beginner",
+      "concepts": "objects, methods, this",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Card factory\n\nCreate contacts with a `label()` method.",
+          "source": "function makeContact(name, email, city) {\n  return {\n    name,\n    email,\n    city,\n    label() {\n      return `${this.name} <${this.email}> — ${this.city}`;\n    },\n  };\n}\nconst team = [\n  makeContact(\"Ava\", \"ava@codeitall.dev\", \"Singapore\"),\n  makeContact(\"Leo\", \"leo@example.com\", \"Lisbon\"),\n];\nfor (const c of team) console.log(c.label());\n"
+        }
+      ]
+    },
+    {
+      "id": "13_fibonacci_fountain",
+      "title": "Project 13: Fibonacci Fountain ⛲",
+      "description": "Generate Fibonacci numbers two ways: loop and recursion with memo.",
+      "level": "Beginner",
+      "concepts": "loops, recursion, memoization",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Loop + memo\n\nCompare iterative and recursive approaches.",
+          "source": "function fibLoop(n) {\n  if (n < 2) return n;\n  let a = 0, b = 1;\n  for (let i = 2; i <= n; i++) [a, b] = [b, a + b];\n  return b;\n}\nconst memo = { 0: 0, 1: 1 };\nfunction fibMemo(n) {\n  if (memo[n] !== undefined) return memo[n];\n  return (memo[n] = fibMemo(n - 1) + fibMemo(n - 2));\n}\nconst n = 15;\nconsole.log(\"loop:\", Array.from({ length: n }, (_, i) => fibLoop(i)).join(\" \"));\nconsole.log(\"memo:\", Array.from({ length: n }, (_, i) => fibMemo(i)).join(\" \"));\n"
+        }
+      ]
+    },
+    {
+      "id": "14_rock_paper_scissors_bot",
+      "title": "Project 14: Rock Paper Scissors Bot ✊",
+      "description": "Play several rounds against a random bot and tally the score.",
+      "level": "Beginner",
+      "concepts": "Math.random, arrays, scoring",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Best of series\n\nSimulate player moves vs random bot.",
+          "source": "const moves = [\"rock\", \"paper\", \"scissors\"];\nconst beats = { rock: \"scissors\", paper: \"rock\", scissors: \"paper\" };\nconst player = [\"rock\", \"paper\", \"scissors\", \"rock\", \"paper\"];\nlet wins = 0, losses = 0, ties = 0;\nfor (const p of player) {\n  const b = moves[Math.floor(Math.random() * 3)];\n  let result;\n  if (p === b) { result = \"tie\"; ties++; }\n  else if (beats[p] === b) { result = \"win\"; wins++; }\n  else { result = \"lose\"; losses++; }\n  console.log(`you=${p} bot=${b} → ${result}`);\n}\nconsole.log(`Score W${wins} L${losses} T${ties}`);\n"
+        }
+      ]
+    },
+    {
+      "id": "15_multiplication_table_forge",
+      "title": "Project 15: Multiplication Table Forge ✖️",
+      "description": "Print a neat multiplication table with padded columns.",
+      "level": "Beginner",
+      "concepts": "nested loops, padStart",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Table 1–10\n\nUse nested loops and alignment.",
+          "source": "const size = 10;\nlet header = \"   |\";\nfor (let c = 1; c <= size; c++) header += String(c).padStart(4);\nconsole.log(header);\nconsole.log(\"-\".repeat(header.length));\nfor (let r = 1; r <= size; r++) {\n  let row = String(r).padStart(2) + \" |\";\n  for (let c = 1; c <= size; c++) row += String(r * c).padStart(4);\n  console.log(row);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "16_leap_year_oracle",
+      "title": "Project 16: Leap Year Oracle 📅",
+      "description": "Decide leap years with the Gregorian rules.",
+      "level": "Beginner",
+      "concepts": "boolean logic, functions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Gregorian check\n\nDivisible by 4, but not 100 unless 400.",
+          "source": "function isLeap(y) {\n  return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;\n}\nfor (const y of [1900, 2000, 2024, 2025, 2400]) {\n  console.log(y, isLeap(y) ? \"leap\" : \"common\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "17_grade_curve_sorter",
+      "title": "Project 17: Grade Curve Sorter 📊",
+      "description": "Sort student scores and assign letter grades with curved boundaries.",
+      "level": "Beginner",
+      "concepts": "sort, destructuring, arrays",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Curve + letters\n\nSort descending and map to A–F.",
+          "source": "const scores = [\n  { name: \"Mia\", score: 91 },\n  { name: \"Jon\", score: 74 },\n  { name: \"Sky\", score: 88 },\n  { name: \"Ada\", score: 97 },\n  { name: \"Rex\", score: 62 },\n];\nconst sorted = [...scores].sort((a, b) => b.score - a.score);\nfunction letter(s) {\n  if (s >= 90) return \"A\";\n  if (s >= 80) return \"B\";\n  if (s >= 70) return \"C\";\n  if (s >= 60) return \"D\";\n  return \"F\";\n}\nfor (const [i, row] of sorted.entries()) {\n  console.log(`${i + 1}. ${row.name} ${row.score} → ${letter(row.score)}`);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "18_ascii_banner_printer",
+      "title": "Project 18: ASCII Banner Printer 🪧",
+      "description": "Build a simple block-letter banner from a small alphabet map.",
+      "level": "Beginner",
+      "concepts": "objects as maps, nested loops",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Spell HI\n\nCompose lines from glyph patterns.",
+          "source": "const glyphs = {\n  H: [\"#  #\", \"#  #\", \"####\", \"#  #\", \"#  #\"],\n  I: [\"####\", \"  # \", \"  # \", \"  # \", \"####\"],\n  \" \": [\"    \", \"    \", \"    \", \"    \", \"    \"],\n};\nfunction banner(text) {\n  const rows = [\"\", \"\", \"\", \"\", \"\"];\n  for (const ch of text.toUpperCase()) {\n    const g = glyphs[ch] || glyphs[\" \"];\n    g.forEach((line, i) => { rows[i] += line + \"  \"; });\n  }\n  return rows.join(\"\\n\");\n}\nconsole.log(banner(\"HI\"));\n"
+        }
+      ]
+    },
+    {
+      "id": "19_coin_flip_streaks",
+      "title": "Project 19: Coin Flip Streaks 🪙",
+      "description": "Flip coins and find the longest heads streak.",
+      "level": "Beginner",
+      "concepts": "simulation, tracking state",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Longest streak\n\nTrack current vs best.",
+          "source": "const flips = 40;\nlet cur = 0, best = 0;\nconst seq = [];\nfor (let i = 0; i < flips; i++) {\n  const heads = Math.random() < 0.5;\n  seq.push(heads ? \"H\" : \"T\");\n  if (heads) { cur++; best = Math.max(best, cur); }\n  else cur = 0;\n}\nconsole.log(seq.join(\"\"));\nconsole.log(\"longest heads streak:\", best);\n"
+        }
+      ]
+    },
+    {
+      "id": "20_random_color_mixer",
+      "title": "Project 20: Random Color Mixer 🎨",
+      "description": "Generate hex colors and contrast labels for CSS experimentation.",
+      "level": "Beginner",
+      "concepts": "bitwise/math, hex strings, HSL",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Palette of 6\n\nMake hex + rgb pairs.",
+          "source": "function randomHex() {\n  const n = Math.floor(Math.random() * 0xffffff);\n  return \"#\" + n.toString(16).padStart(6, \"0\");\n}\nfunction hexToRgb(hex) {\n  const n = parseInt(hex.slice(1), 16);\n  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };\n}\nfor (let i = 0; i < 6; i++) {\n  const hex = randomHex();\n  const { r, g, b } = hexToRgb(hex);\n  const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;\n  console.log(hex, `rgb(${r},${g},${b})`, luma > 140 ? \"light\" : \"dark\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "21_hangman_skeleton",
+      "title": "Project 21: Hangman Skeleton 🪢",
+      "description": "Reveal a secret word with masked letters as guesses arrive.",
+      "level": "Intermediate",
+      "concepts": "Set, strings, game loop logic",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Guess sequence\n\nTrack lives and masked display.",
+          "source": "const secret = \"COMPILER\";\nconst guesses = [\"C\", \"O\", \"X\", \"M\", \"P\", \"Z\", \"I\", \"L\", \"E\", \"R\"];\nlet lives = 6;\nconst found = new Set();\nfunction mask() {\n  return [...secret].map((ch) => (found.has(ch) ? ch : \"_\")).join(\" \");\n}\nconsole.log(\"Word:\", mask());\nfor (const g of guesses) {\n  if (secret.includes(g)) found.add(g);\n  else { lives--; console.log(`miss ${g} (lives ${lives})`); }\n  console.log(mask());\n  if (![...secret].some((ch) => !found.has(ch))) {\n    console.log(\"You solved it!\");\n    break;\n  }\n  if (lives <= 0) { console.log(\"Game over\"); break; }\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "22_tic_tac_toe_board",
+      "title": "Project 22: Tic Tac Toe Board ⭕",
+      "description": "Render a 3×3 board and detect a winning line.",
+      "level": "Intermediate",
+      "concepts": "2D arrays, win checks",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Play moves + winner\n\nApply moves then scan rows/cols/diags.",
+          "source": "const board = Array.from({ length: 3 }, () => Array(3).fill(\".\"));\nconst moves = [[0,0,\"X\"],[1,1,\"O\"],[0,1,\"X\"],[2,2,\"O\"],[0,2,\"X\"]];\nfunction show() {\n  console.log(board.map((r) => r.join(\" \")).join(\"\\n\"));\n}\nfunction winner() {\n  const lines = [\n    ...board,\n    [0,1,2].map((i) => board[i][0]),\n    [0,1,2].map((i) => board[i][1]),\n    [0,1,2].map((i) => board[i][2]),\n    [board[0][0], board[1][1], board[2][2]],\n    [board[0][2], board[1][1], board[2][0]],\n  ];\n  for (const line of lines) {\n    if (line[0] !== \".\" && line.every((c) => c === line[0])) return line[0];\n  }\n  return null;\n}\nfor (const [r, c, mark] of moves) {\n  board[r][c] = mark;\n  show();\n  console.log(\"---\");\n  const w = winner();\n  if (w) { console.log(w, \"wins!\"); break; }\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "23_stack_bracket_matcher",
+      "title": "Project 23: Stack Bracket Matcher 🧱",
+      "description": "Validate (), [], {} with a stack — a classic interview warm-up.",
+      "level": "Intermediate",
+      "concepts": "stack (array), maps",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Balanced?\n\nPush opens, pop on closes.",
+          "source": "function balanced(s) {\n  const pairs = { \")\": \"(\", \"]\": \"[\", \"}\": \"{\" };\n  const stack = [];\n  for (const ch of s) {\n    if (\"([{\".includes(ch)) stack.push(ch);\n    else if (\")]}\".includes(ch)) {\n      if (stack.pop() !== pairs[ch]) return false;\n    }\n  }\n  return stack.length === 0;\n}\nfor (const s of [\"(a+[b*c])\", \"([)]\", \"{[]()}\", \"(((\"]) {\n  console.log(s, \"→\", balanced(s) ? \"ok\" : \"bad\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "24_queue_ice_cream_shop",
+      "title": "Project 24: Queue Ice Cream Shop 🍦",
+      "description": "Serve customers from a queue and track wait times.",
+      "level": "Intermediate",
+      "concepts": "queue (shift/push), simulation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Serve the line\n\nEach order takes serviceMs; print when finished.",
+          "source": "const queue = [\n  { name: \"Ana\", flavor: \"mango\", service: 2 },\n  { name: \"Bo\", flavor: \"cookies\", service: 3 },\n  { name: \"Cy\", flavor: \"vanilla\", service: 1 },\n];\nlet time = 0;\nwhile (queue.length) {\n  const next = queue.shift();\n  time += next.service;\n  console.log(`t=${time}: served ${next.name} (${next.flavor})`);\n}\nconsole.log(\"shop closed — total time\", time);\n"
+        }
+      ]
+    },
+    {
+      "id": "25_map_leaderboard",
+      "title": "Project 25: Map Leaderboard 🏆",
+      "description": "Use a Map to tally scores and print a sorted leaderboard.",
+      "level": "Intermediate",
+      "concepts": "Map, sort entries",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Points Map\n\nAccumulate then sort descending.",
+          "source": "const points = new Map();\nfunction award(name, pts) {\n  points.set(name, (points.get(name) || 0) + pts);\n}\naward(\"Nova\", 10);\naward(\"Kai\", 7);\naward(\"Nova\", 5);\naward(\"Rio\", 12);\naward(\"Kai\", 4);\nconst board = [...points.entries()].sort((a, b) => b[1] - a[1]);\nboard.forEach(([name, pts], i) => console.log(`${i + 1}. ${name} — ${pts}`));\n"
+        }
+      ]
+    },
+    {
+      "id": "26_class_bank_account",
+      "title": "Project 26: Class Bank Account 🏦",
+      "description": "Model deposits and withdrawals with a class and private-ish balance.",
+      "level": "Intermediate",
+      "concepts": "classes, methods, encapsulation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Account class\n\nReject overdrafts and log a mini statement.",
+          "source": "class BankAccount {\n  #balance;\n  constructor(owner, opening = 0) {\n    this.owner = owner;\n    this.#balance = opening;\n    this.ledger = [];\n  }\n  deposit(amount) {\n    this.#balance += amount;\n    this.ledger.push(`+${amount}`);\n  }\n  withdraw(amount) {\n    if (amount > this.#balance) {\n      this.ledger.push(`denied ${amount}`);\n      return false;\n    }\n    this.#balance -= amount;\n    this.ledger.push(`-${amount}`);\n    return true;\n  }\n  get balance() { return this.#balance; }\n}\nconst acct = new BankAccount(\"Sam\", 100);\nacct.deposit(40);\nacct.withdraw(25);\nacct.withdraw(200);\nconsole.log(acct.owner, \"balance\", acct.balance);\nconsole.log(\"ledger:\", acct.ledger.join(\" | \"));\n"
+        }
+      ]
+    },
+    {
+      "id": "27_canvas_starfield",
+      "title": "Project 27: Canvas Starfield ✨",
+      "description": "Draw a tiny starfield with the Canvas 2D API (lab shows the canvas).",
+      "level": "Intermediate",
+      "concepts": "canvas, fillRect/arc, loops",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Paint stars\n\nUse `lab.canvas` helper when available, else describe counts.",
+          "source": "const W = 320, H = 180;\nconst canvas = typeof lab !== \"undefined\" && lab.canvas\n  ? lab.canvas(W, H)\n  : { getContext: () => null };\nconst ctx = canvas.getContext && canvas.getContext(\"2d\");\nif (!ctx) {\n  console.log(\"Canvas helper unavailable — counting stars instead.\");\n  console.log(\"Would draw\", 60, \"stars on\", W, \"x\", H);\n} else {\n  ctx.fillStyle = \"#050508\";\n  ctx.fillRect(0, 0, W, H);\n  for (let i = 0; i < 60; i++) {\n    const x = Math.random() * W;\n    const y = Math.random() * H;\n    const r = Math.random() * 1.6 + 0.4;\n    ctx.beginPath();\n    ctx.arc(x, y, r, 0, Math.PI * 2);\n    ctx.fillStyle = `rgba(255,255,255,${0.5 + Math.random() * 0.5})`;\n    ctx.fill();\n  }\n  console.log(\"Starfield painted — look below for the canvas.\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "28_local_storage_journal",
+      "title": "Project 28: Local Storage Journal 📔",
+      "description": "Simulate a journal with an in-memory store (and localStorage when available).",
+      "level": "Intermediate",
+      "concepts": "JSON, localStorage, try/catch",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Save & load entries\n\nFall back to a memory Map if storage is blocked.",
+          "source": "const memory = new Map();\nconst KEY = \"cia_js_journal\";\nfunction save(entries) {\n  memory.set(KEY, entries);\n  try {\n    if (typeof localStorage !== \"undefined\") {\n      localStorage.setItem(KEY, JSON.stringify(entries));\n    }\n  } catch (_) { /* private mode */ }\n}\nfunction load() {\n  try {\n    if (typeof localStorage !== \"undefined\") {\n      const raw = localStorage.getItem(KEY);\n      if (raw) return JSON.parse(raw);\n    }\n  } catch (_) {}\n  return memory.get(KEY) || [];\n}\nlet entries = load();\nentries.push({ at: new Date().toISOString(), note: \"Shipped a JS Lab step\" });\nentries.push({ at: new Date().toISOString(), note: \"Learned JSON.stringify\" });\nsave(entries);\nconsole.log(\"Journal entries:\");\nfor (const e of load()) console.log(\"-\", e.at.slice(11, 19), e.note);\n"
+        }
+      ]
+    },
+    {
+      "id": "29_promise_cafe_queue",
+      "title": "Project 29: Promise Cafe Queue ☕",
+      "description": "Chain promises to model drink orders with delayed resolve.",
+      "level": "Intermediate",
+      "concepts": "Promise, setTimeout, then/catch",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Async orders\n\n`brew` resolves after a delay — await the sequence.",
+          "source": "function brew(name, ms) {\n  return new Promise((resolve) => {\n    setTimeout(() => resolve(`${name} ready (${ms}ms)`), ms);\n  });\n}\nasync function main() {\n  console.log(\"Cafe open\");\n  const a = await brew(\"espresso\", 200);\n  console.log(a);\n  const b = await brew(\"latte\", 350);\n  console.log(b);\n  const both = await Promise.all([brew(\"tea\", 150), brew(\"mocha\", 280)]);\n  console.log(\"tray:\", both.join(\" · \"));\n}\nmain();\n"
+        }
+      ]
+    },
+    {
+      "id": "30_fetch_joke_machine",
+      "title": "Project 30: Fetch Joke Machine 😄",
+      "description": "Fetch a programming joke (with a local fallback if the network fails).",
+      "level": "Intermediate",
+      "concepts": "fetch, async/await, error handling",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Joke or fallback\n\nTry a public API; degrade gracefully.",
+          "source": "async function getJoke() {\n  const fallback = {\n    setup: \"Why do JS devs prefer dark mode?\",\n    punchline: \"Because light attracts bugs.\",\n  };\n  try {\n    const res = await fetch(\"https://official-joke-api.appspot.com/jokes/programming/random\");\n    if (!res.ok) throw new Error(\"HTTP \" + res.status);\n    const data = await res.json();\n    const joke = Array.isArray(data) ? data[0] : data;\n    return { setup: joke.setup, punchline: joke.punchline, source: \"api\" };\n  } catch (err) {\n    console.log(\"Network fallback:\", String(err.message || err));\n    return { ...fallback, source: \"offline\" };\n  }\n}\n(async () => {\n  const j = await getJoke();\n  console.log(`[${j.source}]`, j.setup);\n  console.log(\"→\", j.punchline);\n})();\n"
+        }
+      ]
+    },
+    {
+      "id": "31_debounce_search_demo",
+      "title": "Project 31: Debounce Search Demo ⌨️",
+      "description": "Implement debounce so search only fires after typing pauses.",
+      "level": "Intermediate",
+      "concepts": "closures, setTimeout, higher-order functions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Debounced logger\n\nSimulate fast keystrokes; only the last should search.",
+          "source": "function debounce(fn, wait) {\n  let t;\n  return (...args) => {\n    clearTimeout(t);\n    t = setTimeout(() => fn(...args), wait);\n  };\n}\nconst search = debounce((q) => console.log(\"searching:\", q), 120);\nconst keys = [\"c\", \"co\", \"cod\", \"code\", \"codei\", \"codeit\"];\nkeys.forEach((q, i) => setTimeout(() => search(q), i * 40));\nsetTimeout(() => console.log(\"(only final query should search)\"), 400);\n"
+        }
+      ]
+    },
+    {
+      "id": "32_event_bubbler_lab",
+      "title": "Project 32: Event Bubbler Lab 🫧",
+      "description": "Model capture/bubble phases with a tiny fake DOM tree.",
+      "level": "Intermediate",
+      "concepts": "event phases, arrays as tree paths",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Fake bubble path\n\nLog handlers from target up to root.",
+          "source": "const path = [\"button.buy\", \"div.card\", \"section.shop\", \"body\"];\nfunction dispatch(type) {\n  console.log(`--- ${type} ---`);\n  // capture (root → target)\n  for (const node of [...path].reverse()) console.log(\"capture\", node);\n  console.log(\"target handler on\", path[0]);\n  // bubble (target → root)\n  for (const node of path.slice(1)) console.log(\"bubble\", node);\n}\ndispatch(\"click\");\n"
+        }
+      ]
+    },
+    {
+      "id": "33_closure_counter_factory",
+      "title": "Project 33: Closure Counter Factory 🏭",
+      "description": "Use closures to create private counters — module pattern lite.",
+      "level": "Intermediate",
+      "concepts": "closures, factory functions",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Private state\n\nEach factory call gets its own count.",
+          "source": "function makeCounter(label) {\n  let n = 0;\n  return {\n    inc(by = 1) { n += by; return n; },\n    value() { return n; },\n    tag() { return `${label}:${n}`; },\n  };\n}\nconst a = makeCounter(\"likes\");\nconst b = makeCounter(\"views\");\na.inc(); a.inc(2);\nb.inc(5);\nconsole.log(a.tag(), b.tag());\nconsole.log(\"a cannot see b's n — closures isolate state.\");\n"
+        }
+      ]
+    },
+    {
+      "id": "34_async_wait_cafe",
+      "title": "Project 34: Async Wait Cafe ⏱️",
+      "description": "Coordinate tasks with async/await, Promise.race, and timeouts.",
+      "level": "Advanced",
+      "concepts": "Promise.race, AbortController pattern lite",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Race a slow order\n\nTimeout wins if brew is too slow.",
+          "source": "function delay(ms, value) {\n  return new Promise((resolve) => setTimeout(() => resolve(value), ms));\n}\nfunction timeout(ms) {\n  return new Promise((_, reject) => setTimeout(() => reject(new Error(\"timeout\")), ms));\n}\nasync function order(name, brewMs, limitMs) {\n  try {\n    const drink = await Promise.race([delay(brewMs, name), timeout(limitMs)]);\n    console.log(\"served\", drink);\n  } catch (e) {\n    console.log(name, \"failed:\", e.message);\n  }\n}\n(async () => {\n  await order(\"quick espresso\", 100, 300);\n  await order(\"slow pour-over\", 500, 200);\n})();\n"
+        }
+      ]
+    },
+    {
+      "id": "35_regex_email_detective",
+      "title": "Project 35: Regex Email Detective 📧",
+      "description": "Validate and extract emails from messy text with regex.",
+      "level": "Advanced",
+      "concepts": "RegExp, matchAll, validation",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Find & validate\n\nPull candidate emails then filter.",
+          "source": "const blob = `\nContact ava@codeitall.dev or bad@@mail, also leo+lab@example.com\nand skip not-an-email and space @ nowhere.com\n`;\nconst loose = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}/g;\nconst strict = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/;\nconst found = [...blob.matchAll(loose)].map((m) => m[0]);\nconsole.log(\"found:\", found);\nconsole.log(\"valid:\", found.filter((e) => strict.test(e)));\n"
+        }
+      ]
+    },
+    {
+      "id": "36_json_adventure_map",
+      "title": "Project 36: JSON Adventure Map 🗺️",
+      "description": "Walk a tiny text adventure stored as JSON nodes.",
+      "level": "Advanced",
+      "concepts": "JSON, graphs, recursion",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Traverse rooms\n\nFollow choices by id.",
+          "source": "const world = {\n  start: { text: \"You stand at a glowing terminal.\", exits: { code: \"lab\", nap: \"couch\" } },\n  lab: { text: \"The JS Lab hums. A Run button blinks.\", exits: { home: \"start\" } },\n  couch: { text: \"Soft couch. Productivity -10.\", exits: { wake: \"start\" } },\n};\nfunction play(path) {\n  let id = \"start\";\n  console.log(world[id].text);\n  for (const choice of path) {\n    const next = world[id].exits[choice];\n    if (!next) { console.log(\"dead end on\", choice); return; }\n    id = next;\n    console.log(`> ${choice}`);\n    console.log(world[id].text);\n  }\n}\nplay([\"code\", \"home\", \"nap\"]);\n"
+        }
+      ]
+    },
+    {
+      "id": "37_canvas_bouncing_ball",
+      "title": "Project 37: Canvas Bouncing Ball ⚽",
+      "description": "Animate a bouncing ball with a simple physics loop (few frames).",
+      "level": "Advanced",
+      "concepts": "requestAnimationFrame pattern, velocity",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Simulated frames\n\nStep physics without a live RAF loop so the lab finishes cleanly.",
+          "source": "const W = 300, H = 160;\nlet x = 40, y = 30, vx = 7, vy = 4, r = 10;\nconst frames = [];\nfor (let i = 0; i < 40; i++) {\n  x += vx; y += vy;\n  if (x < r || x > W - r) vx *= -1;\n  if (y < r || y > H - r) vy *= -1;\n  frames.push({ x: Math.round(x), y: Math.round(y) });\n}\nconsole.log(\"last positions:\", frames.slice(-5));\nconst canvas = typeof lab !== \"undefined\" && lab.canvas ? lab.canvas(W, H) : null;\nconst ctx = canvas && canvas.getContext(\"2d\");\nif (ctx) {\n  ctx.fillStyle = \"#0b0b10\";\n  ctx.fillRect(0, 0, W, H);\n  ctx.fillStyle = \"#8b1e1e\";\n  ctx.beginPath();\n  ctx.arc(x, y, r, 0, Math.PI * 2);\n  ctx.fill();\n  console.log(\"Final frame painted on canvas.\");\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "38_pixel_fireworks",
+      "title": "Project 38: Pixel Fireworks 🎆",
+      "description": "Spawn particles that fade outward — mini particle system on canvas.",
+      "level": "Advanced",
+      "concepts": "particles, arrays, alpha",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Burst\n\nCreate particles and draw one explosion frame.",
+          "source": "const W = 320, H = 200;\nconst cx = W / 2, cy = H / 2;\nconst particles = Array.from({ length: 48 }, () => {\n  const ang = Math.random() * Math.PI * 2;\n  const spd = 1.5 + Math.random() * 3.5;\n  return { x: cx, y: cy, vx: Math.cos(ang) * spd, vy: Math.sin(ang) * spd, life: 1 };\n});\nfor (let step = 0; step < 18; step++) {\n  for (const p of particles) {\n    p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.life *= 0.92;\n  }\n}\nconst canvas = typeof lab !== \"undefined\" && lab.canvas ? lab.canvas(W, H) : null;\nconst ctx = canvas && canvas.getContext(\"2d\");\nif (ctx) {\n  ctx.fillStyle = \"#030308\";\n  ctx.fillRect(0, 0, W, H);\n  for (const p of particles) {\n    ctx.fillStyle = `rgba(255,${120 + Math.floor(Math.random() * 80)},80,${p.life})`;\n    ctx.fillRect(p.x, p.y, 3, 3);\n  }\n  console.log(\"Fireworks frame painted.\");\n} else {\n  console.log(\"particles alive:\", particles.filter((p) => p.life > 0.1).length);\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "39_mini_svg_bar_chart",
+      "title": "Project 39: Mini SVG Bar Chart 📉",
+      "description": "Build an SVG bar chart string from data (and display it in the lab).",
+      "level": "Advanced",
+      "concepts": "SVG, map, template strings",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Encode bars\n\nGenerate SVG markup from values.",
+          "source": "const data = [\n  { label: \"Mon\", v: 4 },\n  { label: \"Tue\", v: 7 },\n  { label: \"Wed\", v: 3 },\n  { label: \"Thu\", v: 9 },\n  { label: \"Fri\", v: 6 },\n];\nconst W = 320, H = 160, pad = 24;\nconst max = Math.max(...data.map((d) => d.v));\nconst bw = (W - pad * 2) / data.length - 8;\nconst bars = data.map((d, i) => {\n  const h = ((H - pad * 2) * d.v) / max;\n  const x = pad + i * (bw + 8);\n  const y = H - pad - h;\n  return `<rect x=\"${x}\" y=\"${y}\" width=\"${bw}\" height=\"${h}\" fill=\"#8b1e1e\"/><text x=\"${x + bw / 2}\" y=\"${H - 6}\" text-anchor=\"middle\" fill=\"#aaa\" font-size=\"10\">${d.label}</text>`;\n}).join(\"\");\nconst svg = `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${W}\" height=\"${H}\" style=\"background:#0a0a0a\">${bars}</svg>`;\nconsole.log(\"bars:\", data.map((d) => d.v).join(\", \"));\nif (typeof lab !== \"undefined\" && lab.html) lab.html(svg);\nelse console.log(svg.slice(0, 120) + \"…\");\n"
+        }
+      ]
+    },
+    {
+      "id": "40_web_audio_beep_synth",
+      "title": "Project 40: Web Audio Beep Synth 🔊",
+      "description": "Schedule a short beep sequence with the Web Audio API (or log frequencies offline).",
+      "level": "Advanced",
+      "concepts": "OscillatorNode, AudioContext, timing",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Melody plan\n\nPlay or print a tiny scale.",
+          "source": "const notes = [261.63, 329.63, 392.0, 523.25]; // C E G C\nasync function play() {\n  const AC = typeof AudioContext !== \"undefined\" ? AudioContext : null;\n  if (!AC) {\n    console.log(\"No AudioContext — frequencies:\", notes.join(\", \"));\n    return;\n  }\n  const ctx = new AC();\n  let t = ctx.currentTime;\n  for (const f of notes) {\n    const o = ctx.createOscillator();\n    const g = ctx.createGain();\n    o.frequency.value = f;\n    o.type = \"sine\";\n    g.gain.setValueAtTime(0.0001, t);\n    g.gain.exponentialRampToValueAtTime(0.2, t + 0.02);\n    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);\n    o.connect(g); g.connect(ctx.destination);\n    o.start(t); o.stop(t + 0.2);\n    t += 0.22;\n  }\n  console.log(\"Beeps scheduled — listen if your browser allows audio.\");\n  await new Promise((r) => setTimeout(r, 1000));\n  await ctx.close();\n}\nplay();\n"
+        }
+      ]
+    }
+  ]
+}

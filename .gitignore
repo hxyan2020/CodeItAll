@@ -1,7 +1,0 @@
-outputs/
-__pycache__/
-*.pyc
-.ipynb_checkpoints/
-.vercel/
-.env
-site.zip

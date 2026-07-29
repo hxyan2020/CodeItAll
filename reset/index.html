@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Reset password | CodeItAll</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="../profile/profile.css?v=7" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="../index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="../assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <ul class="nav" id="nav">
+      <li><a href="../course/">Learn with AI</a></li>
+      <li><a href="../dissect/">Dissect any website</a></li>
+      <li><a href="../career/">Career booster</a></li>
+      <li><a href="../profile/">Me</a></li>
+    </ul>
+  </header>
+
+  <main class="profile-main">
+    <section class="panel account-panel" style="margin-top:1.5rem;">
+      <div class="panel-head">
+        <h2>Reset your password</h2>
+        <p id="resetLead">Choose a new password for your CodeItAll account.</p>
+      </div>
+      <form class="auth-form" id="resetForm">
+        <label for="newPw">New password</label>
+        <input id="newPw" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8" />
+        <label for="newPw2">Confirm new password</label>
+        <input id="newPw2" type="password" autocomplete="new-password" placeholder="Repeat password" required minlength="8" />
+        <button type="submit" class="btn-save" id="resetSubmit">Set new password</button>
+      </form>
+      <p class="auth-note" id="resetNote" role="status"></p>
+      <p class="fine"><a href="../profile/">Back to sign in</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-copy">© 2026 CodeItAll</div>
+  </footer>
+
+  <script src="../shared/progress.js?v=2"></script>
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const token = new URLSearchParams(location.search).get("token") || "";
+    const note = (msg, kind) => {
+      const el = $("#resetNote");
+      el.textContent = msg || "";
+      el.className = "auth-note" + (kind ? " " + kind : "");
+    };
+    if (!token) {
+      $("#resetForm").classList.add("hide");
+      $("#resetLead").textContent = "This reset link is missing its token. Request a new link from the Me page.";
+    }
+    $("#resetForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const pw = $("#newPw").value;
+      const pw2 = $("#newPw2").value;
+      if (pw !== pw2) {
+        note("Passwords don't match — please retype them.", "err");
+        return;
+      }
+      $("#resetSubmit").disabled = true;
+      note("Updating your password…");
+      try {
+        await window.CIAProgress.resetPassword(token, pw);
+        $("#resetForm").classList.add("hide");
+        note("Password updated. You can now sign in with your new password.", "ok");
+      } catch (err) {
+        note(String(err.message || err), "err");
+      } finally {
+        $("#resetSubmit").disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

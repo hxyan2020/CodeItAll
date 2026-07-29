@@ -1,0 +1,574 @@
+{
+  "track": "sql",
+  "engine": "sqlite",
+  "projects": [
+    {
+      "id": "01_hello_select_world",
+      "title": "Project 1: Hello Select World 👋",
+      "description": "Run your first SELECT and meet the result grid.",
+      "level": "Beginner",
+      "concepts": "SELECT, literals, aliases",
+      "setup": "SELECT 1 AS ready;\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Query without a table\n\nSQL can compute values even before you create tables.",
+          "source": "SELECT 'Hello from CodeItAll SQL Lab!' AS greeting,\n       2026 AS year,\n       2 + 2 AS sanity_check;\n"
+        }
+      ]
+    },
+    {
+      "id": "02_pet_shelter_census",
+      "title": "Project 2: Pet Shelter Census 🐾",
+      "description": "Create a pets table, insert rows, then list everyone.",
+      "level": "Beginner",
+      "concepts": "CREATE TABLE, INSERT, SELECT *",
+      "setup": "\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Build the shelter\n\nCreate the table and adopt three pets.",
+          "source": "DROP TABLE IF EXISTS pets;\nCREATE TABLE pets (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL,\n  species TEXT NOT NULL,\n  age INTEGER\n);\nINSERT INTO pets (name, species, age) VALUES\n  ('Mochi', 'cat', 2),\n  ('Biscuit', 'dog', 5),\n  ('Nori', 'rabbit', 1);\nSELECT * FROM pets;\n"
+        }
+      ]
+    },
+    {
+      "id": "03_smoothie_menu_filter",
+      "title": "Project 3: Smoothie Menu Filter 🥤",
+      "description": "Filter menu items with WHERE.",
+      "level": "Beginner",
+      "concepts": "WHERE, AND/OR, comparison",
+      "setup": "DROP TABLE IF EXISTS smoothies;\nCREATE TABLE smoothies (id INTEGER PRIMARY KEY, name TEXT, calories INTEGER, vegan INTEGER);\nINSERT INTO smoothies (name, calories, vegan) VALUES\n  ('Mango Glow', 180, 1),\n  ('Berry Blast', 210, 1),\n  ('PB Power', 320, 0),\n  ('Green Zen', 140, 1);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Under 200 calories & vegan\n\nCombine conditions with AND.",
+          "source": "SELECT name, calories\nFROM smoothies\nWHERE calories < 200 AND vegan = 1\nORDER BY calories;\n"
+        }
+      ]
+    },
+    {
+      "id": "04_high_score_board",
+      "title": "Project 4: High Score Board 🏆",
+      "description": "Sort and limit arcade scores.",
+      "level": "Beginner",
+      "concepts": "ORDER BY, LIMIT, DESC",
+      "setup": "DROP TABLE IF EXISTS scores;\nCREATE TABLE scores (player TEXT, game TEXT, points INTEGER);\nINSERT INTO scores VALUES\n  ('Nova', 'Tag Quest', 980),\n  ('Kai', 'Form Runner', 860),\n  ('Rio', 'Tag Quest', 910),\n  ('Nova', 'Form Runner', 720),\n  ('Sky', 'Tag Quest', 990);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Top 3 overall\n\nHighest points first, take three rows.",
+          "source": "SELECT player, game, points\nFROM scores\nORDER BY points DESC\nLIMIT 3;\n"
+        }
+      ]
+    },
+    {
+      "id": "05_bakery_distinct_flavors",
+      "title": "Project 5: Bakery Distinct Flavors 🥐",
+      "description": "Deduplicate flavor names with DISTINCT.",
+      "level": "Beginner",
+      "concepts": "DISTINCT, SELECT columns",
+      "setup": "DROP TABLE IF EXISTS pastries;\nCREATE TABLE pastries (name TEXT, flavor TEXT);\nINSERT INTO pastries VALUES\n  ('Croissant', 'butter'),\n  ('Muffin', 'blueberry'),\n  ('Danish', 'blueberry'),\n  ('Scone', 'cranberry'),\n  ('Muffin', 'chocolate');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Unique flavors\n\nDISTINCT collapses duplicate values.",
+          "source": "SELECT DISTINCT flavor\nFROM pastries\nORDER BY flavor;\n"
+        }
+      ]
+    },
+    {
+      "id": "06_inventory_restock_alert",
+      "title": "Project 6: Inventory Restock Alert 📦",
+      "description": "Find products that need restocking.",
+      "level": "Beginner",
+      "concepts": "WHERE inequalities, boolean flags",
+      "setup": "DROP TABLE IF EXISTS inventory;\nCREATE TABLE inventory (sku TEXT, item TEXT, qty INTEGER, reorder_at INTEGER);\nINSERT INTO inventory VALUES\n  ('A1', 'Notebook', 3, 5),\n  ('B2', 'Pen Pack', 12, 8),\n  ('C3', 'Sticker Sheet', 2, 6),\n  ('D4', 'USB Cable', 20, 10);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Below reorder point\n\nqty less than reorder_at means restock.",
+          "source": "SELECT sku, item, qty, reorder_at\nFROM inventory\nWHERE qty < reorder_at\nORDER BY qty;\n"
+        }
+      ]
+    },
+    {
+      "id": "07_library_card_between",
+      "title": "Project 7: Library Card Between 📚",
+      "description": "Find books in a page-count range with BETWEEN.",
+      "level": "Beginner",
+      "concepts": "BETWEEN, inclusive ranges",
+      "setup": "DROP TABLE IF EXISTS books;\nCREATE TABLE books (title TEXT, pages INTEGER, genre TEXT);\nINSERT INTO books VALUES\n  ('SQL Snacks', 120, 'tech'),\n  ('Ocean Atlas', 340, 'science'),\n  ('Tiny Tales', 90, 'fiction'),\n  ('Data Trails', 280, 'tech'),\n  ('Moon Garden', 210, 'fiction');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Mid-length reads\n\nBETWEEN is inclusive on both ends.",
+          "source": "SELECT title, pages, genre\nFROM books\nWHERE pages BETWEEN 100 AND 300\nORDER BY pages;\n"
+        }
+      ]
+    },
+    {
+      "id": "08_tag_search_like",
+      "title": "Project 8: Tag Search Like 🔎",
+      "description": "Pattern-match product tags with LIKE.",
+      "level": "Beginner",
+      "concepts": "LIKE, % and _ wildcards",
+      "setup": "DROP TABLE IF EXISTS products;\nCREATE TABLE products (name TEXT, tag TEXT);\nINSERT INTO products VALUES\n  ('Red Hoodie', 'apparel-warm'),\n  ('Blue Mug', 'kitchen-drink'),\n  ('Trail Mix', 'snack-trail'),\n  ('Desk Lamp', 'home-light'),\n  ('Green Tee', 'apparel-casual');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Apparel tags\n\n`%` matches any sequence of characters.",
+          "source": "SELECT name, tag\nFROM products\nWHERE tag LIKE 'apparel%'\nORDER BY name;\n"
+        }
+      ]
+    },
+    {
+      "id": "09_null_detector_agency",
+      "title": "Project 9: Null Detector Agency 🕵️",
+      "description": "Hunt missing emails with IS NULL.",
+      "level": "Beginner",
+      "concepts": "IS NULL, IS NOT NULL",
+      "setup": "DROP TABLE IF EXISTS members;\nCREATE TABLE members (name TEXT, email TEXT);\nINSERT INTO members VALUES\n  ('Ava', 'ava@example.com'),\n  ('Bo', NULL),\n  ('Cy', 'cy@codeitall.dev'),\n  ('Dee', NULL);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Missing contacts\n\nNULL means unknown — compare with IS NULL, not `= NULL`.",
+          "source": "SELECT name\nFROM members\nWHERE email IS NULL\nORDER BY name;\n"
+        }
+      ]
+    },
+    {
+      "id": "10_alias_nickname_studio",
+      "title": "Project 10: Alias Nickname Studio 🎭",
+      "description": "Rename columns and computed fields with AS.",
+      "level": "Beginner",
+      "concepts": "column aliases, expressions",
+      "setup": "DROP TABLE IF EXISTS tickets;\nCREATE TABLE tickets (event TEXT, price REAL, qty INTEGER);\nINSERT INTO tickets VALUES\n  ('SQL Night', 12.5, 3),\n  ('Join Jam', 18.0, 2),\n  ('Index Fest', 9.0, 5);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Friendly result headers\n\nAliases make result grids readable.",
+          "source": "SELECT event AS show_name,\n       price AS seat_price,\n       qty AS seats,\n       price * qty AS line_total\nFROM tickets\nORDER BY line_total DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "11_ticket_counter_aggregate",
+      "title": "Project 11: Ticket Counter Aggregate 🎫",
+      "description": "Summarize a sales table with COUNT, SUM, AVG.",
+      "level": "Beginner",
+      "concepts": "COUNT, SUM, AVG, MIN, MAX",
+      "setup": "DROP TABLE IF EXISTS sales;\nCREATE TABLE sales (item TEXT, amount REAL);\nINSERT INTO sales VALUES\n  ('Sticker', 3.0), ('Sticker', 3.0), ('Poster', 12.0),\n  ('Mug', 15.0), ('Poster', 12.0), ('Tee', 22.0);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — One-row summary\n\nAggregates collapse many rows into stats.",
+          "source": "SELECT COUNT(*) AS orders,\n       SUM(amount) AS revenue,\n       ROUND(AVG(amount), 2) AS avg_order,\n       MIN(amount) AS cheapest,\n       MAX(amount) AS biggest\nFROM sales;\n"
+        }
+      ]
+    },
+    {
+      "id": "12_genre_group_party",
+      "title": "Project 12: Genre Group Party 🎧",
+      "description": "Count songs per genre with GROUP BY.",
+      "level": "Beginner",
+      "concepts": "GROUP BY, COUNT",
+      "setup": "DROP TABLE IF EXISTS songs;\nCREATE TABLE songs (title TEXT, genre TEXT, duration_sec INTEGER);\nINSERT INTO songs VALUES\n  ('Query Bounce', 'electronic', 180),\n  ('Join the Band', 'rock', 210),\n  ('Null Lullaby', 'ambient', 240),\n  ('Index Run', 'electronic', 195),\n  ('Foreign Key Blues', 'rock', 200),\n  ('CTE Drift', 'ambient', 260);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Songs per genre\n\nGROUP BY buckets rows before aggregating.",
+          "source": "SELECT genre, COUNT(*) AS tracks, ROUND(AVG(duration_sec)) AS avg_sec\nFROM songs\nGROUP BY genre\nORDER BY tracks DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "13_having_heroes_only",
+      "title": "Project 13: Having Heroes Only 🦸",
+      "description": "Filter groups after aggregation with HAVING.",
+      "level": "Intermediate",
+      "concepts": "HAVING vs WHERE",
+      "setup": "DROP TABLE IF EXISTS heroes;\nCREATE TABLE heroes (name TEXT, team TEXT, power INTEGER);\nINSERT INTO heroes VALUES\n  ('Spark', 'Alpha', 80), ('Bolt', 'Alpha', 90),\n  ('Mist', 'Beta', 70), ('Leaf', 'Beta', 65),\n  ('Nova', 'Gamma', 95), ('Orbit', 'Gamma', 88), ('Comet', 'Gamma', 92);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Strong teams\n\nWHERE filters rows; HAVING filters groups.",
+          "source": "SELECT team, COUNT(*) AS members, ROUND(AVG(power), 1) AS avg_power\nFROM heroes\nGROUP BY team\nHAVING AVG(power) >= 80\nORDER BY avg_power DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "14_inner_join_buddy_film",
+      "title": "Project 14: Inner Join Buddy Film 🎬",
+      "description": "Connect movies to directors with INNER JOIN.",
+      "level": "Intermediate",
+      "concepts": "INNER JOIN, ON",
+      "setup": "DROP TABLE IF EXISTS directors;\nDROP TABLE IF EXISTS movies;\nCREATE TABLE directors (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE movies (id INTEGER PRIMARY KEY, title TEXT, director_id INTEGER);\nINSERT INTO directors VALUES (1, 'Ava Chen'), (2, 'Leo Park'), (3, 'Sam Ortiz');\nINSERT INTO movies VALUES\n  (1, 'Query Dawn', 1),\n  (2, 'Join Streets', 2),\n  (3, 'Null Island', 1),\n  (4, 'Orphan Reel', 99);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Movies with known directors\n\nINNER JOIN keeps only matching pairs.",
+          "source": "SELECT m.title, d.name AS director\nFROM movies AS m\nINNER JOIN directors AS d ON d.id = m.director_id\nORDER BY m.title;\n"
+        }
+      ]
+    },
+    {
+      "id": "15_left_join_waitlist",
+      "title": "Project 15: Left Join Waitlist 🕓",
+      "description": "Keep all customers even when orders are missing.",
+      "level": "Intermediate",
+      "concepts": "LEFT JOIN, NULLs from unmatched",
+      "setup": "DROP TABLE IF EXISTS orders;\nDROP TABLE IF EXISTS customers;\nCREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, item TEXT);\nINSERT INTO customers VALUES (1, 'Mina'), (2, 'Omar'), (3, 'Priya');\nINSERT INTO orders VALUES (1, 1, 'Latte'), (2, 1, 'Bagel'), (3, 3, 'Tea');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Who has not ordered?\n\nLEFT JOIN keeps left-table rows; filter where right side is NULL.",
+          "source": "SELECT c.name, o.item\nFROM customers AS c\nLEFT JOIN orders AS o ON o.customer_id = c.id\nORDER BY c.name, o.item;\n"
+        },
+        {
+          "markdown": "### Step 2 — Customers with zero orders\n\nSame join, keep unmatched customers only.",
+          "source": "SELECT c.name AS no_order_yet\nFROM customers AS c\nLEFT JOIN orders AS o ON o.customer_id = c.id\nWHERE o.id IS NULL;\n"
+        }
+      ]
+    },
+    {
+      "id": "16_multi_table_quest_log",
+      "title": "Project 16: Multi Table Quest Log 🗺️",
+      "description": "Join heroes, quests, and completions across three tables.",
+      "level": "Intermediate",
+      "concepts": "multi-table JOIN",
+      "setup": "DROP TABLE IF EXISTS completions;\nDROP TABLE IF EXISTS quests;\nDROP TABLE IF EXISTS heroes;\nCREATE TABLE heroes (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE quests (id INTEGER PRIMARY KEY, title TEXT, xp INTEGER);\nCREATE TABLE completions (hero_id INTEGER, quest_id INTEGER, stars INTEGER);\nINSERT INTO heroes VALUES (1, 'Rin'), (2, 'Tess');\nINSERT INTO quests VALUES (1, 'Fetch Herbs', 50), (2, 'Detect Nulls', 80), (3, 'Join Forces', 120);\nINSERT INTO completions VALUES (1, 1, 3), (1, 2, 2), (2, 2, 3), (2, 3, 1);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Who finished what\n\nChain JOINs with clear aliases.",
+          "source": "SELECT h.name AS hero, q.title AS quest, q.xp, c.stars\nFROM completions AS c\nJOIN heroes AS h ON h.id = c.hero_id\nJOIN quests AS q ON q.id = c.quest_id\nORDER BY h.name, q.xp DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "17_subquery_treasure_hunt",
+      "title": "Project 17: Subquery Treasure Hunt 🪙",
+      "description": "Find chests richer than the average using a subquery.",
+      "level": "Intermediate",
+      "concepts": "scalar subquery, WHERE",
+      "setup": "DROP TABLE IF EXISTS chests;\nCREATE TABLE chests (label TEXT, gold INTEGER);\nINSERT INTO chests VALUES\n  ('Cove', 40), ('Ruins', 90), ('Ship', 70), ('Cave', 120), ('Tower', 55);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Above-average loot\n\nA subquery in WHERE returns one value here.",
+          "source": "SELECT label, gold\nFROM chests\nWHERE gold > (SELECT AVG(gold) FROM chests)\nORDER BY gold DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "18_exists_detective",
+      "title": "Project 18: Exists Detective 🔦",
+      "description": "Use EXISTS to find authors who published something.",
+      "level": "Intermediate",
+      "concepts": "EXISTS correlated subquery",
+      "setup": "DROP TABLE IF EXISTS posts;\nDROP TABLE IF EXISTS authors;\nCREATE TABLE authors (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE posts (id INTEGER PRIMARY KEY, author_id INTEGER, title TEXT);\nINSERT INTO authors VALUES (1, 'Jules'), (2, 'Ken'), (3, 'Ivy');\nINSERT INTO posts VALUES (1, 1, 'SELECT Me'), (2, 1, 'Join Club'), (3, 3, 'Null Tales');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Authors with at least one post\n\nEXISTS stops at the first matching row — efficient intent.",
+          "source": "SELECT a.name\nFROM authors AS a\nWHERE EXISTS (\n  SELECT 1 FROM posts AS p WHERE p.author_id = a.id\n)\nORDER BY a.name;\n"
+        }
+      ]
+    },
+    {
+      "id": "19_case_when_mood_ring",
+      "title": "Project 19: Case When Mood Ring 💍",
+      "description": "Bucket numeric scores into labels with CASE.",
+      "level": "Intermediate",
+      "concepts": "CASE WHEN, ELSE",
+      "setup": "DROP TABLE IF EXISTS quizzes;\nCREATE TABLE quizzes (student TEXT, score INTEGER);\nINSERT INTO quizzes VALUES\n  ('Ami', 95), ('Ben', 82), ('Cid', 67), ('Dot', 54), ('Eve', 88);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Letter mood grades\n\nCASE turns numbers into readable categories.",
+          "source": "SELECT student, score,\n  CASE\n    WHEN score >= 90 THEN 'glowing'\n    WHEN score >= 80 THEN 'bright'\n    WHEN score >= 70 THEN 'warming'\n    ELSE 'needs charge'\n  END AS mood\nFROM quizzes\nORDER BY score DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "20_union_band_playlist",
+      "title": "Project 20: Union Band Playlist 🎸",
+      "description": "Stack two set lists with UNION.",
+      "level": "Intermediate",
+      "concepts": "UNION vs UNION ALL",
+      "setup": "DROP TABLE IF EXISTS set_a;\nDROP TABLE IF EXISTS set_b;\nCREATE TABLE set_a (track TEXT);\nCREATE TABLE set_b (track TEXT);\nINSERT INTO set_a VALUES ('Intro Query'), ('Join Bridge'), ('Encore Index');\nINSERT INTO set_b VALUES ('Join Bridge'), ('Null Ballad'), ('Encore Index');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Combined unique tracks\n\nUNION removes duplicates; UNION ALL keeps them.",
+          "source": "SELECT track FROM set_a\nUNION\nSELECT track FROM set_b\nORDER BY track;\n"
+        },
+        {
+          "markdown": "### Step 2 — Keep duplicates (ALL)\n\nSee overlapping songs appear twice.",
+          "source": "SELECT track FROM set_a\nUNION ALL\nSELECT track FROM set_b\nORDER BY track;\n"
+        }
+      ]
+    },
+    {
+      "id": "21_view_frozen_scenes",
+      "title": "Project 21: View Frozen Scenes 🧊",
+      "description": "Create a view that freezes a friendly query.",
+      "level": "Intermediate",
+      "concepts": "CREATE VIEW, querying views",
+      "setup": "DROP VIEW IF EXISTS v_open_orders;\nDROP TABLE IF EXISTS shop_orders;\nCREATE TABLE shop_orders (id INTEGER PRIMARY KEY, customer TEXT, status TEXT, total REAL);\nINSERT INTO shop_orders (customer, status, total) VALUES\n  ('Ada', 'open', 24.0), ('Gus', 'shipped', 40.0),\n  ('Nia', 'open', 18.5), ('Ada', 'cancelled', 0);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Save a reusable scene\n\nViews store a query definition, not a copy of every row.",
+          "source": "DROP VIEW IF EXISTS v_open_orders;\nCREATE VIEW v_open_orders AS\n  SELECT id, customer, total\n  FROM shop_orders\n  WHERE status = 'open';\n\nSELECT * FROM v_open_orders ORDER BY total DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "22_index_speedy_lookup",
+      "title": "Project 22: Index Speedy Lookup ⚡",
+      "description": "Add an index and confirm SQLite can use it (EXPLAIN).",
+      "level": "Intermediate",
+      "concepts": "CREATE INDEX, EXPLAIN QUERY PLAN",
+      "setup": "DROP TABLE IF EXISTS citations;\nCREATE TABLE citations (id INTEGER PRIMARY KEY, tag TEXT, note TEXT);\nINSERT INTO citations (tag, note)\nSELECT 'tag-' || (abs(random()) % 50), 'note ' || x\nFROM (SELECT 1 AS x UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5);\nINSERT INTO citations (tag, note) SELECT tag, note FROM citations;\nINSERT INTO citations (tag, note) SELECT tag, note FROM citations;\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Index a lookup column\n\nThen ask the planner how it finds rows.",
+          "source": "CREATE INDEX IF NOT EXISTS idx_citations_tag ON citations(tag);\nEXPLAIN QUERY PLAN\nSELECT id, note FROM citations WHERE tag = 'tag-1';\n"
+        }
+      ]
+    },
+    {
+      "id": "23_transaction_piggy_bank",
+      "title": "Project 23: Transaction Piggy Bank 🐷",
+      "description": "Move coins between accounts inside a transaction.",
+      "level": "Intermediate",
+      "concepts": "BEGIN, COMMIT, UPDATE atomicity",
+      "setup": "DROP TABLE IF EXISTS accounts;\nCREATE TABLE accounts (name TEXT PRIMARY KEY, balance INTEGER);\nINSERT INTO accounts VALUES ('Mia', 100), ('Leo', 40);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Transfer 25 coins\n\nBoth updates succeed together inside one transaction.",
+          "source": "BEGIN;\n  UPDATE accounts SET balance = balance - 25 WHERE name = 'Mia';\n  UPDATE accounts SET balance = balance + 25 WHERE name = 'Leo';\nCOMMIT;\nSELECT * FROM accounts ORDER BY name;\n"
+        }
+      ]
+    },
+    {
+      "id": "24_unique_constraint_vault",
+      "title": "Project 24: Unique Constraint Vault 🔐",
+      "description": "Enforce unique emails and see a constraint error handled.",
+      "level": "Intermediate",
+      "concepts": "UNIQUE, INSERT OR IGNORE",
+      "setup": "DROP TABLE IF EXISTS vault_users;\nCREATE TABLE vault_users (\n  id INTEGER PRIMARY KEY,\n  email TEXT NOT NULL UNIQUE,\n  handle TEXT\n);\nINSERT INTO vault_users (email, handle) VALUES ('ava@x.dev', 'ava');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Soft-fail duplicate\n\nOR IGNORE skips the conflicting insert.",
+          "source": "INSERT OR IGNORE INTO vault_users (email, handle)\nVALUES ('ava@x.dev', 'ava2');\nINSERT INTO vault_users (email, handle)\nVALUES ('leo@x.dev', 'leo');\nSELECT * FROM vault_users ORDER BY id;\n"
+        }
+      ]
+    },
+    {
+      "id": "25_foreign_key_friendship",
+      "title": "Project 25: Foreign Key Friendship 🤝",
+      "description": "Link posts to users with a foreign key (SQLite needs PRAGMA).",
+      "level": "Intermediate",
+      "concepts": "FOREIGN KEY, PRAGMA foreign_keys",
+      "setup": "PRAGMA foreign_keys = ON;\nDROP TABLE IF EXISTS posts;\nDROP TABLE IF EXISTS users;\nCREATE TABLE users (\n  id INTEGER PRIMARY KEY,\n  name TEXT NOT NULL\n);\nCREATE TABLE posts (\n  id INTEGER PRIMARY KEY,\n  user_id INTEGER NOT NULL,\n  body TEXT,\n  FOREIGN KEY (user_id) REFERENCES users(id)\n);\nINSERT INTO users (name) VALUES ('Rae'), ('Quill');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Valid posts only\n\nTry a good insert; orphans are rejected when foreign_keys=ON.",
+          "source": "PRAGMA foreign_keys = ON;\nINSERT INTO posts (user_id, body) VALUES (1, 'Hello FK world');\nSELECT u.name, p.body\nFROM posts AS p\nJOIN users AS u ON u.id = p.user_id;\n"
+        }
+      ]
+    },
+    {
+      "id": "26_update_price_flash_sale",
+      "title": "Project 26: Update Price Flash Sale 🏷️",
+      "description": "Discount a category of products with UPDATE.",
+      "level": "Beginner",
+      "concepts": "UPDATE ... WHERE",
+      "setup": "DROP TABLE IF EXISTS catalog;\nCREATE TABLE catalog (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price REAL);\nINSERT INTO catalog (name, category, price) VALUES\n  ('Desk Mat', 'desk', 20),\n  ('Monitor Light', 'desk', 40),\n  ('Mug', 'kitchen', 12),\n  ('Notebook', 'desk', 8);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — 20% off desk gear\n\nAlways limit UPDATE with WHERE unless you mean every row.",
+          "source": "UPDATE catalog\nSET price = ROUND(price * 0.8, 2)\nWHERE category = 'desk';\nSELECT * FROM catalog ORDER BY category, name;\n"
+        }
+      ]
+    },
+    {
+      "id": "27_delete_soft_archive",
+      "title": "Project 27: Delete Soft Archive 🗑️",
+      "description": "Remove cancelled rows and keep a tidy table.",
+      "level": "Beginner",
+      "concepts": "DELETE WHERE",
+      "setup": "DROP TABLE IF EXISTS tasks;\nCREATE TABLE tasks (id INTEGER PRIMARY KEY, title TEXT, status TEXT);\nINSERT INTO tasks (title, status) VALUES\n  ('Write schema', 'done'),\n  ('Seed data', 'done'),\n  ('Old draft', 'cancelled'),\n  ('Ship lab', 'open'),\n  ('Spam idea', 'cancelled');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Clear cancelled tasks\n\nDELETE removes rows permanently in this lab DB.",
+          "source": "DELETE FROM tasks WHERE status = 'cancelled';\nSELECT * FROM tasks ORDER BY id;\n"
+        }
+      ]
+    },
+    {
+      "id": "28_upsert_score_patch",
+      "title": "Project 28: Upsert Score Patch 🩹",
+      "description": "Insert or replace a player's best score.",
+      "level": "Intermediate",
+      "concepts": "INSERT ... ON CONFLICT DO UPDATE",
+      "setup": "DROP TABLE IF EXISTS best_scores;\nCREATE TABLE best_scores (\n  player TEXT PRIMARY KEY,\n  points INTEGER NOT NULL\n);\nINSERT INTO best_scores VALUES ('Nova', 900), ('Kai', 850);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Upsert higher scores only\n\nON CONFLICT patches an existing primary key.",
+          "source": "INSERT INTO best_scores (player, points) VALUES ('Nova', 940)\nON CONFLICT(player) DO UPDATE SET\n  points = CASE\n    WHEN excluded.points > best_scores.points THEN excluded.points\n    ELSE best_scores.points\n  END;\nINSERT INTO best_scores (player, points) VALUES ('Rio', 880)\nON CONFLICT(player) DO UPDATE SET\n  points = CASE\n    WHEN excluded.points > best_scores.points THEN excluded.points\n    ELSE best_scores.points\n  END;\nSELECT * FROM best_scores ORDER BY points DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "29_window_rank_race",
+      "title": "Project 29: Window Rank Race 🏁",
+      "description": "Rank racers with window functions.",
+      "level": "Advanced",
+      "concepts": "RANK() OVER, PARTITION BY",
+      "setup": "DROP TABLE IF EXISTS race_times;\nCREATE TABLE race_times (racer TEXT, lane TEXT, seconds REAL);\nINSERT INTO race_times VALUES\n  ('Ami', 'A', 12.1), ('Ben', 'A', 11.8), ('Cid', 'A', 12.1),\n  ('Dot', 'B', 10.9), ('Eve', 'B', 11.2), ('Fox', 'B', 11.0);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Rank within each lane\n\nWindow functions compute across related rows without collapsing them.",
+          "source": "SELECT racer, lane, seconds,\n       RANK() OVER (PARTITION BY lane ORDER BY seconds) AS place\nFROM race_times\nORDER BY lane, place, racer;\n"
+        }
+      ]
+    },
+    {
+      "id": "30_cte_trail_map",
+      "title": "Project 30: CTE Trail Map 🧭",
+      "description": "Build a readable query with a WITH clause (CTE).",
+      "level": "Advanced",
+      "concepts": "WITH common table expressions",
+      "setup": "DROP TABLE IF EXISTS hikes;\nCREATE TABLE hikes (trail TEXT, km REAL, difficulty TEXT);\nINSERT INTO hikes VALUES\n  ('Cedar Loop', 4.2, 'easy'),\n  ('Ridge Run', 9.5, 'hard'),\n  ('Lake Path', 6.0, 'moderate'),\n  ('Summit Push', 12.0, 'hard'),\n  ('Pine Stroll', 3.1, 'easy');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Long hard trails via CTE\n\nCTEs name intermediate results for clarity.",
+          "source": "WITH hard AS (\n  SELECT trail, km FROM hikes WHERE difficulty = 'hard'\n)\nSELECT trail, km\nFROM hard\nWHERE km >= 10\nORDER BY km DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "31_date_festival_filter",
+      "title": "Project 31: Date Festival Filter 📅",
+      "description": "Work with date strings and SQLite date functions.",
+      "level": "Advanced",
+      "concepts": "date(), julianday, comparisons",
+      "setup": "DROP TABLE IF EXISTS events;\nCREATE TABLE events (name TEXT, starts_on TEXT);\nINSERT INTO events VALUES\n  ('Join Jam', '2026-07-10'),\n  ('Index Fest', '2026-07-18'),\n  ('Null Night', '2026-08-01'),\n  ('CTE Camp', '2026-07-15');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — July events after the 12th\n\nStore dates as ISO text `YYYY-MM-DD` for easy sorting.",
+          "source": "SELECT name, starts_on,\n       CAST(julianday(starts_on) - julianday('2026-07-12') AS INTEGER) AS days_after_jul12\nFROM events\nWHERE starts_on LIKE '2026-07%'\n  AND starts_on > '2026-07-12'\nORDER BY starts_on;\n"
+        }
+      ]
+    },
+    {
+      "id": "32_string_soup_studio",
+      "title": "Project 32: String Soup Studio 🍜",
+      "description": "Clean and reshape text with SQL string functions.",
+      "level": "Advanced",
+      "concepts": "upper/lower, substr, ||, length, trim",
+      "setup": "DROP TABLE IF EXISTS raw_tags;\nCREATE TABLE raw_tags (label TEXT);\nINSERT INTO raw_tags VALUES\n  ('  sql '), ('Join'), ('NULL'), ('cte');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Normalize labels\n\nTrim, case-fold, and build a display code.",
+          "source": "SELECT\n  trim(label) AS cleaned,\n  lower(trim(label)) AS slug,\n  upper(substr(trim(label), 1, 1)) || lower(substr(trim(label), 2)) AS titled,\n  length(trim(label)) AS chars\nFROM raw_tags\nORDER BY slug;\n"
+        }
+      ]
+    },
+    {
+      "id": "33_check_constraint_cafe",
+      "title": "Project 33: Check Constraint Cafe ☕",
+      "description": "Reject invalid prices with a CHECK constraint.",
+      "level": "Advanced",
+      "concepts": "CHECK constraints, INSERT OR IGNORE",
+      "setup": "DROP TABLE IF EXISTS drinks;\nCREATE TABLE drinks (\n  name TEXT PRIMARY KEY,\n  price REAL NOT NULL CHECK (price > 0),\n  size TEXT CHECK (size IN ('S', 'M', 'L'))\n);\nINSERT INTO drinks VALUES ('Espresso', 3.5, 'S');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Valid menu rows only\n\nBad prices/sizes are ignored here so the lab keeps flowing.",
+          "source": "INSERT OR IGNORE INTO drinks VALUES ('Free Mist', 0, 'M');\nINSERT OR IGNORE INTO drinks VALUES ('Latte', 4.5, 'XL');\nINSERT OR IGNORE INTO drinks VALUES ('Latte', 4.5, 'M');\nSELECT * FROM drinks ORDER BY name;\n"
+        }
+      ]
+    },
+    {
+      "id": "34_trigger_audit_log",
+      "title": "Project 34: Trigger Audit Log 📓",
+      "description": "Auto-log price changes with a trigger.",
+      "level": "Advanced",
+      "concepts": "CREATE TRIGGER, OLD/NEW",
+      "setup": "DROP TABLE IF EXISTS price_audit;\nDROP TABLE IF EXISTS items;\nCREATE TABLE items (id INTEGER PRIMARY KEY, name TEXT, price REAL);\nCREATE TABLE price_audit (\n  id INTEGER PRIMARY KEY,\n  item_id INTEGER,\n  old_price REAL,\n  new_price REAL,\n  changed_at TEXT DEFAULT CURRENT_TIMESTAMP\n);\nINSERT INTO items (name, price) VALUES ('Sticker Pack', 5.0);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Trigger on UPDATE\n\nWhen price changes, write a row to the audit table.",
+          "source": "DROP TRIGGER IF EXISTS trg_items_price;\nCREATE TRIGGER trg_items_price\nAFTER UPDATE OF price ON items\nFOR EACH ROW\nWHEN OLD.price <> NEW.price\nBEGIN\n  INSERT INTO price_audit (item_id, old_price, new_price)\n  VALUES (OLD.id, OLD.price, NEW.price);\nEND;\n\nUPDATE items SET price = 6.5 WHERE name = 'Sticker Pack';\nSELECT i.name, a.old_price, a.new_price, a.changed_at\nFROM price_audit AS a\nJOIN items AS i ON i.id = a.item_id;\n"
+        }
+      ]
+    },
+    {
+      "id": "35_recursive_org_chart",
+      "title": "Project 35: Recursive Org Chart 🏢",
+      "description": "Walk a management tree with a recursive CTE.",
+      "level": "Advanced",
+      "concepts": "WITH RECURSIVE",
+      "setup": "DROP TABLE IF EXISTS staff;\nCREATE TABLE staff (id INTEGER PRIMARY KEY, name TEXT, manager_id INTEGER);\nINSERT INTO staff VALUES\n  (1, 'Root CEO', NULL),\n  (2, 'Eng Lead', 1),\n  (3, 'Design Lead', 1),\n  (4, 'Backend Dev', 2),\n  (5, 'Frontend Dev', 2),\n  (6, 'Illustrator', 3);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Everyone under Eng Lead\n\nRecursive CTEs follow parent/child links.",
+          "source": "WITH RECURSIVE reports AS (\n  SELECT id, name, manager_id, 0 AS depth\n  FROM staff WHERE name = 'Eng Lead'\n  UNION ALL\n  SELECT s.id, s.name, s.manager_id, r.depth + 1\n  FROM staff AS s\n  JOIN reports AS r ON s.manager_id = r.id\n)\nSELECT depth, name FROM reports ORDER BY depth, name;\n"
+        }
+      ]
+    },
+    {
+      "id": "36_pivot_ish_crosstab",
+      "title": "Project 36: Pivot Ish Crosstab 📊",
+      "description": "Fake a pivot table with conditional aggregation.",
+      "level": "Advanced",
+      "concepts": "SUM(CASE WHEN…), FILTER-style pivots",
+      "setup": "DROP TABLE IF EXISTS enroll;\nCREATE TABLE enroll (student TEXT, course TEXT);\nINSERT INTO enroll VALUES\n  ('Ami', 'SQL'), ('Ami', 'HTML'),\n  ('Ben', 'SQL'), ('Ben', 'JS'),\n  ('Cid', 'HTML'), ('Cid', 'JS'), ('Cid', 'SQL');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Course flags per student\n\nConditional SUM turns rows into columns.",
+          "source": "SELECT student,\n  SUM(CASE WHEN course = 'SQL' THEN 1 ELSE 0 END) AS took_sql,\n  SUM(CASE WHEN course = 'HTML' THEN 1 ELSE 0 END) AS took_html,\n  SUM(CASE WHEN course = 'JS' THEN 1 ELSE 0 END) AS took_js\nFROM enroll\nGROUP BY student\nORDER BY student;\n"
+        }
+      ]
+    },
+    {
+      "id": "37_many_to_many_playlist",
+      "title": "Project 37: Many To Many Playlist 🎶",
+      "description": "Model songs ↔ playlists with a junction table.",
+      "level": "Advanced",
+      "concepts": "junction tables, many-to-many JOIN",
+      "setup": "DROP TABLE IF EXISTS playlist_songs;\nDROP TABLE IF EXISTS songs;\nDROP TABLE IF EXISTS playlists;\nCREATE TABLE playlists (id INTEGER PRIMARY KEY, name TEXT);\nCREATE TABLE songs (id INTEGER PRIMARY KEY, title TEXT);\nCREATE TABLE playlist_songs (\n  playlist_id INTEGER,\n  song_id INTEGER,\n  PRIMARY KEY (playlist_id, song_id)\n);\nINSERT INTO playlists (name) VALUES ('Focus'), ('Hype');\nINSERT INTO songs (title) VALUES ('Index Drive'), ('Join Chorus'), ('Null Wave');\nINSERT INTO playlist_songs VALUES (1, 1), (1, 3), (2, 1), (2, 2);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Songs on Focus\n\nJoin through the junction table.",
+          "source": "SELECT p.name AS playlist, s.title AS song\nFROM playlist_songs AS ps\nJOIN playlists AS p ON p.id = ps.playlist_id\nJOIN songs AS s ON s.id = ps.song_id\nWHERE p.name = 'Focus'\nORDER BY s.title;\n"
+        }
+      ]
+    },
+    {
+      "id": "38_report_dashboard_query",
+      "title": "Project 38: Report Dashboard Query 📈",
+      "description": "Build a compact sales dashboard with joins + aggregates.",
+      "level": "Advanced",
+      "concepts": "reporting query patterns",
+      "setup": "DROP TABLE IF EXISTS order_items;\nDROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS customers;\nCREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, city TEXT);\nCREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, category TEXT, price REAL);\nCREATE TABLE order_items (\n  id INTEGER PRIMARY KEY,\n  customer_id INTEGER,\n  product_id INTEGER,\n  qty INTEGER\n);\nINSERT INTO customers VALUES (1, 'Nia', 'Singapore'), (2, 'Omar', 'Lisbon'), (3, 'Pia', 'Singapore');\nINSERT INTO products VALUES\n  (1, 'Sticker', 'merch', 3), (2, 'Tee', 'merch', 22), (3, 'Ebook', 'digital', 9);\nINSERT INTO order_items (customer_id, product_id, qty) VALUES\n  (1, 1, 4), (1, 3, 1), (2, 2, 1), (3, 1, 2), (3, 2, 1), (2, 3, 2);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Revenue by city & category\n\nA classic dashboard-shaped query.",
+          "source": "SELECT c.city, p.category,\n       SUM(oi.qty) AS units,\n       ROUND(SUM(oi.qty * p.price), 2) AS revenue\nFROM order_items AS oi\nJOIN customers AS c ON c.id = oi.customer_id\nJOIN products AS p ON p.id = oi.product_id\nGROUP BY c.city, p.category\nORDER BY c.city, revenue DESC;\n"
+        }
+      ]
+    },
+    {
+      "id": "39_data_cleanup_detox",
+      "title": "Project 39: Data Cleanup Detox 🧽",
+      "description": "Clean messy imports with TRIM, CAST, and NULLIF.",
+      "level": "Advanced",
+      "concepts": "CAST, TRIM, NULLIF, UPDATE cleanup",
+      "setup": "DROP TABLE IF EXISTS messy;\nCREATE TABLE messy (raw_name TEXT, raw_age TEXT);\nINSERT INTO messy VALUES\n  ('  ami ', '19'),\n  ('BEN', 'n/a'),\n  ('  Cid', '22'),\n  ('', '30');\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Normalize for analysis\n\nNULLIF turns blank strings into NULL.",
+          "source": "SELECT\n  trim(raw_name) AS name,\n  CAST(NULLIF(lower(trim(raw_age)), 'n/a') AS INTEGER) AS age\nFROM messy\nWHERE trim(raw_name) <> ''\nORDER BY name;\n"
+        }
+      ]
+    },
+    {
+      "id": "40_capstone_shop_analytics",
+      "title": "Project 40: Capstone Shop Analytics 🏪",
+      "description": "Capstone: explore a tiny shop schema with joins, windows, and CTEs.",
+      "level": "Advanced",
+      "concepts": "end-to-end analytics query",
+      "setup": "DROP TABLE IF EXISTS order_lines;\nDROP TABLE IF EXISTS orders;\nDROP TABLE IF EXISTS products;\nDROP TABLE IF EXISTS customers;\nCREATE TABLE customers (id INTEGER PRIMARY KEY, name TEXT, cohort TEXT);\nCREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price REAL);\nCREATE TABLE orders (id INTEGER PRIMARY KEY, customer_id INTEGER, ordered_on TEXT);\nCREATE TABLE order_lines (order_id INTEGER, product_id INTEGER, qty INTEGER);\nINSERT INTO customers VALUES (1, 'Ada', 'A'), (2, 'Ben', 'B'), (3, 'Cara', 'A');\nINSERT INTO products VALUES (1, 'Mug', 12), (2, 'Tee', 24), (3, 'Sticker', 3);\nINSERT INTO orders VALUES\n  (1, 1, '2026-07-01'), (2, 2, '2026-07-02'), (3, 1, '2026-07-08'), (4, 3, '2026-07-09');\nINSERT INTO order_lines VALUES\n  (1, 1, 2), (1, 3, 5),\n  (2, 2, 1),\n  (3, 2, 1), (3, 3, 2),\n  (4, 1, 1), (4, 3, 10);\n",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Customer lifetime value\n\nCTE + join + window for a shop snapshot.",
+          "source": "WITH line_rev AS (\n  SELECT o.customer_id,\n         o.id AS order_id,\n         SUM(ol.qty * p.price) AS order_total\n  FROM orders AS o\n  JOIN order_lines AS ol ON ol.order_id = o.id\n  JOIN products AS p ON p.id = ol.product_id\n  GROUP BY o.customer_id, o.id\n),\ncust AS (\n  SELECT customer_id,\n         COUNT(*) AS orders,\n         ROUND(SUM(order_total), 2) AS revenue\n  FROM line_rev\n  GROUP BY customer_id\n)\nSELECT c.name, c.cohort, cust.orders, cust.revenue,\n       ROUND(cust.revenue * 1.0 / cust.orders, 2) AS avg_order,\n       RANK() OVER (ORDER BY cust.revenue DESC) AS revenue_rank\nFROM cust\nJOIN customers AS c ON c.id = cust.customer_id\nORDER BY revenue_rank;\n"
+        }
+      ]
+    }
+  ]
+}

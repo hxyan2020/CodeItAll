@@ -1,0 +1,176 @@
+/* CodeItAll — syntax & line explain tooltips */
+
+.lab-explain-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 0.55rem;
+  border-radius: 50%;
+  vertical-align: middle;
+  cursor: help;
+  background: radial-gradient(circle at 35% 30%, #fff6 0%, #c46565 35%, #8b1e1e 70%, #5a1010 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 8px rgba(139, 30, 30, 0.75),
+    0 0 14px rgba(255, 180, 120, 0.35);
+  animation: lab-explain-pulse 2.4s ease-in-out infinite;
+  position: relative;
+  top: -1px;
+}
+.lab-explain-dot:hover,
+.lab-explain-dot.is-active {
+  transform: scale(1.25);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 0 12px rgba(255, 200, 140, 0.85),
+    0 0 20px rgba(139, 30, 30, 0.9);
+}
+
+@keyframes lab-explain-pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.35); }
+}
+
+.lab-explain-token-hit {
+  background: rgba(139, 30, 30, 0.28) !important;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(255, 200, 160, 0.25);
+  cursor: help;
+}
+
+.lab-explain-tip {
+  position: fixed;
+  z-index: 12000;
+  width: min(360px, calc(100vw - 1.5rem));
+  max-height: min(58vh, 420px);
+  overflow: auto;
+  background: linear-gradient(160deg, #1a1414 0%, #0d0d0d 55%, #141010 100%);
+  color: #f2f2f2;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(139, 30, 30, 0.25),
+    0 0 24px rgba(139, 30, 30, 0.18);
+  padding: 0.85rem 1rem 0.95rem;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  text-align: left;
+  animation: lab-explain-in 0.16s ease-out;
+}
+
+@keyframes lab-explain-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lab-explain-tip-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.lab-explain-tip-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+  padding-right: 0.25rem;
+}
+
+.lab-explain-close {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lab-explain-close:hover {
+  background: #8b1e1e;
+}
+
+.lab-explain-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.45rem;
+  border-radius: 999px;
+  margin-bottom: 0.45rem;
+  background: rgba(139, 30, 30, 0.35);
+  color: #ffc9c9;
+  border: 1px solid rgba(255, 180, 180, 0.25);
+}
+
+.lab-explain-tip-body {
+  color: #cfcfcf;
+}
+.lab-explain-tip-body p {
+  margin: 0 0 0.4rem;
+}
+.lab-explain-tip-body p:last-child {
+  margin-bottom: 0;
+}
+.lab-explain-tip-body strong {
+  color: #fff;
+  font-weight: 700;
+}
+.lab-explain-tip-body .tip-kw {
+  color: #ffb4a8;
+  font-weight: 700;
+}
+.lab-explain-tip-body .tip-id {
+  color: #9fd4ff;
+  font-weight: 700;
+}
+.lab-explain-tip-body .tip-str {
+  color: #c6ef9c;
+  font-weight: 600;
+}
+.lab-explain-tip-body .tip-num {
+  color: #ffd28a;
+  font-weight: 700;
+}
+.lab-explain-tip-body .tip-op {
+  color: #e0b0ff;
+  font-weight: 700;
+}
+.lab-explain-tip-body code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.82em;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.08em 0.35em;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.lab-explain-tip-foot {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  color: #8a8a8a;
+}
+
+@media (max-width: 820px) {
+  .lab-explain-tip {
+    width: min(100vw - 1rem, 380px);
+    max-height: 45vh;
+  }
+  .lab-explain-dot {
+    width: 10px;
+    height: 10px;
+    margin-left: 0.7rem;
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "name": "codeitall",
-  "builds": [{ "src": "docs/**", "use": "@vercel/static" }],
-  "routes": [
-    { "src": "/notebook", "dest": "/docs/notebook.html" },
-    { "src": "/(.*)", "dest": "/docs/$1" }
-  ]
-}

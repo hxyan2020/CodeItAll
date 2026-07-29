@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Website Dissect | CodeItAll</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="./dissect.css?v=6" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="../index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="../assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <ul class="nav" id="nav">
+      <li><a href="../course/">Learn with AI</a></li>
+      <li><a class="active" href="./">Dissect any website</a></li>
+      <li><a href="../career/">Career booster</a></li>
+      <li><a href="../profile/">Me</a></li>
+    </ul>
+  </header>
+
+  <main class="dissect-main">
+    <section class="dissect-hero">
+      <p class="eyebrow">Website Dissect</p>
+      <h1>See how a public page is built</h1>
+      <p class="lead">
+        Paste a URL. We fetch the <strong>public HTML</strong>, map its structure, explain it step by step,
+        and highlight logins / paywalls we <em>cannot</em> open.
+      </p>
+      <form class="url-bar" id="dissectForm">
+        <label class="sr-only" for="urlInput">Website URL</label>
+        <input id="urlInput" name="url" type="text" inputmode="url" autocomplete="url"
+          placeholder="www.example.com or https://…" required />
+        <button type="submit" class="btn-go" id="goBtn">Dissect</button>
+      </form>
+      <p class="fine" id="statusLine">Educational only — we never bypass passwords, paywalls, or CAPTCHAs.</p>
+    </section>
+
+    <section class="dissect-results" id="results" hidden>
+      <div class="meta-row" id="metaRow"></div>
+
+      <div class="panel overview-panel" id="overviewPanel">
+        <h2>What this site is about</h2>
+        <p class="overview-summary" id="overviewSummary"></p>
+        <div class="overview-meta">
+          <span class="overview-kind" id="overviewKind"></span>
+        </div>
+        <h3 class="subhead">Key tech stack</h3>
+        <div class="tech-tags" id="techTags"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="panel">
+          <h2>Structure</h2>
+          <div id="structureSummary" class="summary"></div>
+        </div>
+        <div class="panel">
+          <h2>Bit-by-bit walkthrough</h2>
+          <ol class="walk" id="walkthrough"></ol>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head-row">
+          <h2>Public source code</h2>
+          <div class="src-toolbar">
+            <div class="src-tabs" id="srcTabs" role="tablist">
+              <button type="button" class="src-tab active" data-src="html" role="tab">HTML</button>
+              <button type="button" class="src-tab" data-src="css" role="tab">CSS</button>
+              <button type="button" class="src-tab" data-src="js" role="tab">JS</button>
+            </div>
+            <button type="button" class="btn-ghost" id="copyHtmlBtn">Copy</button>
+          </div>
+        </div>
+        <pre class="code src-pane" data-src="html"><code class="language-xml" id="htmlView"></code></pre>
+        <pre class="code src-pane hide" data-src="css"><code class="language-css" id="cssView"></code></pre>
+        <pre class="code src-pane hide" data-src="js"><code class="language-javascript" id="jsView"></code></pre>
+      </div>
+
+      <div class="panel danger-panel" id="accessPanel">
+        <h2>What you cannot access</h2>
+        <div id="accessNotes"></div>
+      </div>
+
+      <div class="panel customize-panel" id="customizePanel">
+        <h2>What do you want to do with this?</h2>
+        <p class="customize-lead">Ask in plain language — customize, simplify, or rebuild a learner-friendly version.</p>
+        <div class="chips" id="chips">
+          <button type="button" data-q="Explain the navigation and headings like I’m new to HTML.">Explain the layout</button>
+          <button type="button" data-q="Help me rebuild a simpler HTML version of this page’s structure (no copying brand assets).">Rebuild a simpler version</button>
+          <button type="button" data-q="List every form field and what each one is for in plain English.">Break down the forms</button>
+          <button type="button" data-q="What parts are probably missing because of login, paywall, or JavaScript apps?">What am I missing?</button>
+        </div>
+        <div class="chat" id="chatLog"></div>
+        <form class="chat-form" id="chatForm">
+          <label class="sr-only" for="chatInput">Your request</label>
+          <textarea id="chatInput" rows="3" placeholder="Example: Make a beginner-friendly skeleton that mirrors this page’s sections…"></textarea>
+          <button type="submit" class="btn-go">Ask</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-links row">
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../course/">Course</a>
+      <a href="../profile/">Me</a>
+    </div>
+    <div class="wrap footer-copy">© 2026 CodeItAll · Website Dissect inspects public HTML only.</div>
+  </footer>
+
+  <script src="../shared/progress.js?v=2"></script>
+  <script src="./dissect.js?v=4"></script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

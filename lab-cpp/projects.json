@@ -1,0 +1,647 @@
+{
+  "language": "cpp",
+  "title": "CodeItAll C++ Lab",
+  "count": 40,
+  "projects": [
+    {
+      "id": "01_hello_universe",
+      "title": "Project 1: Hello Universe \ud83d\ude80",
+      "name": "Hello Universe",
+      "number": 1,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Your first C++ program: print a welcome banner and play with cout.",
+      "concepts": "main(), iostream, cout, endl",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Print your launch message\n\nEdit the message strings, then **Run**. In C++, every program starts at `main`.",
+          "source": "#include <iostream>\n#include <string>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string name = \"CodeItAll Cadet\";\n    std::string craft = \"SS Python-to-C++\";\n\n    std::cout << \"================================\\n\";\n    std::cout << \"  HELLO, UNIVERSE\\n\";\n    std::cout << \"================================\\n\";\n    std::cout << \"Pilot : \" << name << \"\\n\";\n    std::cout << \"Craft : \" << craft << \"\\n\";\n    std::cout << \"Status: systems online\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "02_number_guess_duel",
+      "title": "Project 2: Number Guess Duel \ud83c\udfaf",
+      "name": "Number Guess Duel",
+      "number": 2,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "The computer picks a number; simulate guesses until you win (auto-demo mode).",
+      "concepts": "variables, loops, if/else, rand()",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Auto-play the guessing game\n\nThis version uses a fixed seed and auto-guesses so it runs without keyboard input.",
+          "source": "#include <iostream>\n#include <cstdlib>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int SECRET_MIN = 1;\n    const int SECRET_MAX = 20;\n    const unsigned SEED = 7;\n\n    std::srand(SEED);\n    int secret = SECRET_MIN + std::rand() % (SECRET_MAX - SECRET_MIN + 1);\n    int low = SECRET_MIN, high = SECRET_MAX;\n    int attempts = 0;\n\n    std::cout << \"Guess Duel: find \" << SECRET_MIN << \"-\" << SECRET_MAX << \"\\n\";\n    while (true) {\n        int guess = (low + high) / 2; // binary-search style player\n        ++attempts;\n        std::cout << \"Attempt \" << attempts << \": \" << guess;\n        if (guess == secret) {\n            std::cout << \" -> correct!\\n\";\n            break;\n        } else if (guess < secret) {\n            std::cout << \" -> too low\\n\";\n            low = guess + 1;\n        } else {\n            std::cout << \" -> too high\\n\";\n            high = guess - 1;\n        }\n    }\n    std::cout << \"Won in \" << attempts << \" tries. Secret was \" << secret << \".\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "03_fizzbuzz_jazz",
+      "title": "Project 3: FizzBuzz Jazz \ud83c\udfb7",
+      "name": "FizzBuzz Jazz",
+      "number": 3,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Classic FizzBuzz with custom words and a jazzier range.",
+      "concepts": "for-loops, modulo operator, string building",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Jam through the numbers\n\nChange `LIMIT`, `A`, `B`, and the words. Multiples of both print the mashup.",
+          "source": "#include <iostream>\n#include <string>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int LIMIT = 30;\n    const int A = 3, B = 5;\n    const std::string WORD_A = \"Fizz\";\n    const std::string WORD_B = \"Buzz\";\n\n    for (int i = 1; i <= LIMIT; ++i) {\n        std::string out;\n        if (i % A == 0) out += WORD_A;\n        if (i % B == 0) out += WORD_B;\n        if (out.empty()) std::cout << i << '\\n';\n        else std::cout << out << '\\n';\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "04_temp_toggle_booth",
+      "title": "Project 4: Temp Toggle Booth \ud83c\udf21\ufe0f",
+      "name": "Temp Toggle Booth",
+      "number": 4,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Convert Celsius\u2194Fahrenheit in a tiny command booth (batch of sample values).",
+      "concepts": "functions, floating point, formatted output",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Convert a batch of temperatures\n\nAdd more sample values to the arrays, then run.",
+          "source": "#include <iostream>\n#include <iomanip>\n\ndouble c_to_f(double c) { return c * 9.0 / 5.0 + 32.0; }\ndouble f_to_c(double f) { return (f - 32.0) * 5.0 / 9.0; }\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    double celsius[] = {0, 22, 37, 100};\n    double fahrenheit[] = {32, 72, 98.6, 212};\n    const int N = 4;\n\n    std::cout << std::fixed << std::setprecision(1);\n    std::cout << \"C -> F\\n\";\n    for (int i = 0; i < N; ++i)\n        std::cout << celsius[i] << \" C = \" << c_to_f(celsius[i]) << \" F\\n\";\n    std::cout << \"\\nF -> C\\n\";\n    for (int i = 0; i < N; ++i)\n        std::cout << fahrenheit[i] << \" F = \" << f_to_c(fahrenheit[i]) << \" C\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "05_caesar_shift_desk",
+      "title": "Project 5: Caesar Shift Desk \ud83d\udd10",
+      "name": "Caesar Shift Desk",
+      "number": 5,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Encrypt a slogan with a Caesar shift \u2014 pure C++ string walking.",
+      "concepts": "chars, ASCII math, references",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Encode the slogan\n\nTune `SHIFT` and `MESSAGE`. Only letters move; spaces stay put.",
+          "source": "#include <iostream>\n#include <string>\n\nstd::string caesar(const std::string& text, int shift) {\n    std::string out = text;\n    for (char& ch : out) {\n        if (ch >= 'a' && ch <= 'z')\n            ch = char('a' + (ch - 'a' + shift + 26) % 26);\n        else if (ch >= 'A' && ch <= 'Z')\n            ch = char('A' + (ch - 'A' + shift + 26) % 26);\n    }\n    return out;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string message = \"CodeItAll Cadets Learn C++\";\n    int shift = 4;\n\n    std::string secret = caesar(message, shift);\n    std::cout << \"Plain : \" << message << \"\\n\";\n    std::cout << \"Secret: \" << secret << \"\\n\";\n    std::cout << \"Back  : \" << caesar(secret, -shift) << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "06_dice_histogram",
+      "title": "Project 6: Dice Histogram \ud83c\udfb2",
+      "name": "Dice Histogram",
+      "number": 6,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Roll a die thousands of times and print an ASCII histogram of the faces.",
+      "concepts": "arrays, rand, scaling output",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Roll and chart\n\nIncrease `ROLLS` for smoother bars. `SIDES` can be 6 or 20.",
+          "source": "#include <iostream>\n#include <cstdlib>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int SIDES = 6;\n    const int ROLLS = 3000;\n    const unsigned SEED = 3;\n    const int BAR_WIDTH = 40;\n\n    std::srand(SEED);\n    std::vector<int> counts(SIDES + 1, 0);\n    for (int i = 0; i < ROLLS; ++i)\n        counts[1 + std::rand() % SIDES]++;\n\n    int peak = *std::max_element(counts.begin() + 1, counts.end());\n    std::cout << \"Dice Histogram (\" << ROLLS << \" rolls)\\n\";\n    for (int face = 1; face <= SIDES; ++face) {\n        int bars = peak ? counts[face] * BAR_WIDTH / peak : 0;\n        std::cout << face << \" | \";\n        for (int b = 0; b < bars; ++b) std::cout << '#';\n        std::cout << \" (\" << counts[face] << \")\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "07_palindrome_patrol",
+      "title": "Project 7: Palindrome Patrol \ud83d\udd01",
+      "name": "Palindrome Patrol",
+      "number": 7,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Check which phrases are palindromes, ignoring spaces and punctuation.",
+      "concepts": "string cleanup, two-pointer thinking",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Patrol a list of phrases\n\nAdd your own phrases to the list and see which pass.",
+          "source": "#include <iostream>\n#include <string>\n#include <cctype>\n#include <vector>\n\nstd::string normalize(const std::string& s) {\n    std::string out;\n    for (char ch : s) if (std::isalnum(static_cast<unsigned char>(ch)))\n        out.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(ch))));\n    return out;\n}\n\nbool is_palindrome(const std::string& s) {\n    std::string n = normalize(s);\n    for (size_t i = 0, j = n.size(); i < j; ++i, --j)\n        if (n[i] != n[j - 1]) return false;\n    return true;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<std::string> phrases = {\n        \"Level\",\n        \" codEItAll \",\n        \"A man a plan a canal Panama\",\n        \"C++ is fun\",\n        \"Was it a car or a cat I saw\"\n    };\n\n    for (const auto& p : phrases) {\n        std::cout << (is_palindrome(p) ? \"[YES] \" : \"[no ] \") << p << \"\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "08_prime_radar",
+      "title": "Project 8: Prime Radar \ud83d\udce1",
+      "name": "Prime Radar",
+      "number": 8,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Scan a range for prime numbers and print them in neat columns.",
+      "concepts": "nested loops, boolean helpers",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Sweep for primes\n\nChange `FROM`/`TO` to expand the radar sweep.",
+          "source": "#include <iostream>\n#include <cmath>\n\nbool is_prime(int n) {\n    if (n < 2) return false;\n    if (n == 2) return true;\n    if (n % 2 == 0) return false;\n    int lim = static_cast<int>(std::sqrt(n));\n    for (int d = 3; d <= lim; d += 2)\n        if (n % d == 0) return false;\n    return true;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int FROM = 2;\n    const int TO = 100;\n    const int COLS = 8;\n\n    int col = 0, found = 0;\n    std::cout << \"Primes from \" << FROM << \" to \" << TO << \":\\n\";\n    for (int n = FROM; n <= TO; ++n) {\n        if (!is_prime(n)) continue;\n        std::cout << n << '\\t';\n        ++found;\n        if (++col == COLS) { std::cout << '\\n'; col = 0; }\n    }\n    if (col) std::cout << '\\n';\n    std::cout << \"Found \" << found << \" primes.\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "09_rock_paper_cpu",
+      "title": "Project 9: Rock Paper CPU \u270a",
+      "name": "Rock Paper CPU",
+      "number": 9,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Simulate Rock-Paper-Scissors rounds against a random CPU opponent.",
+      "concepts": "enums-as-ints, switch/branching, tallies",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Fight 20 rounds\n\nWatch wins/losses/draws accumulate. Change `ROUNDS` for a longer match.",
+          "source": "#include <iostream>\n#include <cstdlib>\n#include <string>\n\nconst char* name_of(int m) {\n    static const char* n[] = {\"Rock\", \"Paper\", \"Scissors\"};\n    return n[m];\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int ROUNDS = 20;\n    const unsigned SEED = 11;\n\n    std::srand(SEED);\n    int you_w = 0, cpu_w = 0, draws = 0;\n    for (int r = 1; r <= ROUNDS; ++r) {\n        int you = std::rand() % 3;\n        int cpu = std::rand() % 3;\n        std::cout << \"R\" << r << \": you=\" << name_of(you) << \" cpu=\" << name_of(cpu);\n        if (you == cpu) { ++draws; std::cout << \" draw\\n\"; }\n        else if ((you + 1) % 3 == cpu) { ++cpu_w; std::cout << \" cpu\\n\"; }\n        else { ++you_w; std::cout << \" you\\n\"; }\n    }\n    std::cout << \"Score you/cpu/draw = \" << you_w << \"/\" << cpu_w << \"/\" << draws << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "10_word_counter_desk",
+      "title": "Project 10: Word Counter Desk \ud83d\udcdd",
+      "name": "Word Counter Desk",
+      "number": 10,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Count characters, words, and lines in a pasted paragraph.",
+      "concepts": "stringstream, getline loops, aggregation",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Analyze the paragraph\n\nReplace `TEXT` with your own blurb.",
+          "source": "#include <iostream>\n#include <sstream>\n#include <string>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string text =\n        \"C++ feels fast.\\n\"\n        \"Loops dance, types whisper, and compilers keep you honest.\\n\"\n        \"Keep shipping tiny projects!\";\n\n    int chars = 0, words = 0, lines = 0;\n    std::istringstream in(text);\n    std::string line;\n    while (std::getline(in, line)) {\n        ++lines;\n        chars += static_cast<int>(line.size());\n        std::istringstream ws(line);\n        std::string w;\n        while (ws >> w) ++words;\n    }\n    std::cout << \"Lines : \" << lines << \"\\n\";\n    std::cout << \"Words : \" << words << \"\\n\";\n    std::cout << \"Chars : \" << chars << \" (excluding newlines)\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "11_password_strength_gage",
+      "title": "Project 11: Password Strength Gage \ud83d\udd12",
+      "name": "Password Strength Gage",
+      "number": 11,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Score passwords for length and character variety \u2014 print a grade.",
+      "concepts": "char classification, scoring rules",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Grade a list of passwords\n\nTry adding a weak and a strong password to the list.",
+          "source": "#include <iostream>\n#include <string>\n#include <cctype>\n#include <vector>\n\nint score_password(const std::string& p) {\n    int score = 0;\n    bool lower = false, upper = false, digit = false, sym = false;\n    if (p.size() >= 8) score += 2;\n    if (p.size() >= 12) score += 2;\n    for (char ch : p) {\n        if (std::islower(static_cast<unsigned char>(ch))) lower = true;\n        else if (std::isupper(static_cast<unsigned char>(ch))) upper = true;\n        else if (std::isdigit(static_cast<unsigned char>(ch))) digit = true;\n        else sym = true;\n    }\n    score += lower + upper + digit + sym;\n    return score;\n}\n\nconst char* grade(int s) {\n    if (s >= 7) return \"STRONG\";\n    if (s >= 4) return \"OKAY\";\n    return \"WEAK\";\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<std::string> passwords = {\"1234\", \"CodeItAll\", \"C++Rocks!2026\", \"pass\"};\n\n    for (const auto& p : passwords) {\n        int s = score_password(p);\n        std::cout << grade(s) << \" (\" << s << \") : \" << p << \"\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "12_tip_splitter",
+      "title": "Project 12: Tip Splitter \ud83d\udcb8",
+      "name": "Tip Splitter",
+      "number": 12,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Split a restaurant bill with tip across friends and print who pays what.",
+      "concepts": "doubles, formatting money, edge cases",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Split the bill\n\nSet `BILL`, `TIP_PERCENT`, and `FRIENDS`.",
+          "source": "#include <iostream>\n#include <iomanip>\n#include <cmath>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    double bill = 86.50;\n    double tip_percent = 18.0;\n    int friends = 4;\n\n    double tip = bill * tip_percent / 100.0;\n    double total = bill + tip;\n    double each = total / friends;\n\n    std::cout << std::fixed << std::setprecision(2);\n    std::cout << \"Bill      $\" << bill << \"\\n\";\n    std::cout << \"Tip \" << tip_percent << \"% $\" << tip << \"\\n\";\n    std::cout << \"Total     $\" << total << \"\\n\";\n    std::cout << \"Friends   \" << friends << \"\\n\";\n    std::cout << \"Each pays $\" << each << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "13_fibonacci_fountain",
+      "title": "Project 13: Fibonacci Fountain \u26f2",
+      "name": "Fibonacci Fountain",
+      "number": 13,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Print the Fibonacci sequence and a rough golden-ratio estimate.",
+      "concepts": "iteration, long long, ratios",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Pour Fibonacci numbers\n\nIncrease `N` to see the ratio approach \u03c6 \u2248 1.618.",
+          "source": "#include <iostream>\n#include <iomanip>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int N = 20;\n\n    long long a = 0, b = 1;\n    std::cout << std::fixed << std::setprecision(6);\n    for (int i = 1; i <= N; ++i) {\n        std::cout << \"F(\" << i << \") = \" << a;\n        if (a > 0) std::cout << \"  ratio~ \" << static_cast<double>(b) / a;\n        std::cout << \"\\n\";\n        long long next = a + b;\n        a = b;\n        b = next;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "14_morse_blink_desk",
+      "title": "Project 14: Morse Blink Desk \u2022",
+      "name": "Morse Blink Desk",
+      "number": 14,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Translate text into Morse code dots and dashes.",
+      "concepts": "lookup tables with std::map, string building",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Encode a message\n\nChange `MESSAGE` to your callsign.",
+          "source": "#include <iostream>\n#include <string>\n#include <map>\n#include <cctype>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string message = \"CODE IT ALL\";\n\n    std::map<char, std::string> morse = {\n        {'A',\".-\"},{'B',\"-...\"},{'C',\"-.-.\"},{'D',\"-..\"},{'E',\".\"},\n        {'F',\"..-.\"},{'G',\"--.\"},{'H',\"....\"},{'I',\"..\"},{'J',\".---\"},\n        {'K',\"-.-\"},{'L',\".-..\"},{'M',\"--\"},{'N',\"-.\"},{'O',\"---\"},\n        {'P',\".--.\"},{'Q',\"--.-\"},{'R',\".-.\"},{'S',\"...\"},{'T',\"-\"},\n        {'U',\"..-\"},{'V',\"...-\"},{'W',\".--\"},{'X',\"-..-\"},{'Y',\"-.--\"},\n        {'Z',\"--..\"},{' ',\"/\"}\n    };\n\n    for (char ch : message) {\n        ch = static_cast<char>(std::toupper(static_cast<unsigned char>(ch)));\n        if (morse.count(ch)) std::cout << morse[ch] << ' ';\n    }\n    std::cout << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "15_grade_curve_lab",
+      "title": "Project 15: Grade Curve Lab \ud83d\udcca",
+      "name": "Grade Curve Lab",
+      "number": 15,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Average a class of scores and assign letter grades.",
+      "concepts": "vectors, range-based for, average math",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Curve the class\n\nEdit the `scores` list to see averages shift.",
+          "source": "#include <iostream>\n#include <vector>\n#include <numeric>\n\nchar letter(double avg) {\n    if (avg >= 90) return 'A';\n    if (avg >= 80) return 'B';\n    if (avg >= 70) return 'C';\n    if (avg >= 60) return 'D';\n    return 'F';\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<double> scores = {92, 81, 77, 88, 95, 64, 73};\n\n    double sum = std::accumulate(scores.begin(), scores.end(), 0.0);\n    double avg = sum / scores.size();\n    std::cout << \"Students: \" << scores.size() << \"\\n\";\n    std::cout << \"Average : \" << avg << \" -> \" << letter(avg) << \"\\n\";\n    for (double s : scores)\n        std::cout << \"  score \" << s << \" => \" << letter(s) << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "16_anagram_detective",
+      "title": "Project 16: Anagram Detective \ud83d\udd75\ufe0f",
+      "name": "Anagram Detective",
+      "number": 16,
+      "difficulty": "\ud83d\udfe2 Beginner",
+      "description": "Detect whether two words are anagrams by sorting letters.",
+      "concepts": "algorithms sort, string compare",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Compare word pairs\n\nAdd tricky pairs like `listen` / `silent`.",
+          "source": "#include <iostream>\n#include <string>\n#include <algorithm>\n#include <cctype>\n#include <vector>\n#include <utility>\n\nstd::string letters_only_sorted(std::string s) {\n    std::string out;\n    for (char ch : s) if (std::isalpha(static_cast<unsigned char>(ch)))\n        out.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(ch))));\n    std::sort(out.begin(), out.end());\n    return out;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<std::pair<std::string,std::string>> pairs = {\n        {\"listen\", \"silent\"},\n        {\"Code\", \"Deno\"},\n        {\"rail safety\", \"fairy tales\"},\n        {\"C++\", \"plus\"}\n    };\n\n    for (auto& p : pairs) {\n        bool ok = letters_only_sorted(p.first) == letters_only_sorted(p.second)\n                  && !letters_only_sorted(p.first).empty();\n        std::cout << (ok ? \"ANAGRAM \" : \"nope    \")\n                  << '\"' << p.first << \"\\\" vs \\\"\" << p.second << \"\\\"\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "17_vector_stats_bench",
+      "title": "Project 17: Vector Stats Bench \ud83d\udcc8",
+      "name": "Vector Stats Bench",
+      "number": 17,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Compute min/max/mean/median on a std::vector without extra libraries.",
+      "concepts": "STL algorithms, sorting, references",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Profile a dataset\n\nSwap in your own numbers. Median needs a sorted copy.",
+          "source": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n#include <iomanip>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<double> data = {11, 4, 8, 15, 7, 9, 12, 6};\n\n    auto sorted = data;\n    std::sort(sorted.begin(), sorted.end());\n    double sum = std::accumulate(data.begin(), data.end(), 0.0);\n    double mean = sum / data.size();\n    double median = (sorted.size() % 2)\n        ? sorted[sorted.size() / 2]\n        : (sorted[sorted.size() / 2 - 1] + sorted[sorted.size() / 2]) / 2.0;\n\n    std::cout << std::fixed << std::setprecision(2);\n    std::cout << \"n      = \" << data.size() << \"\\n\";\n    std::cout << \"min    = \" << sorted.front() << \"\\n\";\n    std::cout << \"max    = \" << sorted.back() << \"\\n\";\n    std::cout << \"mean   = \" << mean << \"\\n\";\n    std::cout << \"median = \" << median << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "18_stack_undo_buffer",
+      "title": "Project 18: Stack Undo Buffer \ud83d\udcda",
+      "name": "Stack Undo Buffer",
+      "number": 18,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Simulate an editor undo stack with push/pop/peek operations.",
+      "concepts": "std::stack, LIFO thinking",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Type, undo, redo-ish\n\nFollow the scripted actions. Peek shows the top of the undo stack.",
+          "source": "#include <iostream>\n#include <stack>\n#include <string>\n#include <vector>\n\nint main() {\n    std::stack<std::string> undo;\n    std::string doc;\n\n    // \ud83c\udf9b\ufe0f TWEAK THESE \u2014 sequence of typed chunks\n    std::vector<std::string> types = {\"Hello\", \" C++\", \" Lab\", \"!\"};\n\n    for (const auto& chunk : types) {\n        undo.push(doc);\n        doc += chunk;\n        std::cout << \"TYPE  -> \\\"\" << doc << \"\\\"\\n\";\n    }\n    for (int i = 0; i < 2; ++i) {\n        if (undo.empty()) break;\n        doc = undo.top();\n        undo.pop();\n        std::cout << \"UNDO  -> \\\"\" << doc << \"\\\"\\n\";\n    }\n    std::cout << \"Stack size now: \" << undo.size() << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "19_queue_hot_potato",
+      "title": "Project 19: Queue Hot Potato \ud83e\udd54",
+      "name": "Queue Hot Potato",
+      "number": 19,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Pass a hot potato around a queue until one player remains.",
+      "concepts": "std::queue, circular elimination",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Play the elimination round\n\nAdjust player names and `TICKS` (how many passes before someone is out).",
+          "source": "#include <iostream>\n#include <queue>\n#include <string>\n#include <vector>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<std::string> names = {\"Ada\", \"Lin\", \"Kai\", \"Zo\", \"Remy\"};\n    const int TICKS = 3;\n\n    std::queue<std::string> q;\n    for (auto& n : names) q.push(n);\n\n    while (q.size() > 1) {\n        for (int t = 0; t < TICKS; ++t) {\n            auto p = q.front(); q.pop(); q.push(p);\n        }\n        std::cout << \"Out: \" << q.front() << \"\\n\";\n        q.pop();\n    }\n    std::cout << \"Winner: \" << q.front() << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "20_struct_contact_book",
+      "title": "Project 20: Struct Contact Book \ud83d\udcd2",
+      "name": "Struct Contact Book",
+      "number": 20,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Store contacts in a vector of structs and print a tidy directory.",
+      "concepts": "structs, member access, ranged loops",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Fill the book\n\nAdd another Contact to the vector.",
+          "source": "#include <iostream>\n#include <string>\n#include <vector>\n#include <iomanip>\n\nstruct Contact {\n    std::string name;\n    std::string email;\n    std::string city;\n};\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<Contact> book = {\n        {\"Ada Lovelace\", \"ada@analytical.engine\", \"London\"},\n        {\"Bjarne S.\", \"bjarne@cpp.org\", \"New York\"},\n        {\"Grace H.\", \"grace@navy.mil\", \"Virginia\"}\n    };\n\n    std::cout << std::left;\n    for (const auto& c : book) {\n        std::cout << std::setw(16) << c.name\n                  << std::setw(28) << c.email\n                  << c.city << \"\\n\";\n    }\n    std::cout << \"Contacts: \" << book.size() << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "21_binary_search_tracer",
+      "title": "Project 21: Binary Search Tracer \ud83d\udd0d",
+      "name": "Binary Search Tracer",
+      "number": 21,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Watch binary search bounce through a sorted array with step logs.",
+      "concepts": "divide-and-conquer, indices, tracing",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Trace the hunt\n\nChange `TARGET` to see different search paths.",
+          "source": "#include <iostream>\n#include <vector>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<int> data = {2, 4, 7, 11, 15, 18, 23, 29, 31, 40};\n    int target = 23;\n\n    int lo = 0, hi = static_cast<int>(data.size()) - 1, step = 0;\n    while (lo <= hi) {\n        int mid = lo + (hi - lo) / 2;\n        std::cout << \"step \" << ++step << \": lo=\" << lo << \" mid=\" << mid\n                  << \" hi=\" << hi << \" val=\" << data[mid] << \"\\n\";\n        if (data[mid] == target) {\n            std::cout << \"Found \" << target << \" at index \" << mid << \"\\n\";\n            return 0;\n        }\n        if (data[mid] < target) lo = mid + 1;\n        else hi = mid - 1;\n    }\n    std::cout << target << \" not found\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "22_bubble_sort_stage",
+      "title": "Project 22: Bubble Sort Stage \ud83e\udee7",
+      "name": "Bubble Sort Stage",
+      "number": 22,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Animate bubble sort by printing the array after each swap sweep.",
+      "concepts": "nested loops, swaps, algorithm visualization",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Sort with stage lights\n\nSmaller arrays are easier to follow in the console.",
+          "source": "#include <iostream>\n#include <vector>\n#include <utility>\n\nvoid print_vec(const std::vector<int>& a) {\n    for (int x : a) std::cout << x << ' ';\n    std::cout << \"\\n\";\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<int> a = {9, 4, 7, 1, 8, 3, 6};\n\n    std::cout << \"start: \"; print_vec(a);\n    for (size_t i = 0; i < a.size(); ++i) {\n        bool swapped = false;\n        for (size_t j = 0; j + 1 < a.size() - i; ++j) {\n            if (a[j] > a[j + 1]) {\n                std::swap(a[j], a[j + 1]);\n                swapped = true;\n            }\n        }\n        std::cout << \"pass \" << (i + 1) << \": \"; print_vec(a);\n        if (!swapped) break;\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "23_class_pet_zoo",
+      "title": "Project 23: Class Pet Zoo \ud83d\udc3e",
+      "name": "Class Pet Zoo",
+      "number": 23,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Model animals with a base class and overrides \u2014 hear each pet speak.",
+      "concepts": "classes, inheritance, virtual methods",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Open the zoo\n\nAdd another derived pet class if you like.",
+          "source": "#include <iostream>\n#include <string>\n#include <vector>\n#include <memory>\n\nstruct Pet {\n    std::string name;\n    explicit Pet(std::string n) : name(std::move(n)) {}\n    virtual ~Pet() = default;\n    virtual std::string speak() const { return \"...\"; }\n};\n\nstruct Dog : Pet {\n    using Pet::Pet;\n    std::string speak() const override { return \"woof\"; }\n};\n\nstruct Cat : Pet {\n    using Pet::Pet;\n    std::string speak() const override { return \"meow\"; }\n};\n\nstruct RobotBird : Pet {\n    using Pet::Pet;\n    std::string speak() const override { return \"beep-chirp\"; }\n};\n\nint main() {\n    std::vector<std::unique_ptr<Pet>> zoo;\n    zoo.push_back(std::make_unique<Dog>(\"Pixel\"));\n    zoo.push_back(std::make_unique<Cat>(\"Syntax\"));\n    zoo.push_back(std::make_unique<RobotBird>(\"Aero\"));\n\n    for (const auto& p : zoo)\n        std::cout << p->name << \" says \" << p->speak() << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "24_template_toolkit",
+      "title": "Project 24: Template Toolkit \ud83e\uddf0",
+      "name": "Template Toolkit",
+      "number": 24,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Write a tiny generic max3/clamp toolkit with C++ templates.",
+      "concepts": "function templates, constexpr-friendly helpers",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Generic utilities\n\nTemplates let one function work for int and double.",
+          "source": "#include <iostream>\n\ntemplate <typename T>\nT max3(T a, T b, T c) {\n    T m = a;\n    if (b > m) m = b;\n    if (c > m) m = c;\n    return m;\n}\n\ntemplate <typename T>\nT clamp(T v, T lo, T hi) {\n    if (v < lo) return lo;\n    if (v > hi) return hi;\n    return v;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::cout << \"max3 ints    = \" << max3(3, 9, 4) << \"\\n\";\n    std::cout << \"max3 doubles = \" << max3(2.5, 2.7, 2.1) << \"\\n\";\n    std::cout << \"clamp 150    = \" << clamp(150, 0, 100) << \"\\n\";\n    std::cout << \"clamp -5     = \" << clamp(-5, 0, 100) << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "25_file_haiku_logger",
+      "title": "Project 25: File Haiku Logger \ud83d\udcc4",
+      "name": "File Haiku Logger",
+      "number": 25,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Write haiku lines to a text file, then read them back (filesystem sandbox).",
+      "concepts": "fstream, RAII mindset",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Write and re-read\n\nFiles are written under the runner sandbox temp folder.",
+          "source": "#include <iostream>\n#include <fstream>\n#include <string>\n#include <vector>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<std::string> haiku = {\n        \"silent compiler\",\n        \"red errors bloom then vanish \u2014\",\n        \"green light, ship the build\"\n    };\n\n    const char* path = \"haiku_log.txt\";\n    {\n        std::ofstream out(path);\n        for (const auto& line : haiku) out << line << \"\\n\";\n    }\n\n    std::ifstream in(path);\n    std::string line;\n    std::cout << \"From file:\\n\";\n    while (std::getline(in, line)) std::cout << \"  \" << line << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "26_csv_mini_reader",
+      "title": "Project 26: CSV Mini Reader \ud83d\udcd1",
+      "name": "CSV Mini Reader",
+      "number": 26,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Parse a tiny in-memory CSV of high scores into rows.",
+      "concepts": "stringstream tokenization, structs",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Parse the scoreboard\n\nThe CSV lives in a string \u2014 great for demos without extra files.",
+          "source": "#include <iostream>\n#include <sstream>\n#include <string>\n#include <vector>\n\nstruct Row { std::string name; int score; };\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string csv =\n        \"name,score\\n\"\n        \"Ada,9001\\n\"\n        \"Lin,8700\\n\"\n        \"Kai,9200\\n\";\n\n    std::istringstream in(csv);\n    std::string line;\n    std::getline(in, line); // header\n    std::vector<Row> rows;\n    while (std::getline(in, line)) {\n        if (line.empty()) continue;\n        auto comma = line.find(',');\n        rows.push_back({line.substr(0, comma), std::stoi(line.substr(comma + 1))});\n    }\n    for (const auto& r : rows)\n        std::cout << r.name << \" -> \" << r.score << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "27_pointer_treasure_map",
+      "title": "Project 27: Pointer Treasure Map \ud83e\udded",
+      "name": "Pointer Treasure Map",
+      "number": 27,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Follow a chain of pointers through a treasure island of integers.",
+      "concepts": "raw pointers, arrays decaying to pointers",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Chase the addresses\n\nWatch how pointer arithmetic walks the array.",
+          "source": "#include <iostream>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    int chest[] = {10, 25, 40, 55, 70};\n    int* p = chest;\n\n    std::cout << \"base address value = \" << *p << \"\\n\";\n    for (int i = 0; i < 5; ++i) {\n        std::cout << \"p+\" << i << \" -> \" << *(p + i) << \"\\n\";\n    }\n    p += 2;\n    std::cout << \"after p+=2, *p = \" << *p << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "28_enum_traffic_light",
+      "title": "Project 28: Enum Traffic Light \ud83d\udea6",
+      "name": "Enum Traffic Light",
+      "number": 28,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Model a traffic light state machine with enum class.",
+      "concepts": "enum class, switch, state transitions",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Cycle the lights\n\nEach tick advances to the next color.",
+          "source": "#include <iostream>\n#include <string>\n\nenum class Light { Red, Green, Yellow };\n\nconst char* label(Light l) {\n    switch (l) {\n        case Light::Red: return \"RED - stop\";\n        case Light::Green: return \"GREEN - go\";\n        case Light::Yellow: return \"YELLOW - slow\";\n    }\n    return \"?\";\n}\n\nLight next(Light l) {\n    switch (l) {\n        case Light::Red: return Light::Green;\n        case Light::Green: return Light::Yellow;\n        case Light::Yellow: return Light::Red;\n    }\n    return Light::Red;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    Light light = Light::Red;\n    const int TICKS = 7;\n\n    for (int t = 1; t <= TICKS; ++t) {\n        std::cout << \"tick \" << t << \": \" << label(light) << \"\\n\";\n        light = next(light);\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "29_lambda_sort_party",
+      "title": "Project 29: Lambda Sort Party \u03bb",
+      "name": "Lambda Sort Party",
+      "number": 29,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Sort a list of players with custom lambda comparators.",
+      "concepts": "lambdas, std::sort, structured bindings vibe",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Rank the roster\n\nSort by score descending, then by name.",
+          "source": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n\nstruct Player { std::string name; int score; };\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::vector<Player> roster = {\n        {\"Zo\", 12}, {\"Ada\", 18}, {\"Kai\", 18}, {\"Remy\", 9}\n    };\n\n    std::sort(roster.begin(), roster.end(), [](const Player& a, const Player& b) {\n        if (a.score != b.score) return a.score > b.score;\n        return a.name < b.name;\n    });\n\n    int rank = 1;\n    for (const auto& p : roster)\n        std::cout << rank++ << \". \" << p.name << \" (\" << p.score << \")\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "30_optional_treasure",
+      "title": "Project 30: Optional Treasure \ud83c\udf81",
+      "name": "Optional Treasure",
+      "number": 30,
+      "difficulty": "\ud83d\udfe1 Intermediate",
+      "description": "Use std::optional to model a treasure search that might fail.",
+      "concepts": "std::optional, nullability without raw pointers",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Search the vault\n\nToggle `KEY` to see found vs empty optional paths.",
+          "source": "#include <iostream>\n#include <optional>\n#include <string>\n#include <map>\n\nstd::optional<std::string> loot_for(const std::string& key) {\n    static const std::map<std::string, std::string> vault = {\n        {\"alpha\", \"golden screwdriver\"},\n        {\"beta\", \"rubber duck debugger\"},\n        {\"gamma\", \"infinite coffee mug\"}\n    };\n    auto it = vault.find(key);\n    if (it == vault.end()) return std::nullopt;\n    return it->second;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string keys[] = {\"alpha\", \"delta\", \"gamma\"};\n\n    for (const auto& k : keys) {\n        auto loot = loot_for(k);\n        if (loot) std::cout << k << \" -> \" << *loot << \"\\n\";\n        else std::cout << k << \" -> chest empty\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "31_ppm_pixel_banner",
+      "title": "Project 31: PPM Pixel Banner \ud83c\udfa8",
+      "name": "PPM Pixel Banner",
+      "number": 31,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Generate a tiny PPM image file (gradient banner) using pure C++.",
+      "concepts": "file binary/text formats, nested loops, color math",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Render a PPM\n\nPPM is a simple image format you can open in many viewers.",
+          "source": "#include <iostream>\n#include <fstream>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int W = 240, H = 60;\n    const char* path = \"banner.ppm\";\n\n    std::ofstream out(path);\n    out << \"P3\\n\" << W << \" \" << H << \"\\n255\\n\";\n    for (int y = 0; y < H; ++y) {\n        for (int x = 0; x < W; ++x) {\n            int r = x * 255 / (W - 1);\n            int g = 30;\n            int b = y * 255 / (H - 1);\n            out << r << ' ' << g << ' ' << b << ' ';\n        }\n        out << \"\\n\";\n    }\n    std::cout << \"Wrote \" << path << \" (\" << W << \"x\" << H << \")\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "32_game_of_life_seed",
+      "title": "Project 32: Game of Life Seed \ud83e\uddeb",
+      "name": "Game of Life Seed",
+      "number": 32,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Run Conway's Game of Life for a few generations on a console grid.",
+      "concepts": "2D grids, neighbor counts, cellular automata",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Evolve a glider\n\nEach generation prints the board. Increase `GENS` for a longer run.",
+          "source": "#include <iostream>\n#include <vector>\n#include <utility>\n\nusing Grid = std::vector<std::vector<int>>;\n\nint neighbors(const Grid& g, int r, int c) {\n    int n = 0, R = (int)g.size(), C = (int)g[0].size();\n    for (int dr = -1; dr <= 1; ++dr)\n        for (int dc = -1; dc <= 1; ++dc) {\n            if (!dr && !dc) continue;\n            int rr = r + dr, cc = c + dc;\n            if (rr >= 0 && rr < R && cc >= 0 && cc < C) n += g[rr][cc];\n        }\n    return n;\n}\n\nGrid step(const Grid& g) {\n    Grid n = g;\n    for (int r = 0; r < (int)g.size(); ++r)\n        for (int c = 0; c < (int)g[0].size(); ++c) {\n            int k = neighbors(g, r, c);\n            n[r][c] = (g[r][c] ? (k == 2 || k == 3) : (k == 3));\n        }\n    return n;\n}\n\nvoid print(const Grid& g) {\n    for (auto& row : g) {\n        for (int v : row) std::cout << (v ? 'O' : '.');\n        std::cout << \"\\n\";\n    }\n    std::cout << \"\\n\";\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const int GENS = 6;\n    Grid g(12, std::vector<int>(20, 0));\n    // glider\n    g[1][2] = g[2][3] = g[3][1] = g[3][2] = g[3][3] = 1;\n\n    for (int i = 0; i <= GENS; ++i) {\n        std::cout << \"gen \" << i << \"\\n\";\n        print(g);\n        g = step(g);\n    }\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "33_recursive_maze_escape",
+      "title": "Project 33: Recursive Maze Escape \ud83e\uddf5",
+      "name": "Recursive Maze Escape",
+      "number": 33,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Solve a tiny maze with recursive DFS and print the path taken.",
+      "concepts": "recursion, backtracking, grids",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Escape the maze\n\n`#` walls, `.` open, `S` start, `E` end. Path marked with `*`.",
+          "source": "#include <iostream>\n#include <vector>\n#include <string>\n\nusing Maze = std::vector<std::string>;\n\nbool dfs(Maze& m, int r, int c) {\n    if (r < 0 || c < 0 || r >= (int)m.size() || c >= (int)m[0].size()) return false;\n    if (m[r][c] == '#' || m[r][c] == '*') return false;\n    bool end = m[r][c] == 'E';\n    if (m[r][c] != 'S') m[r][c] = '*';\n    if (end) return true;\n    if (dfs(m, r + 1, c) || dfs(m, r - 1, c) || dfs(m, r, c + 1) || dfs(m, r, c - 1))\n        return true;\n    if (m[r][c] == '*') m[r][c] = '.';\n    return false;\n}\n\nint main() {\n    Maze m = {\n        \"S.#.E\",\n        \".#.#.\",\n        \"...#.\",\n        \".###.\",\n        \".....\"\n    };\n    dfs(m, 0, 0);\n    for (auto& row : m) std::cout << row << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "34_bfs_shortcut_city",
+      "title": "Project 34: BFS Shortcut City \ud83d\uddfa\ufe0f",
+      "name": "BFS Shortcut City",
+      "number": 34,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Find shortest hops between stations with breadth-first search.",
+      "concepts": "graphs as adjacency lists, queues, distance maps",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Ride the network\n\nAdjacency list defines connections. Change start/goal.",
+          "source": "#include <iostream>\n#include <queue>\n#include <map>\n#include <vector>\n#include <string>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::map<std::string, std::vector<std::string>> g = {\n        {\"Home\", {\"Cafe\", \"Park\"}},\n        {\"Cafe\", {\"Home\", \"Lab\"}},\n        {\"Park\", {\"Home\", \"Market\"}},\n        {\"Lab\", {\"Cafe\", \"Studio\"}},\n        {\"Market\", {\"Park\", \"Studio\"}},\n        {\"Studio\", {\"Lab\", \"Market\"}}\n    };\n    std::string start = \"Home\", goal = \"Studio\";\n\n    std::queue<std::string> q;\n    std::map<std::string, int> dist;\n    q.push(start); dist[start] = 0;\n    while (!q.empty()) {\n        auto u = q.front(); q.pop();\n        if (u == goal) break;\n        for (auto& v : g[u]) if (!dist.count(v)) {\n            dist[v] = dist[u] + 1;\n            q.push(v);\n        }\n    }\n    if (!dist.count(goal)) std::cout << \"No path\\n\";\n    else std::cout << start << \" -> \" << goal << \" in \" << dist[goal] << \" hops\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "35_smart_pointer_garage",
+      "title": "Project 35: Smart Pointer Garage \ud83d\ude97",
+      "name": "Smart Pointer Garage",
+      "number": 35,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Park cars with unique_ptr and share manuals with shared_ptr.",
+      "concepts": "unique_ptr, shared_ptr, ownership",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Park responsibly\n\nunique_ptr owns a car; shared_ptr shares a manual refcount.",
+          "source": "#include <iostream>\n#include <memory>\n#include <string>\n#include <vector>\n\nstruct Car {\n    std::string model;\n    explicit Car(std::string m) : model(std::move(m)) {\n        std::cout << \"ctor \" << model << \"\\n\";\n    }\n    ~Car() { std::cout << \"dtor \" << model << \"\\n\"; }\n};\n\nint main() {\n    auto manual = std::make_shared<std::string>(\"Owners Manual v1\");\n    std::vector<std::unique_ptr<Car>> garage;\n    garage.push_back(std::make_unique<Car>(\"Pixel Hatch\"));\n    garage.push_back(std::make_unique<Car>(\"Syntax Sedan\"));\n\n    auto manual2 = manual;\n    std::cout << \"manual use_count = \" << manual.use_count() << \"\\n\";\n    for (auto& c : garage) std::cout << \"parked: \" << c->model << \"\\n\";\n    std::cout << \"leaving scope \u2014 watch dtors\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "36_thread_lap_timer",
+      "title": "Project 36: Thread Lap Timer \u23f1\ufe0f",
+      "name": "Thread Lap Timer",
+      "number": 36,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Race two worker threads and measure wall time with chrono.",
+      "concepts": "std::thread, mutex, chrono",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Launch the race\n\nTwo threads count to N; mutex protects the finish log.",
+          "source": "#include <iostream>\n#include <thread>\n#include <mutex>\n#include <chrono>\n#include <vector>\n#include <string>\n\nstd::mutex g_mu;\n\nvoid worker(const std::string& name, long long n) {\n    volatile long long x = 0;\n    for (long long i = 0; i < n; ++i) x += i;\n    std::lock_guard<std::mutex> lock(g_mu);\n    std::cout << name << \" finished (checksum=\" << x << \")\\n\";\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    const long long N = 5000000;\n\n    auto t0 = std::chrono::steady_clock::now();\n    std::thread a(worker, \"lane-A\", N);\n    std::thread b(worker, \"lane-B\", N);\n    a.join();\n    b.join();\n    auto t1 = std::chrono::steady_clock::now();\n    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();\n    std::cout << \"Race time: \" << ms << \" ms\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "37_regex_token_scanner",
+      "title": "Project 37: Regex Token Scanner \ud83d\udd24",
+      "name": "Regex Token Scanner",
+      "number": 37,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Pull emails and hashtags from blurb text with std::regex.",
+      "concepts": "regular expressions, smatch",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Scan the blurb\n\nRequires a C++11 regex implementation (libstdc++).",
+          "source": "#include <iostream>\n#include <regex>\n#include <string>\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::string text =\n        \"Ping ada@codeitall.dev and kai@lab.io #cpp #fun \"\n        \"ignore this@not-email #LearnByBuilding\";\n\n    std::regex email(R\"(([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}))\");\n    std::regex tag(R\"(#(\\w+))\");\n\n    std::cout << \"Emails:\\n\";\n    for (std::sregex_iterator it(text.begin(), text.end(), email), end; it != end; ++it)\n        std::cout << \"  \" << (*it)[1] << \"\\n\";\n\n    std::cout << \"Tags:\\n\";\n    for (std::sregex_iterator it(text.begin(), text.end(), tag), end; it != end; ++it)\n        std::cout << \"  #\" << (*it)[1] << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "38_variant_shape_bag",
+      "title": "Project 38: Variant Shape Bag \ud83d\udd37",
+      "name": "Variant Shape Bag",
+      "number": 38,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Store circles/rects in a std::variant and visit them for area.",
+      "concepts": "std::variant, std::visit, algebraic types",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Pack the shape bag\n\nOne vector holds multiple shape types safely.",
+          "source": "#include <iostream>\n#include <variant>\n#include <vector>\n#include <cmath>\n#include <type_traits>\n\nstruct Circle { double r; };\nstruct Rect { double w, h; };\nusing Shape = std::variant<Circle, Rect>;\n\ndouble area(const Shape& s) {\n    return std::visit([](auto&& sh) -> double {\n        using T = std::decay_t<decltype(sh)>;\n        if constexpr (std::is_same_v<T, Circle>)\n            return 3.1415926535 * sh.r * sh.r;\n        else\n            return sh.w * sh.h;\n    }, s);\n}\n\nint main() {\n    std::vector<Shape> bag = {Circle{2.0}, Rect{3.0, 4.0}, Circle{1.5}};\n    int i = 1;\n    for (const auto& s : bag)\n        std::cout << \"shape \" << i++ << \" area = \" << area(s) << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "39_move_semantics_relay",
+      "title": "Project 39: Move Semantics Relay \ud83c\udfc3",
+      "name": "Move Semantics Relay",
+      "number": 39,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Watch copy vs move constructors fire as objects pass through a relay.",
+      "concepts": "move ctor, noexcept, value categories",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Pass the baton\n\nFollow ctor messages to see moves outperform deep copies.",
+          "source": "#include <iostream>\n#include <string>\n#include <utility>\n#include <vector>\n\nstruct Baton {\n    std::string id;\n    explicit Baton(std::string s) : id(std::move(s)) {\n        std::cout << \"ctor \" << id << \"\\n\";\n    }\n    Baton(const Baton& o) : id(o.id) {\n        std::cout << \"copy \" << id << \"\\n\";\n    }\n    Baton(Baton&& o) noexcept : id(std::move(o.id)) {\n        std::cout << \"move \" << id << \"\\n\";\n    }\n};\n\nBaton make_baton() { return Baton(\"neon\"); }\n\nint main() {\n    Baton a = make_baton();\n    std::vector<Baton> relay;\n    relay.push_back(std::move(a));\n    relay.emplace_back(\"rocket\");\n    std::cout << \"relay size \" << relay.size() << \"\\n\";\n    return 0;\n}\n"
+        }
+      ]
+    },
+    {
+      "id": "40_constexpr_magic_square",
+      "title": "Project 40: Constexpr Magic Square \ud83e\ude84",
+      "name": "Constexpr Magic Square",
+      "number": 40,
+      "difficulty": "\ud83d\udd34 Advanced",
+      "description": "Build a magic-square checksum helper with constexpr and static_assert vibes.",
+      "concepts": "constexpr functions, compile-time thinking, algorithms",
+      "cells": [
+        {
+          "id": "step_1",
+          "markdown": "### Step 1 \u2014 Verify the square\n\nA 3\u00d73 magic square sums rows/cols/diags to 15.",
+          "source": "#include <iostream>\n#include <array>\n\nconstexpr int magic_sum(const std::array<int, 9>& a) {\n    // first row sum as representative when square is valid\n    return a[0] + a[1] + a[2];\n}\n\nconstexpr bool is_magic(const std::array<int, 9>& a) {\n    const int t = 15;\n    auto row = [&](int r) { return a[3*r] + a[3*r+1] + a[3*r+2]; };\n    auto col = [&](int c) { return a[c] + a[3+c] + a[6+c]; };\n    if (row(0) != t || row(1) != t || row(2) != t) return false;\n    if (col(0) != t || col(1) != t || col(2) != t) return false;\n    if (a[0] + a[4] + a[8] != t) return false;\n    if (a[2] + a[4] + a[6] != t) return false;\n    return true;\n}\n\nint main() {\n    // \ud83c\udf9b\ufe0f TWEAK THESE\n    std::array<int, 9> square = {2, 7, 6,\n                                 9, 5, 1,\n                                 4, 3, 8};\n\n    std::cout << \"sum target check: \" << magic_sum(square) << \"\\n\";\n    std::cout << (is_magic(square) ? \"MAGIC SQUARE \u2713\\n\" : \"not magic\\n\");\n    for (int r = 0; r < 3; ++r) {\n        for (int c = 0; c < 3; ++c) std::cout << square[3 * r + c] << ' ';\n        std::cout << \"\\n\";\n    }\n    return 0;\n}\n"
+        }
+      ]
+    }
+  ]
+}

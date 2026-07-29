@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CodeItAll C++ Lab — Interactive C++</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css" />
+  <link rel="stylesheet" href="./lab.css?v=3" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <a class="brand" href="../index.html">
+        <img src="../assets/logo-black.svg" alt="CodeItAll" />
+        <span>C++ Lab</span>
+      </a>
+      <div class="top-actions">
+        <span id="runtimeStatus" class="status-pill loading">Checking…</span>
+        <button type="button" class="btn ghost desktop-only" id="homeBtn">Home</button>
+        <a class="btn ghost desktop-only" href="../lab/" style="text-decoration:none;display:inline-flex;align-items:center;">Python Lab</a>
+        <button type="button" class="btn ok" id="runAllBtn" disabled>Run all</button>
+      </div>
+    </header>
+
+    <div class="backdrop" id="backdrop" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Projects">
+      <div class="panel-head mobile-only">
+        <h2>C++ Projects</h2>
+        <button type="button" class="btn icon-btn" id="closeProjectsBtn" aria-label="Close projects">✕</button>
+      </div>
+      <h2 class="desktop-only">C++ Projects</h2>
+      <div class="project-list" id="projectList"></div>
+    </aside>
+
+    <main class="main" id="mainPane">
+      <div class="lab-column">
+        <div class="project-head">
+          <div class="project-head-row">
+            <h1 id="projectTitle">Loading…</h1>
+            <button type="button" class="btn ghost mobile-only projects-trigger" id="openProjectsBtn">Projects</button>
+          </div>
+          <p id="projectDesc"></p>
+          <p class="hint" id="runCellHint">Connecting to the C++ compile server…</p>
+        </div>
+        <div class="cells" id="cells"></div>
+      </div>
+    </main>
+
+    <aside class="ai-panel" id="aiPanel" aria-label="AI Assist">
+      <div class="panel-head">
+        <h2>AI Assist</h2>
+        <button type="button" class="btn icon-btn mobile-only" id="closeAiBtn" aria-label="Close AI">✕</button>
+      </div>
+      <div class="ai-messages" id="aiMessages">
+        <div class="msg assistant">
+          <div class="who">AI Assist</div>
+          Tap <strong>Ask AI</strong> on any cell while coding or after a compile/runtime error. Fixes return in a <code>```cpp</code> fence with an Apply button.
+        </div>
+      </div>
+      <div class="ai-compose">
+        <textarea id="aiInput" placeholder="Ask anything about this C++ project…" rows="3"></textarea>
+        <button type="button" class="btn accent" id="aiSendBtn">Send</button>
+      </div>
+      <div class="ai-settings">
+        <details>
+          <summary>AI Settings</summary>
+          <label>Endpoint
+            <input id="aiEndpoint" placeholder="/api/assist or OpenAI URL" autocomplete="off" />
+          </label>
+          <label>API key (stored only in this browser)
+            <input id="aiKey" type="password" placeholder="sk-… (optional if server has a key)" autocomplete="off" />
+          </label>
+          <label>Model
+            <input id="aiModel" placeholder="gpt-4o-mini" autocomplete="off" />
+          </label>
+          <button type="button" class="btn ghost ai-save" id="aiSaveBtn">Save settings</button>
+          <p class="ai-note">Without a key, Lab uses an offline tutor for common C++ errors.</p>
+        </details>
+      </div>
+    </aside>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Lab sections">
+      <button type="button" class="mob-tab" data-panel="projects" id="tabProjects">
+        <span class="mob-ico">☰</span>
+        <span>Projects</span>
+      </button>
+      <button type="button" class="mob-tab active" data-panel="code" id="tabCode">
+        <span class="mob-ico">{ }</span>
+        <span>Editor</span>
+      </button>
+      <button type="button" class="mob-tab" data-panel="ai" id="tabAi">
+        <span class="mob-ico">✦</span>
+        <span>AI</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="./lab.js?v=1"></script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Your Profile | CodeItAll</title>
+  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="./profile.css?v=7" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="../index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="../assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">Menu</button>
+    <ul class="nav" id="nav">
+      <li><a href="../course/">Learn with AI</a></li>
+      <li><a href="../dissect/">Dissect any website</a></li>
+      <li><a href="../career/">Career booster</a></li>
+      <li><a class="active" href="./">Me</a></li>
+    </ul>
+  </header>
+
+  <main class="profile-main">
+    <section class="profile-hero">
+      <p class="eyebrow">Your profile</p>
+      <h1 id="heroName">Learner</h1>
+      <p class="lead">
+        Every project you open, run, finish, or dissect is saved here on <strong>this device</strong>
+        — so you can see what you’ve covered and pick up next.
+      </p>
+      <p class="fine" id="profileMeta"></p>
+    </section>
+
+    <section class="panel account-panel" id="authPanel">
+      <div class="panel-head">
+        <h2>Account</h2>
+        <p id="authLead">Sign in to save your progress to the cloud and pick up on any device.</p>
+      </div>
+
+      <div id="authOut">
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="auth-tab active" data-mode="login" role="tab">Sign in</button>
+          <button type="button" class="auth-tab" data-mode="register" role="tab">Create account</button>
+        </div>
+        <form class="auth-form" id="authForm">
+          <label for="authEmail">Email</label>
+          <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <label for="authPassword">Password</label>
+          <input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 8 characters" required minlength="8" />
+          <button type="submit" class="btn-save" id="authSubmit">Sign in</button>
+        </form>
+        <div class="auth-links">
+          <button type="button" class="linklike" id="forgotLink">Forgot password?</button>
+        </div>
+        <p class="auth-note" id="authNote" role="status"></p>
+      </div>
+
+      <div id="authIn" class="hide">
+        <p class="signed-as">Signed in as <strong id="authEmailLabel"></strong> · progress syncs automatically.</p>
+        <div class="actions">
+          <button type="button" class="btn-ghost" id="logoutBtn">Sign out</button>
+          <button type="button" class="btn-ghost" id="togglePwBtn">Change password</button>
+        </div>
+        <form class="auth-form hide" id="changePwForm">
+          <label for="oldPw">Current password</label>
+          <input id="oldPw" type="password" autocomplete="current-password" placeholder="Current password" required />
+          <label for="newPw">New password</label>
+          <input id="newPw" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8" />
+          <button type="submit" class="btn-save">Update password</button>
+        </form>
+        <p class="auth-note" id="authNoteIn" role="status"></p>
+      </div>
+    </section>
+
+    <section class="stats" id="statsRow" aria-label="Learning stats"></section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Completed projects</h2>
+        <p>Marked done after a clean Run all, or when you tap Mark complete in a lab.</p>
+      </div>
+      <ul class="done-list" id="doneList"></ul>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Learning history</h2>
+        <p>Newest first — opens, runs, AI asks, and site dissections.</p>
+      </div>
+      <ol class="history" id="historyList"></ol>
+    </section>
+
+    <section class="panel danger">
+      <div class="panel-head">
+        <h2>Data on this device</h2>
+        <p>Clearing resets progress in this browser. When signed in, your cloud copy updates on the next change.</p>
+      </div>
+      <div class="actions">
+        <button type="button" class="btn-ghost" id="clearHistoryBtn">Clear history</button>
+        <button type="button" class="btn-danger" id="resetBtn">Reset profile</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-links row">
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../course/">Course</a>
+      <a href="./">Me</a>
+    </div>
+    <div class="wrap footer-copy">© 2026 CodeItAll · Progress stays in your browser.</div>
+  </footer>
+
+  <script src="../shared/progress.js?v=2"></script>
+  <script src="./profile.js?v=4"></script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+{
+  "track": "html",
+  "projects": [
+    {
+      "id": "01_hello_web_postcard",
+      "title": "Project 1: Hello Web Postcard 💌",
+      "description": "Build your first complete HTML page and see it preview live.",
+      "level": "Beginner",
+      "concepts": "DOCTYPE, html, head, body, title, h1, p",
+      "cells": [
+        {
+          "markdown": "### Step 1 — A complete page\n\nEvery HTML page needs a document type, `html`, `head`, and `body`.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Hello Web Postcard</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Hello from CodeItAll HTML Lab!</h1>\n<p>You just wrote a real web page. Change this text and click <strong>Preview</strong>.</p>\n        </body>\n        </html>\n"
+        },
+        {
+          "markdown": "### Step 2 — Add a greeting card vibe\n\nUse a second paragraph and an address line.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Hello Web Postcard</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <div class=\"card\">\n  <h1>Wish You Were Coding</h1>\n  <p>Greetings from the HTML track — separate from Python, built for the browser.</p>\n  <p>Love,<br />Your First Web Page</p>\n</div>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "02_headline_hierarchy_zoo",
+      "title": "Project 2: Headline Hierarchy Zoo 🦁",
+      "description": "Practice heading levels h1–h6 like a zoo map of importance.",
+      "level": "Beginner",
+      "concepts": "h1–h6, document outline",
+      "cells": [
+        {
+          "markdown": "### Step 1 — One topic, many levels\n\nUse only one `h1`. Nest importance with smaller headings.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Headline Hierarchy Zoo</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>City Zoo Map</h1>\n<h2>Mammals</h2>\n<h3>Big Cats</h3>\n<h4>Lions</h4>\n<h5>Food Schedule</h5>\n<h6>Keepers Only</h6>\n<p>Headings create structure for readers and screen readers.</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "03_paragraph_playground",
+      "title": "Project 3: Paragraph Playground 🛝",
+      "description": "Mix paragraphs, line breaks, and thematic breaks.",
+      "level": "Beginner",
+      "concepts": "p, br, hr",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Breaks and rules\n\nPrefer new `<p>` tags over stacks of `<br>`.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Paragraph Playground</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Park Notes</h1>\n<p>Morning: birds, coffee, blank notebook.</p>\n<p>Afternoon: write HTML until the sun moves.<br />Evening: preview again.</p>\n<hr />\n<p>End of day — leave with one finished page.</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "04_emphasis_style_club",
+      "title": "Project 4: Emphasis Style Club ✒️",
+      "description": "Learn when to use strong, em, mark, and small.",
+      "level": "Beginner",
+      "concepts": "strong, em, mark, small, b, i",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Meaning over looks\n\n`strong`/`em` add meaning; `b`/`i` are more visual.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Emphasis Style Club</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Edit Notes</h1>\n<p>Always <strong>save</strong> before you close the tab.</p>\n<p>Readers notice <em>rhythm</em> before they notice fonts.</p>\n<p>Highlight: <mark>Preview often</mark>.</p>\n<p><small>Disclaimer: jokes optional, tags required.</small></p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "05_link_treasure_map",
+      "title": "Project 5: Link Treasure Map 🗺️",
+      "description": "Connect pages and open external links safely.",
+      "level": "Beginner",
+      "concepts": "a href, target, rel, title",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Internal + external\n\nUse descriptive link text (not “click here”).",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Link Treasure Map</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Treasure Map</h1>\n<ul>\n  <li><a href=\"#cave\">Secret Cave</a></li>\n  <li><a href=\"#beach\">Sunny Beach</a></li>\n  <li><a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML\" target=\"_blank\" rel=\"noopener noreferrer\">MDN HTML docs</a></li>\n</ul>\n<h2 id=\"cave\">Secret Cave</h2>\n<p>Bring a flashlight and a valid DOCTYPE.</p>\n<h2 id=\"beach\">Sunny Beach</h2>\n<p>Tags dry faster in the sun. <a href=\"#top\" title=\"Back up\">Back to map</a></p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "06_image_gallery_shelf",
+      "title": "Project 6: Image Gallery Shelf 🖼️",
+      "description": "Add images with meaningful alt text and dimensions.",
+      "level": "Beginner",
+      "concepts": "img, alt, width, height, loading",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Accessible images\n\n`alt` describes the image for screen readers (or stays empty if decorative).",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Image Gallery Shelf</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Gallery Shelf</h1>\n<p>Placeholder photos from a public image service:</p>\n<p>\n  <img src=\"https://picsum.photos/seed/codeitall1/280/160\" alt=\"Abstract landscape sample\" width=\"280\" height=\"160\" loading=\"lazy\" />\n</p>\n<p>\n  <img src=\"https://picsum.photos/seed/codeitall2/280/160\" alt=\"Soft gradient sample photo\" width=\"280\" height=\"160\" loading=\"lazy\" />\n</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "07_nested_list_recipe",
+      "title": "Project 7: Nested List Recipe 🍜",
+      "description": "Build a recipe with ordered steps and nested ingredient groups.",
+      "level": "Beginner",
+      "concepts": "ul, ol, li nesting",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Lists inside lists\n\nIndent with nesting, not spaces in the output.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Nested List Recipe</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Midnight Noodles</h1>\n<h2>Ingredients</h2>\n<ul>\n  <li>Noodles\n    <ul>\n      <li>200g dry noodles</li>\n      <li>Pinch of salt</li>\n    </ul>\n  </li>\n  <li>Sauce\n    <ul>\n      <li>Soy sauce</li>\n      <li>Garlic</li>\n    </ul>\n  </li>\n</ul>\n<h2>Steps</h2>\n<ol>\n  <li>Boil water.</li>\n  <li>Cook noodles.</li>\n  <li>Toss with sauce.</li>\n</ol>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "08_definition_dictionary",
+      "title": "Project 8: Definition Dictionary 📖",
+      "description": "Explain HTML terms with a description list.",
+      "level": "Beginner",
+      "concepts": "dl, dt, dd",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Term / definition pairs\n\n`dt` is the term; `dd` is the description.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Definition Dictionary</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Tiny HTML Dictionary</h1>\n<dl>\n  <dt>Element</dt>\n  <dd>A building block like <code>&lt;p&gt;</code> with optional content.</dd>\n  <dt>Attribute</dt>\n  <dd>Extra info on a tag, such as <code>href</code> or <code>alt</code>.</dd>\n  <dt>Semantic</dt>\n  <dd>Choosing tags that describe meaning, not just appearance.</dd>\n</dl>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "09_table_scoreboard",
+      "title": "Project 9: Table Scoreboard 🏟️",
+      "description": "Make a readable scoreboard with headers and captions.",
+      "level": "Beginner",
+      "concepts": "table, thead, tbody, th, td, caption",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Real table structure\n\nPut titles in `<th>` and wrap header rows in `<thead>`.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Table Scoreboard</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Arcade Scoreboard</h1>\n<table>\n  <caption>Weekly high scores</caption>\n  <thead>\n    <tr><th>Player</th><th>Game</th><th>Score</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Nova</td><td>Tag Quest</td><td>980</td></tr>\n    <tr><td>Kai</td><td>Form Runner</td><td>860</td></tr>\n    <tr><td>Rio</td><td>Link Trek</td><td>910</td></tr>\n  </tbody>\n</table>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "10_form_guestbook",
+      "title": "Project 10: Form Guestbook ✍️",
+      "description": "Collect a name and message with labels wired to inputs.",
+      "level": "Beginner",
+      "concepts": "form, label, input, textarea, button",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Labels that click\n\nConnect each `label` with a matching `for` / `id`.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Form Guestbook</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Guestbook</h1>\n<form action=\"#\" method=\"get\">\n  <p>\n    <label for=\"name\">Name</label><br />\n    <input id=\"name\" name=\"name\" type=\"text\" placeholder=\"Ada\" required />\n  </p>\n  <p>\n    <label for=\"msg\">Message</label><br />\n    <textarea id=\"msg\" name=\"msg\" rows=\"4\" placeholder=\"Nice page!\"></textarea>\n  </p>\n  <p><button type=\"submit\">Sign guestbook</button></p>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "11_checkbox_pizza_order",
+      "title": "Project 11: Checkbox Pizza Order 🍕",
+      "description": "Use checkboxes so guests can pick multiple toppings.",
+      "level": "Beginner",
+      "concepts": "input type=checkbox, name arrays, fieldset",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Multi-select toppings\n\nSame `name` groups related checkboxes.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Checkbox Pizza Order</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Build-a-Pizza</h1>\n<form>\n  <fieldset>\n    <legend>Toppings</legend>\n    <label><input type=\"checkbox\" name=\"topping\" value=\"mushroom\" /> Mushroom</label><br />\n    <label><input type=\"checkbox\" name=\"topping\" value=\"olive\" /> Olive</label><br />\n    <label><input type=\"checkbox\" name=\"topping\" value=\"pepper\" /> Pepper</label>\n  </fieldset>\n  <p><button type=\"submit\">Order</button></p>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "12_radio_mood_picker",
+      "title": "Project 12: Radio Mood Picker 😊",
+      "description": "Pick exactly one mood with radio buttons.",
+      "level": "Beginner",
+      "concepts": "input type=radio, name groups",
+      "cells": [
+        {
+          "markdown": "### Step 1 — One choice only\n\nRadios share a `name` so only one stays selected.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Radio Mood Picker</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Mood Check-In</h1>\n<form>\n  <fieldset>\n    <legend>Today I feel…</legend>\n    <label><input type=\"radio\" name=\"mood\" value=\"focus\" checked /> Focused</label><br />\n    <label><input type=\"radio\" name=\"mood\" value=\"curious\" /> Curious</label><br />\n    <label><input type=\"radio\" name=\"mood\" value=\"tired\" /> Tired-but-trying</label>\n  </fieldset>\n  <p><button type=\"submit\">Save mood</button></p>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "13_select_destination_booth",
+      "title": "Project 13: Select Destination Booth ✈️",
+      "description": "Offer a dropdown of destinations with option groups.",
+      "level": "Beginner",
+      "concepts": "select, option, optgroup",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Grouped options\n\n`optgroup` organizes long lists.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Select Destination Booth</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Where next?</h1>\n<form>\n  <label for=\"dest\">Destination</label>\n  <select id=\"dest\" name=\"dest\">\n    <optgroup label=\"Asia\">\n      <option>Singapore</option>\n      <option>Tokyo</option>\n    </optgroup>\n    <optgroup label=\"Europe\">\n      <option>Lisbon</option>\n      <option>Berlin</option>\n    </optgroup>\n  </select>\n  <button type=\"submit\">Book fantasy trip</button>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "14_textarea_wish_scroll",
+      "title": "Project 14: Textarea Wish Scroll 📜",
+      "description": "Write a long-form wish list with a character-friendly textarea.",
+      "level": "Beginner",
+      "concepts": "textarea, maxlength, placeholder",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Multi-line dreams\n\nTextareas keep line breaks users type.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Textarea Wish Scroll</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Wish Scroll</h1>\n<form>\n  <label for=\"wishes\">Three wishes (be kind)</label><br />\n  <textarea id=\"wishes\" name=\"wishes\" rows=\"6\" cols=\"40\" maxlength=\"280\"\n    placeholder=\"1) Learn HTML&#10;2) Ship a page&#10;3) Help a friend debug\"></textarea>\n  <p><button type=\"submit\">Seal the scroll</button></p>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "15_button_arcade",
+      "title": "Project 15: Button Arcade 🕹️",
+      "description": "Compare submit, reset, and button types.",
+      "level": "Beginner",
+      "concepts": "button types, disabled",
+      "cells": [
+        {
+          "markdown": "### Step 1 — The three button personalities\n\nDefault `button` inside a form is submit — set `type` explicitly.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Button Arcade</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Button Arcade</h1>\n<form>\n  <p><input name=\"score\" value=\"1200\" /></p>\n  <button type=\"submit\">Submit score</button>\n  <button type=\"reset\">Reset</button>\n  <button type=\"button\">Just a click (no submit)</button>\n  <button type=\"submit\" disabled>Locked bonus</button>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "16_semantic_mini_blog",
+      "title": "Project 16: Semantic Mini Blog 📰",
+      "description": "Structure a tiny blog with header, main, article, and footer.",
+      "level": "Beginner",
+      "concepts": "header, main, article, section, footer",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Landmarks\n\nSemantic tags describe regions of the page.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Semantic Mini Blog</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <header>\n  <h1>Pixel &amp; Paragraph</h1>\n  <p>A one-post blog</p>\n</header>\n<main>\n  <article>\n    <h2>Why HTML still matters</h2>\n    <p>Structure first. Style later. Scripts last (when you need them).</p>\n  </article>\n</main>\n<footer>\n  <p>&copy; 2026 CodeItAll HTML track</p>\n</footer>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "17_nav_bar_street_signs",
+      "title": "Project 17: Nav Bar Street Signs 🚦",
+      "description": "Build a primary navigation list inside nav.",
+      "level": "Beginner",
+      "concepts": "nav, ul, aria-current",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Navigation list\n\nWrap site links in `<nav>` for assistive tech.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Nav Bar Street Signs</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <header>\n  <h1>Street Studio</h1>\n  <nav aria-label=\"Primary\">\n    <ul>\n      <li><a href=\"#\" aria-current=\"page\">Home</a></li>\n      <li><a href=\"#gallery\">Gallery</a></li>\n      <li><a href=\"#about\">About</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"gallery\"><h2>Gallery</h2><p>Signs, stickers, tags.</p></section>\n  <section id=\"about\"><h2>About</h2><p>We paint with markup.</p></section>\n</main>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "18_figure_museum",
+      "title": "Project 18: Figure Museum 🏛️",
+      "description": "Pair media with captions using figure and figcaption.",
+      "level": "Beginner",
+      "concepts": "figure, figcaption",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Caption the art\n\n`figcaption` can sit before or after the media.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Figure Museum</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Hall of Samples</h1>\n<figure>\n  <img src=\"https://picsum.photos/seed/museum/320/180\" alt=\"Framed abstract color sample\" width=\"320\" height=\"180\" />\n  <figcaption>Exhibit A — “Untitled Gradient” (stock sample)</figcaption>\n</figure>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "19_blockquote_quote_wall",
+      "title": "Project 19: Blockquote Quote Wall 💬",
+      "description": "Feature quotes with cite and blockquote.",
+      "level": "Beginner",
+      "concepts": "blockquote, cite, q",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Credit the source\n\nUse `cite` for the work/title; `q` for short inline quotes.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Blockquote Quote Wall</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Quote Wall</h1>\n<blockquote cite=\"https://www.w3.org/html/\">\n  <p>HTML is the publishing language of the World Wide Web.</p>\n  <footer>— adapted from <cite>W3C HTML</cite></footer>\n</blockquote>\n<p>Someone once said <q>Preview is believing</q> (probably a web teacher).</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "20_code_snippet_showcase",
+      "title": "Project 20: Code Snippet Showcase 💻",
+      "description": "Display code samples with pre and code.",
+      "level": "Beginner",
+      "concepts": "pre, code, samp, kbd",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Preserve whitespace\n\n`pre` keeps indentation; nest `code` for semantics.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Code Snippet Showcase</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Snippet Showcase</h1>\n                <p>Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> in the lab to preview.</p>\n                <pre><code>&lt;h1&gt;Hello&lt;/h1&gt;\n&lt;p&gt;Structure first.&lt;/p&gt;</code></pre>\n                <p>Sample output: <samp>Hello</samp></p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "21_progress_quest_bar",
+      "title": "Project 21: Progress Quest Bar 🥇",
+      "description": "Show quest completion with the progress element.",
+      "level": "Intermediate",
+      "concepts": "progress, max, value",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Visual progress\n\nInclude text fallback inside the element.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Progress Quest Bar</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Quest Log</h1>\n<p>HTML basics: <progress max=\"40\" value=\"21\">21/40</progress> 21 / 40 projects</p>\n<p>Forms track: <progress max=\"100\" value=\"70\">70%</progress></p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "22_meter_energy_gauge",
+      "title": "Project 22: Meter Energy Gauge ⚡",
+      "description": "Display a scalar within a known range using meter.",
+      "level": "Intermediate",
+      "concepts": "meter, min, max, low, high, optimum",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Gauge, not progress\n\n`meter` is for measurements; `progress` is for tasks.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Meter Energy Gauge</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Laptop Energy</h1>\n<p>\n  Battery:\n  <meter min=\"0\" max=\"100\" low=\"20\" high=\"80\"optimum=\"90\" value=\"64\">64%</meter>\n  64%\n</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "23_details_faq_accordion",
+      "title": "Project 23: Details FAQ Accordion 🪄",
+      "description": "Build a no-JS accordion with details/summary.",
+      "level": "Intermediate",
+      "concepts": "details, summary, open",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Native disclosure widgets\n\nOne `details` can start open with the `open` attribute.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Details FAQ Accordion</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>HTML FAQ</h1>\n<details open>\n  <summary>Do I need CSS to learn HTML?</summary>\n  <p>No. Learn structure first; add CSS when layout matters.</p>\n</details>\n<details>\n  <summary>Is HTML a programming language?</summary>\n  <p>It is a markup language — it describes structure and meaning.</p>\n</details>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "24_dialog_modal_invite",
+      "title": "Project 24: Dialog Modal Invite 🎟️",
+      "description": "Create a dialog modal (open attribute for lab preview).",
+      "level": "Intermediate",
+      "concepts": "dialog, form method=dialog",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Invite popup\n\nIn real apps you call `showModal()`; here we open with the `open` attribute for the preview.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Dialog Modal Invite</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Party Page</h1>\n<p>You are invited to ship a page tonight.</p>\n<dialog open>\n  <form method=\"dialog\">\n    <h2>RSVP</h2>\n    <p>Bring curiosity. Tags provided.</p>\n    <button value=\"yes\">I am in</button>\n    <button value=\"no\">Maybe later</button>\n  </form>\n</dialog>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "25_audio_playlist_card",
+      "title": "Project 25: Audio Playlist Card 🎧",
+      "description": "Embed audio with controls and multiple sources.",
+      "level": "Intermediate",
+      "concepts": "audio, source, controls",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Controls included\n\nProvide a fallback message inside the audio element.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Audio Playlist Card</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Study Loops</h1>\n<div class=\"card\">\n  <h2>Soft beep sample</h2>\n  <audio controls>\n    <source src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3\" type=\"audio/mpeg\" />\n    Your browser does not support audio.\n  </audio>\n</div>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "26_video_trailer_frame",
+      "title": "Project 26: Video Trailer Frame 🎬",
+      "description": "Embed a muted looping trailer-style video with poster-like sizing.",
+      "level": "Intermediate",
+      "concepts": "video, source, controls, muted",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Video element\n\nAlways include captions/tracks in production; here we practice the basics.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Video Trailer Frame</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Trailer Frame</h1>\n<video controls width=\"360\" muted playsinline>\n  <source src=\"https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4\" type=\"video/mp4\" />\n  Sorry — video not supported.\n</video>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "27_iframe_map_window",
+      "title": "Project 27: Iframe Map Window 🪟",
+      "description": "Embed another page in a sandboxed iframe.",
+      "level": "Intermediate",
+      "concepts": "iframe, title, sandbox, loading",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Named frame\n\nAlways set a `title` on iframes for accessibility.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Iframe Map Window</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Window Tour</h1>\n<p>Embedded example document:</p>\n<iframe\n  title=\"Example embed\"\n  src=\"https://example.com\"\n  width=\"100%\"\n  height=\"220\"\n  loading=\"lazy\"\n  sandbox=\"allow-scripts allow-same-origin\"\n></iframe>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "28_svg_logo_workshop",
+      "title": "Project 28: SVG Logo Workshop 🔶",
+      "description": "Draw a tiny logo with inline SVG shapes and text.",
+      "level": "Intermediate",
+      "concepts": "svg, rect, circle, text",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Inline SVG\n\nInline SVG is HTML too — great for icons and logos.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>SVG Logo Workshop</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Brand Scratchpad</h1>\n<svg width=\"220\" height=\"80\" viewBox=\"0 0 220 80\" role=\"img\" aria-labelledby=\"logoTitle\">\n  <title id=\"logoTitle\">CodeItAll HTML mark</title>\n  <rect x=\"8\" y=\"12\" width=\"56\" height=\"56\" rx=\"10\" fill=\"#111\" />\n  <circle cx=\"36\" cy=\"40\" r=\"14\" fill=\"#8b1e1e\" />\n  <text x=\"78\" y=\"48\" font-family=\"Georgia, serif\" font-size=\"28\" fill=\"#111\">HTML</text>\n</svg>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "29_time_stamp_timeline",
+      "title": "Project 29: Time Stamp Timeline ⏱️",
+      "description": "Mark dates and times with the time element.",
+      "level": "Intermediate",
+      "concepts": "time datetime",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Machine-readable dates\n\nHumans see the text; machines use `datetime`.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Time Stamp Timeline</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Ship Timeline</h1>\n<ol>\n  <li>Sketched wireframe on <time datetime=\"2026-07-01\">July 1, 2026</time></li>\n  <li>First preview at <time datetime=\"2026-07-15T22:00\">10:00 PM</time></li>\n  <li>Public lab drop: <time datetime=\"2026-07-15\">today</time></li>\n</ol>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "30_address_contact_card",
+      "title": "Project 30: Address Contact Card 📍",
+      "description": "Mark contact blocks with the address element.",
+      "level": "Intermediate",
+      "concepts": "address, br",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Contact semantics\n\n`address` is for contact info for the nearest article/body author.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Address Contact Card</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Studio Contact</h1>\n<address class=\"card\">\n  CodeItAll HTML Desk<br />\n  <a href=\"mailto:hello@codeitall.dev\">hello@codeitall.dev</a><br />\n  Singapore\n</address>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "31_fieldset_profile_form",
+      "title": "Project 31: Fieldset Profile Form 🪪",
+      "description": "Group related controls with fieldset and legend.",
+      "level": "Intermediate",
+      "concepts": "fieldset, legend, autocomplete",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Grouped profile\n\nLegends name the group for screen readers.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Fieldset Profile Form</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Learner Profile</h1>\n<form>\n  <fieldset>\n    <legend>Basics</legend>\n    <label>Name <input name=\"name\" autocomplete=\"name\" /></label><br />\n    <label>Email <input name=\"email\" type=\"email\" autocomplete=\"email\" /></label>\n  </fieldset>\n  <fieldset>\n    <legend>Track</legend>\n    <label><input type=\"radio\" name=\"track\" value=\"html\" checked /> HTML</label>\n    <label><input type=\"radio\" name=\"track\" value=\"js\" /> JS</label>\n  </fieldset>\n  <button type=\"submit\">Save</button>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "32_datalist_autocomplete",
+      "title": "Project 32: Datalist Autocomplete 🔎",
+      "description": "Suggest values while still allowing free typing.",
+      "level": "Intermediate",
+      "concepts": "datalist, list attribute",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Suggestions, not locks\n\nDatalist options are hints; users can type anything.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Datalist Autocomplete</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Tag Picker</h1>\n<label for=\"tag\">Favorite HTML tag</label>\n<input id=\"tag\" name=\"tag\" list=\"tags\" placeholder=\"Start typing…\" />\n<datalist id=\"tags\">\n  <option value=\"article\"></option>\n  <option value=\"section\"></option>\n  <option value=\"button\"></option>\n  <option value=\"dialog\"></option>\n</datalist>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "33_output_calculator_shell",
+      "title": "Project 33: Output Calculator Shell 🧮",
+      "description": "Build a calculator shell that uses output (with a tiny inline script).",
+      "level": "Intermediate",
+      "concepts": "output, oninput, form",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Live output region\n\n`output` is for calculation results tied to a form.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Output Calculator Shell</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Tip Shell</h1>\n<form oninput=\"tip.value = (bill.valueAsNumber * rate.valueAsNumber / 100 || 0).toFixed(2)\">\n  <label>Bill $<input name=\"bill\" type=\"number\" value=\"40\" min=\"0\" step=\"0.01\" /></label><br />\n  <label>Tip % <input name=\"rate\" type=\"number\" value=\"15\" min=\"0\" /></label>\n  <p>Tip: $<output name=\"tip\">6.00</output></p>\n</form>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "34_mark_highlight_notes",
+      "title": "Project 34: Mark Highlight Notes 🖍️",
+      "description": "Highlight key phrases inside study notes.",
+      "level": "Intermediate",
+      "concepts": "mark, aside, main",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Call out the point\n\n`mark` means “relevant in this context,” not permanent bold.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Mark Highlight Notes</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <main>\n  <h1>Study Notes</h1>\n  <p>Use <mark>semantic HTML</mark> before decorating with CSS.</p>\n  <aside>\n    <p>Tip: Preview after every few tags.</p>\n  </aside>\n</main>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "35_abbr_glossary_page",
+      "title": "Project 35: Abbr Glossary Page 📚",
+      "description": "Expand abbreviations with title tooltips.",
+      "level": "Intermediate",
+      "concepts": "abbr, title",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Spell it out\n\nFirst use often includes the full phrase; `abbr` helps thereafter.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Abbr Glossary Page</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Web Alphabet Soup</h1>\n<p>\n  <abbr title=\"HyperText Markup Language\">HTML</abbr> pairs well with\n  <abbr title=\"Cascading Style Sheets\">CSS</abbr> and\n  <abbr title=\"Accessible Rich Internet Applications\">ARIA</abbr>.\n</p>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "36_keyboard_shortcut_poster",
+      "title": "Project 36: Keyboard Shortcut Poster ⌨️",
+      "description": "Document shortcuts with kbd and a definition list.",
+      "level": "Intermediate",
+      "concepts": "kbd, dl",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Key combos\n\nNest `kbd` elements to show chords.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Keyboard Shortcut Poster</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <h1>Lab Shortcuts</h1>\n<dl>\n  <dt><kbd>Ctrl</kbd> + <kbd>Enter</kbd></dt>\n  <dd>Preview the current step</dd>\n  <dt><kbd>Esc</kbd></dt>\n  <dd>Close mobile drawers</dd>\n</dl>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "37_viewport_mobile_postcard",
+      "title": "Project 37: Viewport Mobile Postcard 📱",
+      "description": "Craft a mobile-friendly postcard with viewport meta and fluid type.",
+      "level": "Advanced",
+      "concepts": "meta viewport, responsive basics",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Think phone-first\n\nThe viewport meta tag is required for sane mobile layout.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Viewport Mobile Postcard</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <div class=\"card\">\n  <h1 style=\"font-size: clamp(1.6rem, 6vw, 2.4rem);\">Pocket Postcard</h1>\n  <p>This page declares a viewport so phones do not zoom out weirdly.</p>\n  <p style=\"font-size: 0.95rem;\">Resize the preview width and watch the title scale.</p>\n</div>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "38_accessibility_landmark_tour",
+      "title": "Project 38: Accessibility Landmark Tour ♿",
+      "description": "Compose a page with landmarks, skip link, and alt text done right.",
+      "level": "Advanced",
+      "concepts": "skip link, main, aria-label, alt",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Inclusive structure\n\nSkip links help keyboard users jump to content.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Accessibility Landmark Tour</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n          <style>a:focus{left:1rem!important;top:1rem;background:#fff;padding:0.4rem;}</style>\n        </head>\n        <body>\n        <a href=\"#main\" style=\"position:absolute;left:-999px;top:auto;\">Skip to content</a>\n<header>\n  <h1>Accessible Plaza</h1>\n  <nav aria-label=\"Primary\">\n    <a href=\"#main\">Content</a> · <a href=\"#aside\">Tips</a>\n  </nav>\n</header>\n<main id=\"main\">\n  <h2>Welcome</h2>\n  <p>Landmarks make structure obvious even without sighted layout cues.</p>\n  <img src=\"https://picsum.photos/seed/a11y/280/140\" width=\"280\" height=\"140\" alt=\"Quiet park path sample photo\" />\n</main>\n<aside id=\"aside\">\n  <h2>Tip</h2>\n  <p>If an image is decorative, use <code>alt=\"\"</code>.</p>\n</aside>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "39_microdata_recipe_card",
+      "title": "Project 39: Microdata Recipe Card 🧪",
+      "description": "Annotate a recipe with microdata vocabulary for machines.",
+      "level": "Advanced",
+      "concepts": "itemscope, itemtype, itemprop",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Invisible machine meaning\n\nMicrodata adds semantics for search engines and tools.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Microdata Recipe Card</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <article class=\"card\" itemscope itemtype=\"https://schema.org/Recipe\">\n  <h1 itemprop=\"name\">Five-Minute Toast</h1>\n  <p>Time: <time itemprop=\"totalTime\" datetime=\"PT5M\">5 minutes</time></p>\n  <h2>Ingredients</h2>\n  <ul>\n    <li itemprop=\"recipeIngredient\">1 slice bread</li>\n    <li itemprop=\"recipeIngredient\">Butter</li>\n  </ul>\n  <h2>Instructions</h2>\n  <div itemprop=\"recipeInstructions\">\n    <p>Toast. Butter. Celebrate HTML.</p>\n  </div>\n</article>\n        </body>\n        </html>\n"
+        }
+      ]
+    },
+    {
+      "id": "40_portfolio_one_pager",
+      "title": "Project 40: Portfolio One Pager 🗂️",
+      "description": "Ship a complete personal one-pager using everything you learned.",
+      "level": "Advanced",
+      "concepts": "full document anatomy, semantics, media, forms",
+      "cells": [
+        {
+          "markdown": "### Step 1 — Capstone page\n\nCombine landmarks, a project list, a figure, and a contact form.",
+          "source": "<!DOCTYPE html>\n        <html lang=\"en\">\n        <head>\n          <meta charset=\"UTF-8\" />\n          <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n          <title>Portfolio One Pager</title>\n          <style>\n            body { font-family: Georgia, \"Times New Roman\", serif; margin: 1.5rem; line-height: 1.5; color: #111; background: #fafafa; }\n            a { color: #8b1e1e; }\n            table { border-collapse: collapse; width: 100%; max-width: 420px; }\n            th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; text-align: left; }\n            img { max-width: 100%; height: auto; }\n            .card { background: #fff; border: 1px solid #ddd; padding: 1rem 1.25rem; max-width: 520px; }\n          </style>\n\n        </head>\n        <body>\n        <header>\n  <h1>Jordan Lee — HTML Maker</h1>\n  <nav aria-label=\"Primary\">\n    <a href=\"#work\">Work</a> ·\n    <a href=\"#about\">About</a> ·\n    <a href=\"#contact\">Contact</a>\n  </nav>\n</header>\n<main>\n  <section id=\"about\">\n    <h2>About</h2>\n    <p>I learn by shipping tiny pages. This portfolio is pure HTML structure.</p>\n  </section>\n  <section id=\"work\">\n    <h2>Selected work</h2>\n    <ul>\n      <li>Guestbook form lab</li>\n      <li>Semantic mini blog</li>\n      <li>SVG logo workshop</li>\n    </ul>\n    <figure>\n      <img src=\"https://picsum.photos/seed/portfolio/320/160\" width=\"320\" height=\"160\" alt=\"Sample project collage\" />\n      <figcaption>Recent collage of practice pages</figcaption>\n    </figure>\n  </section>\n  <section id=\"contact\">\n    <h2>Contact</h2>\n    <form>\n      <label for=\"email\">Email</label><br />\n      <input id=\"email\" type=\"email\" name=\"email\" required /><br />\n      <label for=\"note\">Note</label><br />\n      <textarea id=\"note\" name=\"note\" rows=\"3\"></textarea><br />\n      <button type=\"submit\">Send hello</button>\n    </form>\n  </section>\n</main>\n<footer>\n  <p>Built in the CodeItAll HTML Lab — separate from the Python track.</p>\n</footer>\n        </body>\n        </html>\n"
+        }
+      ]
+    }
+  ]
+}

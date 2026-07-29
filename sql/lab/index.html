@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CodeItAll SQL Lab — Interactive SQL</title>
+  <link rel="icon" href="../../assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../../assets/favicon-256.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css" />
+  <link rel="stylesheet" href="../../shared/progress.css?v=1" />
+  <link rel="stylesheet" href="../../shared/career-banner.css?v=3" />
+  <link rel="stylesheet" href="./lab.css?v=7" />
+  <link rel="stylesheet" href="../../shared/lab-explain.css?v=2" />
+  <style>
+    .sql-table-wrap { overflow: auto; margin-top: 0.5rem; }
+    .sql-table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+    .sql-table th, .sql-table td {
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.35rem 0.55rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .sql-table th { background: rgba(255,255,255,0.06); color: #ddd; }
+    .sql-table td { color: #eee; }
+    .sql-meta { font-size: 0.78rem; opacity: 0.65; margin-top: 0.35rem; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/sql/sql.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+  <script src="../../shared/lab-explain.js?v=4"></script>
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <a class="brand" href="../../index.html">
+        <img src="../../assets/logo-black.svg" alt="CodeItAll" />
+        <span>SQL Lab</span>
+      </a>
+      <div class="top-actions">
+        <span id="runtimeStatus" class="status-pill loading">Loading SQLite…</span>
+        <button type="button" class="btn ghost desktop-only" id="homeBtn">Home</button>
+        <button type="button" class="btn ghost desktop-only" id="profileBtn">Profile</button>
+        <button type="button" class="btn ghost" id="resetDbBtn" disabled>Reset DB</button>
+        <button type="button" class="btn ok" id="runAllBtn" disabled>Run all</button>
+      </div>
+    </header>
+
+    <div class="backdrop" id="backdrop" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Projects">
+      <div class="panel-head mobile-only">
+        <h2>SQL Projects</h2>
+        <button type="button" class="btn icon-btn" id="closeProjectsBtn" aria-label="Close projects">✕</button>
+      </div>
+      <h2 class="desktop-only">SQL Projects</h2>
+      <div class="project-list" id="projectList"></div>
+    </aside>
+
+    <main class="main" id="mainPane">
+      <div class="lab-column">
+        <div class="project-head">
+          <div class="project-head-row">
+            <h1 id="projectTitle">Loading…</h1>
+            <button type="button" class="btn ghost mobile-only projects-trigger" id="openProjectsBtn">Projects</button>
+          </div>
+          <p id="projectDesc"></p>
+          <p class="hint" id="runCellHint">
+            Separate from Python Lab. Queries run on in-browser SQLite (sql.js). Hover/tap keywords or shiny line dots for plain-English help.
+          </p>
+        </div>
+        <div class="cells" id="cells"></div>
+        <div class="lab-footer">
+          <button type="button" class="btn ghost mark-done" id="markDoneBtn">Mark complete</button>
+        </div>
+      </div>
+    </main>
+
+    <aside class="ai-panel" id="aiPanel" aria-label="AI Assist">
+      <div class="panel-head">
+        <h2>AI Assist</h2>
+        <button type="button" class="btn icon-btn mobile-only" id="closeAiBtn" aria-label="Close AI">✕</button>
+      </div>
+      <div class="ai-messages" id="aiMessages">
+        <div class="msg assistant">
+          <div class="who">AI Assist</div>
+          Tap <strong>Ask AI</strong> on any step. I return SQL inside a ```sql fence you can Apply.
+        </div>
+      </div>
+      <div class="ai-compose">
+        <textarea id="aiInput" placeholder="Ask anything about this SQL project…" rows="3"></textarea>
+        <button type="button" class="btn accent" id="aiSendBtn">Send</button>
+      </div>
+      <div class="ai-settings">
+        <details>
+          <summary>AI Settings</summary>
+          <label>Endpoint
+            <input id="aiEndpoint" placeholder="/api/assist" autocomplete="off" />
+          </label>
+          <label>API key (stored only in this browser)
+            <input id="aiKey" type="password" placeholder="sk-… (optional if server has a key)" autocomplete="off" />
+          </label>
+          <label>Model
+            <input id="aiModel" placeholder="gpt-4o-mini" autocomplete="off" />
+          </label>
+          <button type="button" class="btn ghost ai-save" id="aiSaveBtn">Save settings</button>
+          <p class="ai-note">Dialect: SQLite. Without a key, Lab uses an offline tutor.</p>
+        </details>
+      </div>
+    </aside>
+
+    <nav class="mobile-nav" id="mobileNav" aria-label="Lab sections">
+      <button type="button" class="mob-tab" data-panel="projects" id="tabProjects">
+        <span class="mob-ico">☰</span>
+        <span>Projects</span>
+      </button>
+      <button type="button" class="mob-tab active" data-panel="code" id="tabCode">
+        <span class="mob-ico">{ }</span>
+        <span>Editor</span>
+      </button>
+      <button type="button" class="mob-tab" data-panel="ai" id="tabAi">
+        <span class="mob-ico">✦</span>
+        <span>AI</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="../../shared/progress.js?v=2"></script>
+  <script src="../../shared/career-pack.js?v=2"></script>
+  <script src="./lab.js?v=2"></script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

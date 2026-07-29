@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CodeItAll — Project Notebooks</title>
+  <link rel="stylesheet" href="../site.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: "Montserrat", system-ui, sans-serif;
+      padding: clamp(1rem, 4vw, 2rem);
+      padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+    }
+    .wrap { width: min(100%, 720px); margin: 0 auto; }
+    a { color: #fff; text-decoration: none; }
+    .back { display: inline-block; margin-bottom: 1.25rem; font-weight: 700; opacity: 0.85; }
+    h1 { font-size: clamp(1.5rem, 5vw, 2rem); margin-bottom: 0.5rem; }
+    .lead { color: #9a9a9a; margin-bottom: 1.25rem; line-height: 1.5; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      background: #fff;
+      color: #000;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .list { list-style: none; display: grid; gap: 0.55rem; }
+    .list a {
+      display: block;
+      padding: 0.95rem 1rem;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      min-height: 52px;
+      line-height: 1.35;
+    }
+    .list a:active { background: rgba(255,255,255,0.06); }
+    .foot { margin-top: 1.75rem; opacity: 0.65; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="../index.html">← Home</a>
+    <h1>CodeItAll — 40 Project Notebooks</h1>
+    <p class="lead">Browse read-only HTML exports, or open the interactive Lab to edit and run code.</p>
+    <a class="cta" href="../lab/">Open Interactive Lab</a>
+    <ul class="list" id="list"></ul>
+    <p class="foot">Tip: on mobile, use <strong>Lab</strong> for editing and running cells.</p>
+  </div>
+  <script>
+    const projects = [
+      "00_CodeItAll_Index",
+      "01_pixel_palette_pop","02_ascii_art_machine","03_password_fortress","04_qr_code_crafter","05_word_cloud_weaver",
+      "06_morse_code_messenger","07_haiku_composer","08_spiral_art_generator","09_barcode_factory","10_csv_story_explorer",
+      "11_fractal_tree_garden","12_audio_waveform_painter","13_gif_animation_studio","14_pdf_certificate_maker","15_email_html_renderer",
+      "16_stock_sparkline_dashboard","17_color_extractor_lens","18_sentiment_mood_ring","19_geomap_storyteller","20_plotly_data_dashboard",
+      "21_dice_fortune_arena","22_caesar_cipher_club","23_band_name_blender","24_emoji_mood_tracker","25_unit_converter_booth",
+      "26_rock_paper_spock_arena","27_starfield_postcard","28_maze_maker_mini","29_noise_texture_studio","30_sorting_race_visualizer",
+      "31_markov_meme_writer","32_budget_pie_party","33_calendar_heatmap_diary","34_flashcard_forge","35_wallpaper_gradient_weave",
+      "36_typing_speed_lab","37_json_adventure_map","38_audio_beat_stamps","39_choropleth_lite","40_neural_net_from_scratch_lite"
+    ];
+    document.getElementById("list").innerHTML = projects.map((id) => {
+      const label = id.replace(/_/g, " ");
+      return `<li><a href="${id}.html">${label}</a></li>`;
+    }).join("");
+  </script>
+  <script defer src="/assets/analytics.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* Learning progress badges for lab sidebars */
+.project-item.done {
+  position: relative;
+}
+.project-item.done strong::after {
+  content: " ✓";
+  color: #2f8f5b;
+  font-weight: 700;
+}
+.project-item.done span::before {
+  content: "Done · ";
+  color: #2f8f5b;
+  font-weight: 600;
+}
+
+.btn.mark-done {
+  margin-left: 0.35rem;
+}
+.btn.mark-done.is-done {
+  border-color: rgba(47, 143, 91, 0.55);
+  color: #1f6b45;
+}
