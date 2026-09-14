@@ -6,7 +6,19 @@
   const STORAGE_KEY = "cia_profile_v1";
   const TOKEN_KEY = "cia_auth_token";
   const EMAIL_KEY = "cia_auth_email";
-  const AUTH_API = "/api/auth";
+  // On Vercel (HTTPS), /api/auth must reach the droplet over HTTPS too (mixed-content
+  // blocks http://IP:8099). Prefer same-origin /api/auth; fall back to the public
+  // HTTPS proxy on haixiang.space when needed.
+  const AUTH_API = (function resolveAuthApi() {
+    try {
+      if (typeof location !== "undefined" && /vercel\.app$/i.test(location.hostname)) {
+        return "https://haixiang.space/codeitall-auth";
+      }
+    } catch (_) {
+      /* ignore */
+    }
+    return "/api/auth";
+  })();
   const MAX_HISTORY = 400;
   const TRACK_LABELS = {
     python: "Python",
@@ -118,7 +130,16 @@
       data = {};
     }
     if (!res.ok) {
-      const err = new Error(data.detail || data.message || `Request failed (${res.status})`);
+      let msg = data.message || `Request failed (${res.status})`;
+      const detail = data.detail;
+      if (typeof detail === "string") msg = detail;
+      else if (Array.isArray(detail)) {
+        msg = detail.map((d) => d.msg || d.message || JSON.stringify(d)).join("; ");
+      }
+      if (res.status === 404 || (typeof data === "object" && data && !("ok" in data) && !detail && res.headers.get("content-type")?.includes("text/html"))) {
+        msg = "Auth API unavailable on this host. Try again in a moment.";
+      }
+      const err = new Error(msg);
       err.status = res.status;
       throw err;
     }
@@ -213,6 +234,28 @@
     setAuth(data.token, data.email);
     await pullAndMerge();
     return data;
+  }
+
+  async function loginWithGoogle(credential) {
+    const data = await authFetch("/google", {
+      method: "POST",
+      body: JSON.stringify({ credential }),
+    });
+    setAuth(data.token, data.email);
+    await pullAndMerge();
+    return data;
+  }
+
+  async function fetchAuthConfig() {
+    try {
+      return await authFetch("/config", { method: "GET" });
+    } catch (_) {
+      return { ok: false, googleEnabled: false, googleClientId: "" };
+    }
+  }
+
+  async function fetchMe() {
+    return authFetch("/me", { method: "GET" });
   }
 
   async function logout() {
@@ -484,6 +527,9 @@
     getAuth,
     register,
     login,
+    loginWithGoogle,
+    fetchAuthConfig,
+    fetchMe,
     logout,
     changePassword,
     forgotPassword,

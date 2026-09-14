@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Your Profile | CodeItAll</title>
+<!-- SEO:START -->
+  <title>Your Coding Progress &amp; Account | CodeItAll Me</title>
+  <meta name="description" content="Sign in to sync lab progress, review completed projects, and manage your CodeItAll account across Python, JS, SQL, HTML, and C++ tracks." />
+  <meta name="keywords" content="coding progress tracker, save coding lab progress, CodeItAll account, interactive lab profile, learning streak coding" />
+  <meta name="robots" content="index,follow" />
+  <meta name="author" content="CodeItAll" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="canonical" href="https://codeitall-site.vercel.app/profile/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CodeItAll" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://codeitall-site.vercel.app/profile/" />
+  <meta property="og:title" content="Me — Progress &amp; Account | CodeItAll" />
+  <meta property="og:description" content="Track completed labs and sync progress when signed in. Your hub for multi-language interactive learning on CodeItAll." />
+  <meta property="og:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+  <meta property="og:image:alt" content="CodeItAll interactive coding labs" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Me — Progress &amp; Account | CodeItAll" />
+  <meta name="twitter:description" content="Track completed labs and sync progress when signed in. Your hub for multi-language interactive learning on CodeItAll." />
+  <meta name="twitter:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+<!-- SEO:END -->
+
   <link rel="icon" href="../assets/favicon.ico" sizes="any" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
@@ -12,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../site.css?v=5" />
-  <link rel="stylesheet" href="./profile.css?v=7" />
+  <link rel="stylesheet" href="./profile.css?v=8" />
 </head>
 <body>
   <header class="site-header" id="header">
@@ -50,6 +71,16 @@
           <button type="button" class="auth-tab active" data-mode="login" role="tab">Sign in</button>
           <button type="button" class="auth-tab" data-mode="register" role="tab">Create account</button>
         </div>
+
+        <div class="google-auth" id="googleAuthBlock" hidden>
+          <div id="googleBtnHost" class="google-btn-host" aria-label="Continue with Google"></div>
+          <p class="google-fallback-note" id="googleFallbackNote" hidden>
+            Google Sign-In isn’t configured yet. Use email &amp; password below, or follow
+            <a href="../GOOGLE_LOGIN_SETUP.html">Google login setup</a>.
+          </p>
+          <div class="auth-divider" aria-hidden="true"><span>or</span></div>
+        </div>
+
         <form class="auth-form" id="authForm">
           <label for="authEmail">Email</label>
           <input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com" required />
@@ -64,17 +95,31 @@
       </div>
 
       <div id="authIn" class="hide">
-        <p class="signed-as">Signed in as <strong id="authEmailLabel"></strong> · progress syncs automatically.</p>
-        <div class="actions">
+        <div class="account-card" id="accountCard">
+          <div class="account-row">
+            <span class="account-label">Signed in</span>
+            <strong id="authEmailLabel"></strong>
+          </div>
+          <div class="account-row">
+            <span class="account-label">Sign-in method</span>
+            <span id="authProviderLabel">—</span>
+          </div>
+          <div class="account-row">
+            <span class="account-label">Progress</span>
+            <span>Synced to your account · study records below</span>
+          </div>
+        </div>
+        <div class="actions account-actions">
           <button type="button" class="btn-ghost" id="logoutBtn">Sign out</button>
-          <button type="button" class="btn-ghost" id="togglePwBtn">Change password</button>
+          <button type="button" class="btn-ghost" id="togglePwBtn">Reset password</button>
         </div>
         <form class="auth-form hide" id="changePwForm">
-          <label for="oldPw">Current password</label>
-          <input id="oldPw" type="password" autocomplete="current-password" placeholder="Current password" required />
+          <p class="pw-hint" id="pwHint">Enter your current password, then choose a new one.</p>
+          <label for="oldPw" id="oldPwLabel">Current password</label>
+          <input id="oldPw" type="password" autocomplete="current-password" placeholder="Current password" />
           <label for="newPw">New password</label>
           <input id="newPw" type="password" autocomplete="new-password" placeholder="At least 8 characters" required minlength="8" />
-          <button type="submit" class="btn-save">Update password</button>
+          <button type="submit" class="btn-save" id="pwSubmit">Update password</button>
         </form>
         <p class="auth-note" id="authNoteIn" role="status"></p>
       </div>
@@ -120,8 +165,9 @@
     <div class="wrap footer-copy">© 2026 CodeItAll · Progress stays in your browser.</div>
   </footer>
 
-  <script src="../shared/progress.js?v=2"></script>
-  <script src="./profile.js?v=4"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="../shared/progress.js?v=5"></script>
+  <script src="./profile.js?v=6"></script>
   <script defer src="/assets/analytics.js"></script>
 </body>
 </html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Google Sign-In setup | CodeItAll</title>
+  <meta name="robots" content="noindex,follow" />
+  <link rel="stylesheet" href="site.css?v=5" />
+  <style>
+    main {
+      max-width: 720px;
+      margin: 1.5rem auto 3rem;
+      padding: 0 1.25rem;
+      color: #eee;
+      line-height: 1.55;
+    }
+    h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 1rem 0 0.5rem; }
+    h2 { margin-top: 2rem; font-size: 1.25rem; }
+    h3 { margin-top: 1.25rem; font-size: 1.05rem; }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.86rem;
+    }
+    pre {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      overflow: auto;
+    }
+    .card {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 1rem 1.15rem;
+      margin: 1rem 0;
+    }
+    ol { padding-left: 1.2rem; }
+    li { margin: 0.35rem 0; }
+    a { color: #7fb0ff; }
+    .muted { color: #9a9a9a; }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="header">
+    <a class="brand" href="index.html" aria-label="Code It All home">
+      <img class="brand-logo" src="assets/logo-black.png" alt="Code It All" width="200" height="36" />
+    </a>
+    <ul class="nav">
+      <li><a href="profile/">Me / Sign in</a></li>
+      <li><a href="course/">Learn with AI</a></li>
+    </ul>
+  </header>
+
+  <main>
+    <p class="muted">Setup guide · Email/password + Google</p>
+    <h1>Activate Google Sign-In</h1>
+    <p>
+      CodeItAll already supports <strong>email &amp; password</strong> and a
+      <strong>Continue with Google</strong> button on the
+      <a href="profile/">Me / Account</a> page. Follow this guide to turn Google on
+      in <strong>Testing</strong> first, then move to <strong>Production</strong>.
+    </p>
+
+    <div class="card">
+      <strong>Important:</strong> Auth APIs run on the droplet
+      (<code>/api/auth</code>). Use
+      <code>http://188.166.214.47:8099/profile/</code>
+      (or your HTTPS domain pointing at that API). Pure Vercel static hosting
+      cannot finish Google login until <code>/api/auth</code> is proxied.
+    </div>
+
+    <h2>Part A — Testing mode</h2>
+
+    <h3>1. Create a Google Cloud project</h3>
+    <ol>
+      <li>Open <a href="https://console.cloud.google.com/" target="_blank" rel="noopener">Google Cloud Console</a>.</li>
+      <li>Create/select a project (e.g. <code>CodeItAll</code>).</li>
+    </ol>
+
+    <h3>2. OAuth consent screen → Testing</h3>
+    <ol>
+      <li>Go to <strong>APIs &amp; Services → OAuth consent screen</strong>.</li>
+      <li>User type: <strong>External</strong>.</li>
+      <li>App name: <code>CodeItAll</code>. Add support/developer emails.</li>
+      <li>Scopes: keep defaults for Sign-In.</li>
+      <li><strong>Test users</strong>: add every Gmail that should be able to log in while testing.</li>
+      <li>Publishing status stays <strong>Testing</strong>.</li>
+    </ol>
+    <p class="muted">Only listed test users can sign in during Testing.</p>
+
+    <h3>3. Create Web OAuth Client ID</h3>
+    <ol>
+      <li><strong>Credentials → Create credentials → OAuth client ID</strong>.</li>
+      <li>Type: <strong>Web application</strong>.</li>
+      <li><strong>Authorized JavaScript origins</strong> (no path):</li>
+    </ol>
+    <pre>http://188.166.214.47:8099
+http://localhost:8099
+http://127.0.0.1:8099</pre>
+    <ol start="4">
+      <li>Copy the <strong>Client ID</strong> (<code>….apps.googleusercontent.com</code>). Client Secret is not needed for this button flow.</li>
+    </ol>
+
+    <h3>4. Configure the server</h3>
+    <pre>sudo nano /etc/codeitall-assist.env</pre>
+    <pre>GOOGLE_CLIENT_ID=YOUR_CLIENT_ID.apps.googleusercontent.com
+CIA_SITE_URL=http://188.166.214.47:8099</pre>
+    <pre>sudo /opt/codeitall-assist/venv/bin/pip install 'google-auth&gt;=2.28.0'
+sudo systemctl restart codeitall-assist</pre>
+    <pre>curl -s http://127.0.0.1:8100/auth/config</pre>
+    <p>Expect <code>"googleEnabled": true</code>.</p>
+
+    <h3>5. Deploy code + test</h3>
+    <ol>
+      <li>Deploy updated <code>auth_api.py</code>, <code>docs/profile/*</code>, and <code>docs/shared/progress.js</code>.</li>
+      <li>Open <a href="http://188.166.214.47:8099/profile/">/profile/</a>.</li>
+      <li>Click <strong>Continue with Google</strong> with a <em>test user</em> account.</li>
+      <li>Confirm email/password Sign in / Create account still works.</li>
+    </ol>
+
+    <h2>Part B — Production mode</h2>
+    <ol>
+      <li>Put the site on HTTPS (e.g. <code>https://codeitall.dev</code>) pointing at the same API.</li>
+      <li>In Google Cloud Credentials, add production origins:
+        <pre>https://codeitall.dev
+https://www.codeitall.dev</pre>
+      </li>
+      <li>Set <code>CIA_SITE_URL=https://codeitall.dev</code> and restart assist.</li>
+      <li>OAuth consent screen → <strong>Publish app</strong> (Testing → In production).</li>
+      <li>Add a privacy policy URL on the consent screen if Google asks.</li>
+      <li>Smoke test with a Gmail that is <em>not</em> on the old test-user list.</li>
+    </ol>
+
+    <h2>Checklist</h2>
+    <div class="card">
+      <p><strong>Testing:</strong> consent=Testing · test users · JS origins · <code>GOOGLE_CLIENT_ID</code> · restart · button works</p>
+      <p><strong>Production:</strong> HTTPS domain · prod origins · publish consent · non-test Gmail works · password login still works</p>
+    </div>
+
+    <p class="muted">Full notes also in <code>GOOGLE_LOGIN_SETUP.md</code>.</p>
+    <p><a href="profile/">← Back to Me / Sign in</a></p>
+  </main>
+</body>
+</html>
