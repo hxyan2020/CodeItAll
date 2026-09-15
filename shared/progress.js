@@ -6,18 +6,17 @@
   const STORAGE_KEY = "cia_profile_v1";
   const TOKEN_KEY = "cia_auth_token";
   const EMAIL_KEY = "cia_auth_email";
-  // On Vercel (HTTPS), /api/auth must reach the droplet over HTTPS too (mixed-content
-  // blocks http://IP:8099). Prefer same-origin /api/auth; fall back to the public
-  // HTTPS proxy on haixiang.space when needed.
+  // Vercel serves the Node proxy at /api/auth-proxy.js (legacy builds don't
+  // reliably rewrite /api/auth/*). Droplet nginx still uses /api/auth/.
   const AUTH_API = (function resolveAuthApi() {
     try {
       if (typeof location !== "undefined" && /vercel\.app$/i.test(location.hostname)) {
-        return "https://haixiang.space/codeitall-auth";
+        return { mode: "proxy", base: "/api/auth-proxy.js" };
       }
     } catch (_) {
       /* ignore */
     }
-    return "/api/auth";
+    return { mode: "path", base: "/api/auth" };
   })();
   const MAX_HISTORY = 400;
   const TRACK_LABELS = {
@@ -119,10 +118,22 @@
   }
 
   async function authFetch(path, options = {}) {
-    const headers = Object.assign({ "Content-Type": "application/json" }, options.headers || {});
+    const headers = Object.assign({}, options.headers || {});
+    const method = (options.method || "GET").toUpperCase();
+    // Avoid unnecessary CORS preflight on simple GETs (no Content-Type on GET).
+    if (method !== "GET" && method !== "HEAD" && !headers["Content-Type"]) {
+      headers["Content-Type"] = "application/json";
+    }
     const token = getToken();
     if (token) headers.Authorization = `Bearer ${token}`;
-    const res = await fetch(AUTH_API + path, { ...options, headers });
+
+    const clean = String(path || "").replace(/^\//, "");
+    const url =
+      AUTH_API.mode === "proxy"
+        ? `${AUTH_API.base}?path=${encodeURIComponent(clean)}`
+        : `${AUTH_API.base}/${clean}`;
+
+    const res = await fetch(url, { ...options, headers });
     let data = {};
     try {
       data = await res.json();
@@ -135,9 +146,6 @@
       if (typeof detail === "string") msg = detail;
       else if (Array.isArray(detail)) {
         msg = detail.map((d) => d.msg || d.message || JSON.stringify(d)).join("; ");
-      }
-      if (res.status === 404 || (typeof data === "object" && data && !("ok" in data) && !detail && res.headers.get("content-type")?.includes("text/html"))) {
-        msg = "Auth API unavailable on this host. Try again in a moment.";
       }
       const err = new Error(msg);
       err.status = res.status;
@@ -246,11 +254,28 @@
     return data;
   }
 
+  async function requestSmsCode(phone, countryCode) {
+    return authFetch("/sms/start", {
+      method: "POST",
+      body: JSON.stringify({ phone, country_code: countryCode || "" }),
+    });
+  }
+
+  async function loginWithSms(phone, code, countryCode) {
+    const data = await authFetch("/sms/verify", {
+      method: "POST",
+      body: JSON.stringify({ phone, code, country_code: countryCode || "" }),
+    });
+    setAuth(data.token, data.phone || data.email);
+    await pullAndMerge();
+    return data;
+  }
+
   async function fetchAuthConfig() {
     try {
       return await authFetch("/config", { method: "GET" });
     } catch (_) {
-      return { ok: false, googleEnabled: false, googleClientId: "" };
+      return { ok: false, googleEnabled: false, googleClientId: "", smsEnabled: false };
     }
   }
 
@@ -528,6 +553,8 @@
     register,
     login,
     loginWithGoogle,
+    requestSmsCode,
+    loginWithSms,
     fetchAuthConfig,
     fetchMe,
     logout,

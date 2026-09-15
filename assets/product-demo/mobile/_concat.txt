@@ -1,0 +1,23 @@
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/01-home-hero.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/02-home-menu.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/03-course.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/04-lab-open.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/05-lab-ready.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/06-lab-projects-drawer.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/07-lab-run1.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/08-lab-result.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/09-lab-ai-panel.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/10-career.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/11-dissect.png'
+duration 2.20
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/mobile/11-dissect.png'

@@ -3,34 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>CodeItAll Python Lab — Interactive Python</title>
-  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
-  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+<!-- SEO:START -->
+  <title>Free Online Python Lab — Run Python in Your Browser | CodeItAll</title>
+  <meta name="description" content="Practice Python free online—no install. Interactive browser lab with charts, images &amp; games. Perfect for beginners learning Python by building projects." />
+  <meta name="keywords" content="free online python lab, python online compiler free, learn python free for beginners, run python in browser no install, interactive python projects, python practice online, pyodide python lab, CodeItAll python" />
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="google-site-verification" content="WpbQm4GoCTxdzgBNFI0PYrCGCC-g80HtMHe5Kw-guFw" />
+  <meta name="author" content="CodeItAll" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="application-name" content="CodeItAll" />
+  <meta name="rating" content="general" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://codeitall-site.vercel.app/lab/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CodeItAll" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://codeitall-site.vercel.app/lab/" />
+  <meta property="og:title" content="Python Lab — Free Interactive Python in Your Browser" />
+  <meta property="og:description" content="Write and run Python projects online with real outputs. Pair with ~40 beginner-friendly Python track projects on CodeItAll." />
+  <meta property="og:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+  <meta property="og:image:alt" content="CodeItAll interactive coding labs" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Python Lab — Free Interactive Python in Your Browser" />
+  <meta name="twitter:description" content="Write and run Python projects online with real outputs. Pair with ~40 beginner-friendly Python track projects on CodeItAll." />
+  <meta name="twitter:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Free Online Python Lab \u2014 Run Python in Your Browser | CodeItAll",
+  "description": "Practice Python free online\u2014no install. Interactive browser lab with charts, images & games. Perfect for beginners learning Python by building projects.",
+  "url": "https://codeitall-site.vercel.app/lab/",
+  "learningResourceType": "Interactive resource",
+  "isAccessibleForFree": true,
+  "provider": {
+    "@type": "Organization",
+    "name": "CodeItAll",
+    "url": "https://codeitall-site.vercel.app/"
+  },
+  "inLanguage": "en",
+  "teaches": "Python"
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I run Python without installing it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Python Lab runs in your browser so you can write, run, and see outputs without a local Python install."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What kinds of Python projects are included?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Creative and practical projects\u2014visuals, data charts, games, utilities\u2014aligned with the Learn with AI Python track."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this suitable for absolute beginners?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Start with beginner projects and use lab explanations when stuck. Progress at your own pace."
+      }
+    }
+  ]
+}
+  </script>
+<!-- SEO:END -->
+
+<script>
+    (function () {
+      try {
+        if (localStorage.getItem("codeitall-lab-theme") === "light") {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      } catch (e) {}
+    })();
+  </script>
+<link rel="icon" href="/assets/favicon.ico" sizes="any" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/favicon-256.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css" />
-  <link rel="stylesheet" href="../shared/progress.css?v=1" />
-  <link rel="stylesheet" href="../shared/career-banner.css?v=3" />
-  <link rel="stylesheet" href="./lab.css?v=11" />
-  <link rel="stylesheet" href="../shared/lab-explain.css?v=2" />
+  <link rel="stylesheet" href="/shared/progress.css?v=1" />
+  <link rel="stylesheet" href="/shared/career-banner.css?v=3" />
+  <link rel="stylesheet" href="/lab/lab.css?v=12" />
+  <link rel="stylesheet" href="/shared/lab-chrome.css?v=3" />
+  <link rel="stylesheet" href="/shared/lab-explain.css?v=2" />
   <script src="https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
-  <script src="../shared/lab-explain.js?v=4"></script>
+  <script src="/shared/lab-explain.js?v=4"></script>
 </head>
 <body>
   <div class="app" id="app">
     <header class="topbar">
-      <a class="brand" href="../index.html">
-        <img src="../assets/logo-black.svg" alt="CodeItAll" />
+      <a class="brand" href="/">
+        <img src="/assets/CodeItAll_Logo_HD_black-transparent.png" alt="CodeItAll" />
         <span>Python Lab</span>
       </a>
       <div class="top-actions">
+        <button type="button" class="btn ghost lab-chrome-btn" id="themeBtn" aria-label="Switch to light mode" title="Switch to light mode">
+          <span class="lab-chrome-ico" aria-hidden="true">☀</span>
+          <span class="lab-chrome-label">Light</span>
+        </button>
+        <button type="button" class="btn ghost lab-chrome-btn" id="fullscreenBtn" aria-label="Expand to fullscreen" title="Expand to fullscreen">
+          <span class="lab-chrome-ico" aria-hidden="true">⛶</span>
+          <span class="lab-chrome-label">Full screen</span>
+        </button>
         <span id="runtimeStatus" class="status-pill loading">Booting…</span>
         <button type="button" class="btn ghost desktop-only" id="homeBtn">Home</button>
         <button type="button" class="btn ghost desktop-only" id="profileBtn">Profile</button>
@@ -115,9 +209,11 @@
     </nav>
   </div>
 
-  <script src="../shared/progress.js?v=2"></script>
-  <script src="../shared/career-pack.js?v=2"></script>
-  <script src="./lab.js?v=4"></script>
+  <script src="/shared/progress.js?v=2"></script>
+  <script src="/shared/career-pack.js?v=2"></script>
+  <script src="/shared/lab-chrome.js?v=2"></script>
+  <script src="/lab/lab.js?v=6"></script>
+  <script defer src="/shared/install-app.js?v=1"></script>
   <script defer src="/assets/analytics.js"></script>
 </body>
 </html>

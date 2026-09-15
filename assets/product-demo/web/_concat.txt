@@ -1,0 +1,35 @@
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/01-home-hero.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/02-home-stories.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/03-home-subscribe.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/04-course-tracks.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/05-course-python-projects.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/06-lab-loading.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/07-lab-ready.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/08-lab-project-open.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/09-lab-run-cell1.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/10-lab-run-cell2.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/11-lab-run-result.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/12-lab-light-mode.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/13-career-home.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/14-career-filled.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/15-career-results.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/16-dissect-home.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/17-dissect-result.png'
+duration 2.00
+file 'C:/Users/Hansel Yan/Projects/CodeItAll/docs/assets/product-demo/web/17-dissect-result.png'

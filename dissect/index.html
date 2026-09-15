@@ -3,23 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Website Dissect | CodeItAll</title>
-  <link rel="icon" href="../assets/favicon.ico" sizes="any" />
+<!-- SEO:START -->
+  <title>Dissect Any Website — Learn How Real Pages Are Built (HTML)</title>
+  <meta name="description" content="Paste a public URL to inspect HTML structure, forms &amp; layout. Learn how real websites are built—beginner-friendly. Public pages only; logins stay closed." />
+  <meta name="keywords" content="how websites are built explained, inspect website HTML for learning, learn HTML from real websites, website structure for beginners, view page source tutorial tool, front end learning HTML CSS, dissect website HTML free, CodeItAll website dissect" />
+  <meta name="robots" content="index,follow" />
+  <meta name="googlebot" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="google-site-verification" content="WpbQm4GoCTxdzgBNFI0PYrCGCC-g80HtMHe5Kw-guFw" />
+  <meta name="author" content="CodeItAll" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="application-name" content="CodeItAll" />
+  <meta name="rating" content="general" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="canonical" href="https://codeitall-site.vercel.app/dissect/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="CodeItAll" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://codeitall-site.vercel.app/dissect/" />
+  <meta property="og:title" content="Dissect Any Website — See How Pages Are Built | CodeItAll" />
+  <meta property="og:description" content="Fetch public HTML, map structure, and learn step by step. Transparent learning for beginners—not scraping private dashboards or paywalled apps." />
+  <meta property="og:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+  <meta property="og:image:alt" content="CodeItAll interactive coding labs" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dissect Any Website — See How Pages Are Built | CodeItAll" />
+  <meta name="twitter:description" content="Fetch public HTML, map structure, and learn step by step. Transparent learning for beginners—not scraping private dashboards or paywalled apps." />
+  <meta name="twitter:image" content="https://codeitall-site.vercel.app/assets/hero.jpg" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What can Website Dissect access?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only publicly fetchable HTML. We map structure and explain it for learning. Private dashboards, paywalls, and authenticated apps stay out of reach."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this for beginners learning HTML?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. It helps beginners and intermediate learners connect textbook HTML to real public pages\u2014navigation, forms, and section structure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I rebuild a simpler version of a page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can ask for a learner-friendly skeleton that mirrors structure. Do not copy brand assets or proprietary content\u2014use it as a study aid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Dissect bypass login walls?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. If content requires login or payment, we note what is missing instead of attempting unauthorized access."
+      }
+    }
+  ]
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Dissect Any Website \u2014 Learn How Real Pages Are Built (HTML)",
+  "description": "Paste a public URL to inspect HTML structure, forms & layout. Learn how real websites are built\u2014beginner-friendly. Public pages only; logins stay closed.",
+  "url": "https://codeitall-site.vercel.app/dissect/",
+  "learningResourceType": "Interactive resource",
+  "isAccessibleForFree": true,
+  "provider": {
+    "@type": "Organization",
+    "name": "CodeItAll",
+    "url": "https://codeitall-site.vercel.app/"
+  },
+  "inLanguage": "en",
+  "teaches": "HTML"
+}
+  </script>
+<!-- SEO:END -->
+
+<link rel="icon" href="../assets/favicon.ico" sizes="any" />
   <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="../assets/favicon-256.png" />
+  <link rel="apple-touch-icon" href="../assets/pwa-icon-192.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:opsz,wght@9..144,600;700&family=JetBrains+Mono:wght@400;500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../site.css?v=5" />
+  <link rel="stylesheet" href="../site.css?v=6" />
   <link rel="stylesheet" href="./dissect.css?v=6" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+    .seo-faq {
+      padding: clamp(2.5rem, 6vw, 4rem) 0;
+      background: #000;
+      color: #fff;
+    }
+    .seo-faq .wrap { width: min(100% - 2rem, 1180px); margin-inline: auto; }
+    .seo-faq .eyebrow {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      color: #8a8a8a;
+      margin-bottom: 0.75rem;
+    }
+    .seo-faq h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      margin-bottom: 1.25rem;
+      line-height: 1.15;
+    }
+    .seo-faq details {
+      border-top: 1px solid rgba(255,255,255,0.14);
+      padding: 1rem 0;
+    }
+    .seo-faq details:last-child { border-bottom: 1px solid rgba(255,255,255,0.14); }
+    .seo-faq summary {
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 1.05rem;
+      list-style: none;
+    }
+    .seo-faq summary::-webkit-details-marker { display: none; }
+    .seo-faq details p {
+      margin-top: 0.65rem;
+      color: #cfcfcf;
+      line-height: 1.55;
+      max-width: 48rem;
+    }
+</style>
 </head>
 <body>
   <header class="site-header" id="header">
     <a class="brand" href="../index.html" aria-label="Code It All home">
-      <img class="brand-logo" src="../assets/logo-black.png" alt="Code It All" width="200" height="36" />
+      <img class="brand-logo" src="../assets/CodeItAll_Logo_HD_black-transparent.png" alt="Code It All" />
     </a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">Menu</button>
     <ul class="nav" id="nav">
@@ -110,6 +235,18 @@
         </form>
       </div>
     </section>
+  <!-- SEO:FAQ:START -->
+    <section class="seo-faq" aria-label="Frequently asked questions">
+      <div class="wrap">
+        <p class="eyebrow">FAQ</p>
+        <h2>Questions about Website Dissect</h2>
+        <details><summary>What can Website Dissect access?</summary><p>Only publicly fetchable HTML. We map structure and explain it for learning. Private dashboards, paywalls, and authenticated apps stay out of reach.</p></details>
+        <details><summary>Is this for beginners learning HTML?</summary><p>Yes. It helps beginners and intermediate learners connect textbook HTML to real public pages—navigation, forms, and section structure.</p></details>
+        <details><summary>Can I rebuild a simpler version of a page?</summary><p>You can ask for a learner-friendly skeleton that mirrors structure. Do not copy brand assets or proprietary content—use it as a study aid.</p></details>
+        <details><summary>Does Dissect bypass login walls?</summary><p>No. If content requires login or payment, we note what is missing instead of attempting unauthorized access.</p></details>
+      </div>
+    </section>
+<!-- SEO:FAQ:END -->
   </main>
 
   <footer class="site-footer">
@@ -124,6 +261,7 @@
 
   <script src="../shared/progress.js?v=2"></script>
   <script src="./dissect.js?v=4"></script>
+  <script defer src="/shared/install-app.js?v=1"></script>
   <script defer src="/assets/analytics.js"></script>
 </body>
 </html>

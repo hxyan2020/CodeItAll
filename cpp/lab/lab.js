@@ -16,6 +16,18 @@ const state = {
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
+function labDir() {
+  const el = document.querySelector('script[src*="lab.js"]');
+  if (el && el.src) return el.src.replace(/lab\.js(?:\?.*)?$/, "");
+  const path = location.pathname;
+  if (path.endsWith("/")) return path;
+  return path.replace(/\/[^/]*$/, "/") || "/";
+}
+function labUrl(file) {
+  return labDir() + String(file || "").replace(/^\.\//, "");
+}
+
+
 function setStatus(text, kind = "ready") {
   const el = $("#runtimeStatus");
   if (!el) return;
@@ -82,7 +94,7 @@ async function loadProjects() {
     data = { projects: careerHit.projects };
     window.CIACareer.injectBanner(careerHit.pack, true);
   } else {
-    const res = await fetch("./projects.json", { cache: "no-store" });
+    const res = await fetch(labUrl("projects.json"), { cache: "no-store" });
     data = await res.json();
   }
   state.projects = data.projects || [];
@@ -164,7 +176,7 @@ function openProject(id) {
     if (window.CodeMirror) {
       editor = CodeMirror.fromTextArea(ta, {
         mode: "text/x-c++src",
-        theme: "material-darker",
+        theme: (window.CodeItAllLab && window.CodeItAllLab.cmTheme()) || "material-darker",
         lineNumbers: true,
         indentUnit: 4,
         tabSize: 4,
@@ -562,7 +574,7 @@ function wireUi() {
     }
   });
   $("#homeBtn")?.addEventListener("click", () => {
-    window.location.href = "../../index.html";
+    window.location.href = "/";
   });
   wireMobileChrome();
 
@@ -631,7 +643,7 @@ async function main() {
 
   $("#markDoneBtn")?.addEventListener("click", toggleMarkDone);
   $("#profileBtn")?.addEventListener("click", () => {
-    window.location.href = "../../profile/";
+    window.location.href = "/profile/";
   });
 })();
 

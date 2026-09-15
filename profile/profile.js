@@ -107,36 +107,117 @@ function setNote(sel, msg, kind = "") {
   el.className = "auth-note" + (kind ? " " + kind : "");
 }
 
+const COUNTRY_DIALS = [
+  ["SG", "+65", "Singapore"],
+  ["US", "+1", "United States"],
+  ["GB", "+44", "United Kingdom"],
+  ["AU", "+61", "Australia"],
+  ["IN", "+91", "India"],
+  ["CN", "+86", "China"],
+  ["HK", "+852", "Hong Kong"],
+  ["MO", "+853", "Macau"],
+  ["TW", "+886", "Taiwan"],
+  ["MY", "+60", "Malaysia"],
+  ["ID", "+62", "Indonesia"],
+  ["TH", "+66", "Thailand"],
+  ["PH", "+63", "Philippines"],
+  ["VN", "+84", "Vietnam"],
+  ["JP", "+81", "Japan"],
+  ["KR", "+82", "South Korea"],
+  ["AE", "+971", "United Arab Emirates"],
+  ["SA", "+966", "Saudi Arabia"],
+  ["QA", "+974", "Qatar"],
+  ["KW", "+965", "Kuwait"],
+  ["BH", "+973", "Bahrain"],
+  ["OM", "+968", "Oman"],
+  ["IL", "+972", "Israel"],
+  ["TR", "+90", "Turkey"],
+  ["ZA", "+27", "South Africa"],
+  ["NG", "+234", "Nigeria"],
+  ["KE", "+254", "Kenya"],
+  ["EG", "+20", "Egypt"],
+  ["GH", "+233", "Ghana"],
+  ["CA", "+1", "Canada"],
+  ["MX", "+52", "Mexico"],
+  ["BR", "+55", "Brazil"],
+  ["AR", "+54", "Argentina"],
+  ["CL", "+56", "Chile"],
+  ["CO", "+57", "Colombia"],
+  ["PE", "+51", "Peru"],
+  ["DE", "+49", "Germany"],
+  ["FR", "+33", "France"],
+  ["ES", "+34", "Spain"],
+  ["IT", "+39", "Italy"],
+  ["NL", "+31", "Netherlands"],
+  ["BE", "+32", "Belgium"],
+  ["CH", "+41", "Switzerland"],
+  ["AT", "+43", "Austria"],
+  ["SE", "+46", "Sweden"],
+  ["NO", "+47", "Norway"],
+  ["DK", "+45", "Denmark"],
+  ["FI", "+358", "Finland"],
+  ["IE", "+353", "Ireland"],
+  ["PT", "+351", "Portugal"],
+  ["PL", "+48", "Poland"],
+  ["CZ", "+420", "Czechia"],
+  ["RO", "+40", "Romania"],
+  ["HU", "+36", "Hungary"],
+  ["GR", "+30", "Greece"],
+  ["UA", "+380", "Ukraine"],
+  ["RU", "+7", "Russia"],
+  ["KZ", "+7", "Kazakhstan"],
+  ["PK", "+92", "Pakistan"],
+  ["BD", "+880", "Bangladesh"],
+  ["LK", "+94", "Sri Lanka"],
+  ["NP", "+977", "Nepal"],
+  ["MM", "+95", "Myanmar"],
+  ["KH", "+855", "Cambodia"],
+  ["LA", "+856", "Laos"],
+  ["BN", "+673", "Brunei"],
+  ["NZ", "+64", "New Zealand"],
+  ["FJ", "+679", "Fiji"],
+];
+
+function sessionMethodLabel(method) {
+  const m = String(method || "").toLowerCase();
+  if (m === "google") return "Google";
+  if (m === "sms" || m === "phone") return "Phone SMS";
+  if (m === "password") return "Email & password";
+  return "Account";
+}
+
 function providerLabel(me) {
   if (!me) return "—";
   const parts = [];
   if (me.hasGoogle) parts.push("Google");
+  if (me.hasPhone) parts.push("Phone SMS");
   if (me.hasPassword) parts.push("Email & password");
   if (!parts.length) {
-    const p = String(me.authProvider || "");
+    const p = String(me.authProvider || me.loginMethod || "");
     if (p.includes("google")) parts.push("Google");
+    if (p.includes("sms") || p.includes("phone")) parts.push("Phone SMS");
     if (p.includes("password")) parts.push("Email & password");
   }
   return parts.join(" + ") || "Account";
 }
 
 function configurePasswordForm(me) {
-  const hasPw = !!(me && me.hasPassword);
+  const canReset = !!(me && (me.canResetPassword || me.hasPassword));
+  const btn = $("#togglePwBtn");
+  const form = $("#changePwForm");
+  if (btn) {
+    btn.classList.toggle("hide", !canReset);
+    btn.textContent = "Reset password";
+  }
+  if (form && !canReset) form.classList.add("hide");
+  const hint = $("#pwHint");
+  if (hint) hint.textContent = "Enter your current password, then choose a new one.";
   const oldInput = $("#oldPw");
   const oldLabel = $("#oldPwLabel");
-  const hint = $("#pwHint");
-  const btn = $("#togglePwBtn");
-  if (btn) btn.textContent = hasPw ? "Reset password" : "Set a password";
-  if (hint) {
-    hint.textContent = hasPw
-      ? "Enter your current password, then choose a new one."
-      : "This account signed in with Google. Set a password so you can also use email sign-in.";
-  }
   if (oldInput && oldLabel) {
-    oldInput.classList.toggle("hide", !hasPw);
-    oldLabel.classList.toggle("hide", !hasPw);
-    oldInput.required = hasPw;
-    if (!hasPw) oldInput.value = "";
+    oldInput.classList.remove("hide");
+    oldLabel.classList.remove("hide");
+    oldInput.required = canReset;
   }
 }
 
@@ -163,8 +244,15 @@ function renderAuth() {
   $("#authOut").classList.toggle("hide", loggedIn);
   $("#authIn").classList.toggle("hide", !loggedIn);
   if (loggedIn) {
-    const email = (accountMe && accountMe.email) || P.getAuth().email || "your account";
-    $("#authEmailLabel").textContent = email;
+    const identity =
+      (accountMe && (accountMe.display || accountMe.phone || accountMe.email)) ||
+      P.getAuth().email ||
+      "your account";
+    $("#authEmailLabel").textContent = identity;
+    const sessionEl = $("#authSessionLabel");
+    if (sessionEl) {
+      sessionEl.textContent = "Signed in with " + sessionMethodLabel(accountMe && accountMe.loginMethod);
+    }
     $("#authProviderLabel").textContent = providerLabel(accountMe);
     $("#authLead").textContent = "Your progress is saved to your account and syncs across devices.";
     configurePasswordForm(accountMe);
@@ -268,6 +356,94 @@ function wireAuth() {
   });
 
   initGoogleSignIn(P);
+  initSmsLogin(P);
+}
+
+function fillCountrySelect() {
+  const sel = $("#smsCountry");
+  if (!sel || sel.options.length) return;
+  const locale = (navigator.language || "en-SG").toUpperCase();
+  const guess = locale.split("-")[1] || "SG";
+  COUNTRY_DIALS.forEach(([iso, dial, name]) => {
+    const opt = document.createElement("option");
+    opt.value = dial;
+    opt.textContent = `${name} (${dial})`;
+    opt.dataset.iso = iso;
+    if (iso === guess) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  const other = document.createElement("option");
+  other.value = "";
+  other.textContent = "Other — type full number with + country code";
+  sel.appendChild(other);
+  const prefix = $("#smsPrefix");
+  if (prefix) prefix.textContent = sel.value || "+";
+  sel.addEventListener("change", () => {
+    const p = $("#smsPrefix");
+    if (p) p.textContent = sel.value || "+";
+    const phone = $("#smsPhone");
+    if (phone && !sel.value) phone.placeholder = "+15551234567";
+  });
+}
+
+function smsPayload() {
+  return {
+    countryCode: ($("#smsCountry") && $("#smsCountry").value) || "",
+    phone: ($("#smsPhone") && $("#smsPhone").value.trim()) || "",
+  };
+}
+
+async function initSmsLogin(P) {
+  fillCountrySelect();
+  const block = $("#smsAuthBlock");
+  const note = $("#smsFallbackNote");
+  const form = $("#smsForm");
+  if (!form) return;
+  let smsEnabled = true;
+  try {
+    const config = await P.fetchAuthConfig();
+    smsEnabled = !!config.smsEnabled;
+  } catch (_) {
+    smsEnabled = true;
+  }
+  if (block) block.hidden = false;
+  if (note) note.hidden = smsEnabled;
+  form.classList.toggle("hide", !smsEnabled);
+  if (!smsEnabled) return;
+
+  let codeSent = false;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = $("#smsSubmit");
+    const { countryCode, phone } = smsPayload();
+    const codeEl = $("#smsCode");
+    const wrap = $("#smsCodeWrap");
+    btn.disabled = true;
+    try {
+      if (!codeSent || !(codeEl && codeEl.value.trim())) {
+        setNote("#authNote", "Sending SMS code…");
+        const res = await P.requestSmsCode(phone, countryCode);
+        codeSent = true;
+        if (wrap) wrap.classList.remove("hide");
+        if (codeEl) {
+          codeEl.required = true;
+          codeEl.focus();
+        }
+        btn.textContent = "Verify & sign in";
+        setNote("#authNote", res.message || "Code sent. Check your phone.", "ok");
+      } else {
+        setNote("#authNote", "Verifying code…");
+        await P.loginWithSms(phone, codeEl.value.trim(), countryCode);
+        setNote("#authNote", "");
+        await refreshAccountMe();
+        render();
+      }
+    } catch (err) {
+      setNote("#authNote", String(err.message || err), "err");
+    } finally {
+      btn.disabled = false;
+    }
+  });
 }
 
 async function handleGoogleCredential(response) {
@@ -316,9 +492,11 @@ async function initGoogleSignIn(P) {
   const block = $("#googleAuthBlock");
   const note = $("#googleFallbackNote");
   if (!block) return;
-
-  // Always show the Google block so users see the option; hide divider if disabled.
   block.hidden = false;
+
+  // Known production Client ID — used if /api/auth/config is briefly unavailable.
+  const FALLBACK_CLIENT_ID =
+    "607701003212-pk5nbp8k8lf9cumcm4ait9usbjc2jt6k.apps.googleusercontent.com";
 
   let config = { googleEnabled: false, googleClientId: "" };
   try {
@@ -327,19 +505,18 @@ async function initGoogleSignIn(P) {
     /* ignore */
   }
 
-  if (!config.googleEnabled || !config.googleClientId) {
+  const clientId =
+    (config.googleEnabled && config.googleClientId) || FALLBACK_CLIENT_ID;
+
+  if (!clientId) {
     if (note) note.hidden = false;
     return;
   }
   if (note) note.hidden = true;
 
-  const tryRender = () => {
-    if (renderGoogleButton(config.googleClientId)) return true;
-    return false;
-  };
+  const tryRender = () => renderGoogleButton(clientId);
   if (tryRender()) return;
 
-  // GIS script loads async — retry briefly.
   let tries = 0;
   const timer = setInterval(() => {
     tries += 1;

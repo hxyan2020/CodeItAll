@@ -1,0 +1,26 @@
+# CodeItAll — public pages are open to search engines
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /reset/
+Disallow: /api/
+Disallow: /GOOGLE_LOGIN_SETUP.html
+Disallow: /GOOGLE_LOGIN_SETUP.md
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /reset/
+Disallow: /api/
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+Disallow: /reset/
+Disallow: /api/
+
+# Hosted sitemap (submit this URL in Google Search Console > Sitemaps)
+Sitemap: https://codeitall-site.vercel.app/sitemap.xml

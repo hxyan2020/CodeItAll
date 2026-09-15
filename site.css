@@ -48,7 +48,12 @@ img { max-width: 100%; display: block; }
   /* sticky already creates containing block for absolute nav */
 }
 .brand { display: flex; align-items: center; line-height: 0; }
-.brand-logo { height: 32px; width: auto; display: block; }
+.brand-logo {
+  height: 32px;
+  width: auto;
+  display: block;
+  image-rendering: auto;
+}
 .nav {
   display: flex;
   align-items: center;

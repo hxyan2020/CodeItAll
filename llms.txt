@@ -1,0 +1,29 @@
+# CodeItAll
+
+> Free interactive coding education in the browser: Python, C++, JavaScript, HTML, and SQL labs—plus Career Booster portfolio practice and Website Dissect for learning how real pages are built.
+
+## Site
+- Home: https://codeitall-site.vercel.app/
+- Learn with AI (courses): https://codeitall-site.vercel.app/course/
+- Python Lab: https://codeitall-site.vercel.app/lab/
+- C++ Lab: https://codeitall-site.vercel.app/cpp/lab/
+- JavaScript Lab: https://codeitall-site.vercel.app/js/lab/
+- HTML Lab: https://codeitall-site.vercel.app/html/lab/
+- SQL Lab: https://codeitall-site.vercel.app/sql/lab/
+- Career Booster: https://codeitall-site.vercel.app/career/
+- Dissect any website: https://codeitall-site.vercel.app/dissect/
+- Project notebooks: https://codeitall-site.vercel.app/notebooks/
+- Account / progress: https://codeitall-site.vercel.app/profile/
+- About: https://codeitall-site.vercel.app/about.html
+- Contact: https://codeitall-site.vercel.app/contact.html
+- Sitemap: https://codeitall-site.vercel.app/sitemap.xml
+- robots.txt: https://codeitall-site.vercel.app/robots.txt
+
+## Audience
+Beginners, students, and career switchers who want free hands-on coding practice without installing an IDE.
+
+## Primary topics
+learn to code free online, interactive coding labs, Python/JavaScript/SQL/HTML/C++ practice in browser, portfolio coding projects, how websites are built
+
+## Contact
+hello@codeitall.dev
